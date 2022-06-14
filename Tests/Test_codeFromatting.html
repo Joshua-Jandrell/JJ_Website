@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <pre>
+        <code id="blk">
+            <span>
+                this is in span
+            </span>
+        </code>
+    </pre>
+  </body>
+  <script>
+    const charDict = { "<": "&lt;", ">": "&gt;" };
+    function FormatAsCode(html) {
+      let htmlString = String(html);
+      let pre = "";
+
+      for (let char of htmlString) {
+        if (char in charDict) {
+          pre += String(charDict[char]);
+        } else {
+          pre += String(char);
+        }
+      }
+      return pre;
+    }
+
+    let html = document.getElementById("blk").innerHTML;
+    html = FormatAsCode(html);
+    html = html.replaceAll(/&lt;(.*?)&gt;/g, "<span class=red>$&</span>");
+    html = html.replaceAll("&lt;", "<span class=blue>$&</span>");
+    document.getElementById("blk").innerHTML = html;
+  </script>
+
+  <style>
+    .red {
+      color: red;
+    }
+    .blue {
+      color: blue;
+    }
+  </style>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag">#dev_s3-02</span>
+    <h1 slot="title" class="p-name">Repo structure</h1>
+    <time slot="date" datetime="2022-06-13" class="dt-published"
+      >13 June 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      <p>
+        One of my main motivations for the new reboot was an opportunity to make
+        a more organised repository. The specific file structure is less
+        important that a commitment to making and adhering to logical file
+        saving conventions which allow me to save things easily.
+      </p>
+    </article>
+    <article slot="content" class="e-contenet">
+      <section>
+        <h2>But how will you decide these conventions?</h2>
+        <p>
+          Good question. The most important goal is efficiency and simplicity –
+          I should never be confused as to where my files are.
+        </p>
+        <p>
+          It makes sense to separate files according to their general functions.
+          Something like this:
+        </p>
+        <article class="display-block">
+          <pre>
+|
++---CSS
+|
++---HTML
+|
++---JavaScript
+            </pre
+          >
+        </article>
+        <p>
+          However, it’s not that easy. For one, I need to put my index.htm in
+          the root directory if I want to publish the site to GitHub pages. If
+          my index is in the root directory, I could put my other pages there to
+          standardize how I link resources such as script and stylesheets.
+          GitHub pages doesn’t allow for root referencing but being able to do
+          relative referencing for the root may be the next best thing. Besides
+          my current repo has unnecessarily long paths which just make
+          organisation painfully long and increase the risk of me making an
+          error when I defined asset locations.
+        </p>
+        <p>
+          Speaking of assets I think I should add a folder for those too. (You
+          know for pictures, images and so on).
+        </p>
+        <article class="display-block">
+          <pre>
+|
+| index.html
+| blog.html
+| games.html
+| devlog.html
+| about.html?
+|
++---Assets
+|
++---CSS
+|
++---JavaScript
+
+          </pre>
+        </article>
+        <p>
+          Yeah, no. This a very messy setup indeed. And what if I want to add
+          more pages in the future? Do I really want a massive file dump right
+          in my root?
+        </p>
+        <p class="retoric">
+          It’s ganna be somewhere. The root isn’t sacred. Just make a call and
+          move on.
+        </p>
+        <p>
+          I guess. But I have a way to navigate back to the root and honest and
+          html folder is very much worth it cause I’m going to need to throw a
+          lot in there:
+        </p>
+        <article class="display-block">
+          <pre>
+|   index.html
++---HTML
+|   | about.html
+|   | games.html
+|   | devlog.html
+|   |
+|   +---Articles
+|   |   |
+|   |   +---Dev articles
+|   |   |
+|   |   +---Blog articles
+|   |   |
+|   |   +---Game pages
+|   |
+|   +---Templates
+|       |
+|       +---CSS
+|       |
+|       +---JavaScript
+|       
++---Assets
+    |
+    +---Images
+    |
+    +---Videos
+            
+            </pre
+          >
+        </article>
+        <p>
+          The articles directory will hold all the content for my pages and the
+          templates directory will hold all html custom templates like the
+          nav-bar and so on.
+        </p>
+        <p>
+          Part of me want to keep images near the articles that future them or
+          save a stylesheet that is encapsulated in a template in the same
+          directory as the template itself. I guess I will need to use a bit for
+          deaccession and common sense here. Some styles and scripts will only
+          ever need to be reference then and there. (I may even include them in
+          the HTML if I hadn’t been explicitly told not to. I honestly think
+          that there is a time and place to run script and do styling inside and
+          html document. It’s not an arbitrary feature and it works for styles
+          that do not need to be repeated and would either clutter up a style
+          sheet or create more style sheets which clutter up the repo, but
+          anyway)
+        </p>
+        <p>
+          An alternative organisation system would be to give each page a folder
+          which contains page specific CSS and JavaScript. But That seems like a
+          recipe for over complication and too many directories. Separation of
+          roles is a design matter of a reason and copying that in my directory
+          organisation makes sense. I should stop overthinking this and move on
+          to other matters.
+        </p>
+        <p>
+          PS. I may include template specific CSS and JS in template
+          subdirectories because in theory I should be able to move said
+          templates to other projects. It may also make sense to do something
+          similar with some dev-log demo code as I will only ever use it once
+          for demonstration purposes.
+        </p>
+      </section>
+      <section>
+        <h2>Naming conventions</h2>
+        <p>
+          Now that I have an idea of how things are stored, I think I should
+          figure out what they will be called.
+        </p>
+        <h3>Page specific names</h3>
+        <p>
+          Basic html pages are easy. The blog should be
+          <code>blog.html</code>blog.html. Any CSS that only plies to the blog
+          should be in <code>blog.css</code>blog.css and any JavaScript that
+          only works with the blog should be in <code>blog.js</code> (Obviously
+          this trend should be extended to other sections.)
+        </p>
+        <h3>Article names</h3>
+        <p>
+          I plan to import articles (the content of each page) from separate
+          html documents. This will allow me to do the html structure and
+          formatting once then load any content as required. The idea of this is
+          to reduce repetitive html structures. Articles could be names after
+          their titles: for example, this may be repoStruture.html however this
+          lack of context makes it hard for me to tell if this is a blog, game,
+          or dev-log entry. It also makes it difficult to ensure that things are
+          reference in chronological order. Hence, I’m going to be a little bit
+          more pedantic:
+        </p>
+        <p><code>[section]_[Season]-[number]_[article name].html</code></p>
+        <p>
+          The sections the page I expect to display the content in: for example
+          '<code>dev</code>[log]' or '<code>games</code>'. The season and number
+          are a lose way of braking articles into chronological batches and the
+          article name is, well the article name.
+        </p>
+        <p>For example, this is <code>devlog_s3-1_repoStruct</code>.</p>
+        <p>
+          Anyhow, that’s quite enough deliberation. I should get to work making
+          it happen.
+        </p>
+      </section>
+    </article>
+  </body>
+</html>

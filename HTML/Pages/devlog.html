@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../clean.css" />
+    <link rel="stylesheet" href="devlog.css" />
+
+    <script src="../../JS/basic.js"></script>
+    <script src="../../JS/updateBySection.js" type="text/javascript"></script>
+    <script src="../../JS/devIndex.js" type="text/javascript"></script>
+    <script src="../../JS/templates.js" type="text/javascript"></script>
+    <script src="../../JS/loadContent.js" type="text/javascript"></script>
+    <script src="../../JS/formatCode.js"></script>
+    <title>JJ/Dev-log</title>
+  </head>
+  <body class="max basic">
+    <!-- #region nav bar-->
+    <header class="topBar basic z10" id="topDiv">
+      <nav-bar>
+        <span slot="page-name">JJ / Dev-Log</span>
+      </nav-bar>
+    </header>
+    <!-- #endregion -->
+    <!-- Articel section ==============================================================================-->
+    <article class="devlog-super-wrapper">
+      <!-- #region -->
+      <header class="feed-headder">
+        <nav class="devlogpage-index left" aria-hidden="ture">
+          <!--Hide entries list from screen reader users - they can use main feel list for this-->
+
+          <input
+            type="checkbox"
+            name="index-toggle"
+            id="index-toggle"
+            class="noDisplay"
+          />
+          <label for="index-toggle" class="toggle-lable">
+            <h2 class="main-h">
+              <span id="title">Dev-History</span><span id="icon">+</span>
+            </h2></label
+          >
+          <ul class="index-list history-list" id="log-index"></ul>
+        </nav>
+      </header>
+      <!-- #endregion -->
+      <!-- Feed ==============================================================================-->
+      <main class="devlog-feed h-feed">
+        <div class="time-line" aria-hidden="true"></div>
+        <h1 class="main-h">Dev-log</h1>
+        <span class="p-author noDisplay">Joshau Jandrell</span>
+        <!--Give authot for microformat but no need to display this on the site-->
+        <!-- Devlog articles start ---------------------------------->
+        <ul
+          class="devlog-feed-content e-content"
+          aria-roledescription="devlog entries"
+          id="main-log"
+        ></ul>
+      </main>
+    </article>
+    <footer class="foot">
+      <bottom-foot></bottom-foot>
+    </footer>
+
+    <!--===========================================================-->
+    <!--------------------------- Templates ------------------------->
+    <!--===========================================================-->
+    <template id="log-template">
+      <link rel="stylesheet" href="../../clean.css" />
+      <link rel="stylesheet" href="devlog.css" />
+      <slot name="date" class="entry-date"></slot>
+      <details class="devlog-feed-deets" id="log-details">
+        <summary>
+          <h2 class="main-h dev-h"><slot name="title"></slot></h2>
+          <section>
+            <slot name="summary"> </slot>
+          </section>
+        </summary>
+        <!-- Devlog article content --------------------------------------->
+        <article class="entry-content">
+          <slot name="content"></slot>
+        </article>
+        <article class="close-buttons">
+          <button class="close-button next-button">
+            <div class="icon">&#x25B2;</div>
+            next
+          </button>
+          <button class="close-button prev-button">
+            <div class="icon">&#x25BC;</div>
+            previous
+          </button>
+        </article>
+      </details>
+    </template>
+    <template id="log-item-template">
+      <li class="devlog-entry h-entry">
+        <log-template>
+          <load-socket></load-socket>
+        </log-template>
+      </li>
+    </template>
+
+    <template id="index-entry-template" class="not-automated">
+      <li>
+        <a
+          href=""
+          class="u-nav blog-nav"
+          id="entry-link"
+          onclick="CloseCheckbox('index-toggle')"
+          ><h4 class="blog-h p-name">Loading...</h4></a
+        >
+      </li>
+    </template>
+  </body>
+  <script defer>
+    // initalise doc spesfic features
+    const pathToRoot = "../../";
+    const selectId = "devlog-nav";
+    LoadImports(devlogPaths, "log-item-template", "main-log");
+    AddOnLoad("devlog-entry", "dev", "log-template", "load-socket");
+    MakeAllTemplates();
+    LoadCustomTemplates("./Pages/HTML-templates/navBar.html");
+    LoadCustomTemplates("Pages/HTML-templates/shareIcons.html");
+    SetScrollPointMarkers("devlog-entry", "currDevSection", false);
+  </script>
+</html>

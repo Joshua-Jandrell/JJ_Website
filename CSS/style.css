@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1.unstyled {
+  font-size: inherit;
+  margin: inherit;
+  padding: inherit;
+}
+
+/* Stuling for content select sections */
+ul.content-list {
+  list-style: none;
+  padding-left: 0;
+}

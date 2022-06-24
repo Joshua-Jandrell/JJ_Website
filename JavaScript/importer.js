@@ -3,17 +3,20 @@
 // constants
 const ignoreClass = "not-automated"; // this class must be added to a template for it not to be automatically created
 
-document.onload += function () {};
+document.onload += DoImportSetup();
 
-MakeAllTemplates();
-LoadExtenralTemplateHrefs();
-console.log("noni");
+function DoImportSetup() {
+  console.log("wat");
+  MakeAllTemplates();
+  LoadExtenralTemplateHrefs();
+}
 
 // ===============================================================
 // Load any specified custom templates
 function LoadExtenralTemplateHrefs() {
   if (typeof templateHrefs !== "undefined") {
     templateHrefs.forEach((href) => {
+      console.log(href);
       LoadCustomTemplates(href);
     });
   }
@@ -82,8 +85,7 @@ function MakeLoadedTemplates(body) {
   let temps = body.querySelectorAll("template");
   Array.from(temps).forEach((template) => {
     document.body.appendChild(template);
-    FixHrefs(template.content);
-    FixSrcs(template.content);
+    FixLinks(template.content);
     MakeShadowTemplate(template.id);
   });
 }
@@ -130,8 +132,7 @@ async function LoadContent(path, element) {
   LoadHtml(path)
     .then((doc) => {
       let body = doc.body;
-      FixHrefs(body);
-      FixSrcs(body);
+      FixLinks(body);
       let parent = element.parentElement;
       parent.innerHTML = body.innerHTML;
       return parent;
@@ -154,19 +155,6 @@ function MakeLoadEvent(elemHTML) {
   });
 }
 
-// A hacky work around to link pages in different directories from loaded content - regradless of where said content is loaded
-function FixHrefs(loadedContent) {
-  let hrefElems = loadedContent.querySelectorAll("[load-href]");
-  Array.from(hrefElems).forEach((hrefElem) => {
-    hrefElem.href = GetRootPath(hrefElem.getAttribute("load-href"));
-  });
-}
-function FixSrcs(loadedContent) {
-  let srcElems = loadedContent.querySelectorAll("[load-src]");
-  Array.from(srcElems).forEach((srcElem) => {
-    srcElem.src = GetRootPath(srcElem.getAttribute("load-src"));
-  });
-}
 // ===============================================================
 // Automated importing
 function LoadImports(hrefList, templateId, parentId) {
@@ -191,4 +179,44 @@ function MakeFromTemplate(href, temaplate, parent) {
   LoadContent(href, loadSocket);
 }
 
+//#endregion
+//#region Utils
+// This file contains basic funtion used by ther js scripts
+// Spcifically to allow for easy flie importing despite the lack of root refferancing
+function FixLinks(loadedContent) {
+  FixHrefs(loadedContent);
+  FixSrcs(loadedContent);
+}
+function FixHrefs(loadedContent) {
+  let hrefElems = loadedContent.querySelectorAll("[load-href]");
+  Array.from(hrefElems).forEach((hrefElem) => {
+    hrefElem.href = GetRootPath(hrefElem.getAttribute("load-href"));
+  });
+}
+function FixSrcs(loadedContent) {
+  let srcElems = loadedContent.querySelectorAll("[load-src]");
+  Array.from(srcElems).forEach((srcElem) => {
+    srcElem.src = GetRootPath(srcElem.getAttribute("load-src"));
+  });
+}
+
+function GetPathToRoot() {
+  if (typeof pathToRoot === "undefined") {
+    throw "pathToRoot undefined. This must be explicendly declared in in-page script";
+  }
+  return pathToRoot;
+}
+function GetRootPath(pathFromRoot) {
+  return GetPathToRoot() + pathFromRoot;
+}
+
+function SetElemAnchorRef(href, elem) {
+  let a = elem.getElementsByTagName("a")[0];
+  a.href = href;
+}
+
+function SetElemClassContent(content, className, elem) {
+  let classElem = elem.getElementsByClassName(className)[0];
+  classElem.innerHTML = content;
+}
 //#endregion

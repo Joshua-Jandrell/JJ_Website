@@ -1,0 +1,88 @@
+.content-item {
+  position: relative;
+  margin-top: 40pt;
+}
+.content-item .date-marker {
+  position: absolute;
+  top: 0;
+  left: -7vw;
+  width: 4vw;
+}
+.content-item .date-marker .marker {
+  display: block;
+  margin: 0 auto 0;
+
+  width: 20pt;
+  height: 20pt;
+  /*background-color: rgb(0, 189, 199);*/
+  background-color: black;
+}
+
+.content-item .date-marker .date {
+  position: absolute;
+  display: block;
+
+  top: 0;
+  bottom: 0;
+  left: 30pt;
+  padding: 5pt;
+  font-size: 10pt;
+  font-weight: bold;
+  color: black;
+
+  font-family: monospace;
+  width: max-content;
+}
+
+.content-item .link-h {
+  padding: 27pt 1pt 0pt;
+  margin: 0 3pt;
+  font-size: 2.5rem;
+  font-family: monospace;
+
+  position: relative;
+  display: block;
+  width: fit-content;
+
+  transition: all 0.25s;
+}
+.content-item .link-h::before,
+.content-item .link-h::after {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.8rem;
+  display: block;
+  color: orange;
+
+  position: absolute;
+  bottom: 0;
+
+  transition: all 0.25s;
+}
+
+.content-item .link-h::before {
+  content: "[";
+  left: -1rem;
+}
+.content-item .link-h::after {
+  content: "]";
+  right: -1rem;
+}
+
+.content-item:hover .link-h {
+  color: orange;
+  font-weight: bold;
+}
+.content-item:hover .link-h::before,
+.content-item:hover .link-h::after {
+  font-size: 3rem;
+  font-weight: bold;
+  color: black;
+}
+
+.content-item:hover .link-h::before {
+  left: -1.5rem;
+}
+.content-item:hover .link-h::after {
+  content: "]";
+  right: -1.5rem;
+}

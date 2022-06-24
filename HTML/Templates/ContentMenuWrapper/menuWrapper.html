@@ -10,43 +10,85 @@
   </head>
   <body class="max basic">
     <!-- Articel section ==============================================================================-->
-    <article class="content-menu-wrapper">
-      <header class="feed-headder">
-        <nav class="devlogpage-index left" aria-hidden="ture">
-          <input
-            type="checkbox"
-            name="index-toggle"
-            id="index-toggle"
-            class="noDisplay"
-          />
-          <label for="index-toggle" class="toggle-lable">
-            <h2 class="main-h">
-              <span id="title">Dev-History</span><span id="icon">+</span>
-            </h2></label
-          >
-          
-        </nav>
-      </header>
-      <main class="devlog-feed h-feed">
-        <div class="time-line" aria-hidden="true"></div>
-        <slot name="content-title"></slot>
-        <span class="p-author noDisplay">Joshau Jandrell</span>
-        <!--Give authot for microformat but no need to display this on the site-->
-        <!-- Devlog articles start ---------------------------------->
-        <ul
-          class="devlog-feed-content e-content"
-          aria-roledescription="devlog entries"
-          id="main-log"
-        ></ul>
-      </main>
-    </article>
-    <footer class="foot">
-      <bottom-foot></bottom-foot>
-    </footer>
+    <template id="content-menu-wrapper">
+      <link
+        rel="stylesheet"
+        href="/HTML/Templates/ContentMenuWrapper/menuWrapper.css"
+        load-href="/HTML/Templates/ContentMenuWrapper/menuWrapper.css"
+      />
+      <article id="wrapper">
+        <header class="content-head">
+          <nav class="devlogpage-index left" aria-hidden="ture">
+            <input
+              type="checkbox"
+              name="index-toggle"
+              id="index-toggle"
+              class="noDisplay"
+            />
+            <label for="index-toggle" class="toggle-lable">
+              <slot name="index-lable" class="index-lable"></slot
+            ></label>
+            <slot name="index-list"></slot>
+          </nav>
+        </header>
+        <main class="content">
+          <div class="time-line" aria-hidden="true"></div>
+          <slot name="content-lable">Index</slot>
+          <span class="p-author noDisplay">Joshau Jandrell</span>
+          <!--Give authot for microformat but no need to display this on the site-->
+          <!-- Devlog articles start ---------------------------------->
+          <slot name="content-list" class="content-list">
+            Loading content...
+          </slot>
+        </main>
+
+        <footer class="foot">
+          <bottom-foot></bottom-foot>
+        </footer>
+      </article>
+    </template>
+    <template id="content-li" class="not-automated">
+      <li>
+        <a>
+          <slot name="title" class="link-h">WUt</slot>
+          <article class="time-marker"></article>
+          <label for="time-marker"><slot name="date">date</slot></label>
+          <slot name="summary" class="p-summary"></slot>
+        </a>
+      </li>
+    </template>
+
+    <template id="other-article">
+      <link
+        rel="stylesheet"
+        href="/HTML/Templates/ContentMenuWrapper/menuItem.css"
+        load-href="/HTML/Templates/ContentMenuWrapper/menuItem.css"
+      />
+
+      <a class="content-item click-item">
+        <article class="date-marker">
+          <div class="marker"></div>
+          <slot name="date" class="date">date</slot>
+        </article>
+        <article class="item-content">
+          <div class="link-h"><slot name="title">Title</slot></div>
+
+          <slot name="summary"></slot>
+        </article>
+      </a>
+    </template>
 
     <!--===========================================================-->
-    <!--------------------------- Templates ------------------------->
+    <!------------ non-auntomated Templates ------------------------->
     <!--===========================================================-->
+    <template id="log-item-template">
+      <li class="devlog-entry h-entry">
+        <log-template>
+          <load-socket></load-socket>
+        </log-template>
+      </li>
+    </template>
+
     <template id="log-template">
       <link rel="stylesheet" href="../../clean.css" />
       <link rel="stylesheet" href="devlog.css" />
@@ -55,7 +97,7 @@
         <summary>
           <h2 class="main-h dev-h"><slot name="title"></slot></h2>
           <section>
-            <slot name="summary"> </slot>
+            <slot name="summary"></slot>
           </section>
         </summary>
         <!-- Devlog article content --------------------------------------->

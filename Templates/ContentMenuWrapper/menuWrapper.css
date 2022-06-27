@@ -13,9 +13,6 @@
 .content-head {
   max-width: 300pt;
 }
-.index-lable {
-  color: pink;
-}
 
 /* --> main index */
 .content {
@@ -30,10 +27,19 @@
 .time-line {
   display: block;
   position: absolute;
-  top: 0;
+  top: -50pt;
   left: -2.5pt;
   height: 100vh;
   width: 5px;
   background-color: blues;
   border-left: 5px dashed black;
+}
+
+/* Left-nav */
+.index-label {
+  margin-left: 30pt;
+  background-color: azure;
+}
+.left-nav {
+  background-color: aqua;
 }

@@ -13,12 +13,12 @@
     <template id="content-menu-wrapper">
       <link
         rel="stylesheet"
-        href="/HTML/Templates/ContentMenuWrapper/menuWrapper.css"
-        load-href="/HTML/Templates/ContentMenuWrapper/menuWrapper.css"
+        href="/Templates/ContentMenuWrapper/menuWrapper.css"
+        load-href="/Templates/ContentMenuWrapper/menuWrapper.css"
       />
       <article id="wrapper">
         <header class="content-head">
-          <nav class="devlogpage-index left" aria-hidden="ture">
+          <nav class="left-nav" aria-hidden="ture">
             <input
               type="checkbox"
               name="index-toggle"
@@ -26,7 +26,7 @@
               class="noDisplay"
             />
             <label for="index-toggle" class="toggle-lable">
-              <slot name="index-lable" class="index-lable"></slot
+              <slot name="index-label" class="index-label"></slot
             ></label>
             <slot name="index-list"></slot>
           </nav>
@@ -61,8 +61,8 @@
     <template id="other-article">
       <link
         rel="stylesheet"
-        href="/HTML/Templates/ContentMenuWrapper/menuItem.css"
-        load-href="/HTML/Templates/ContentMenuWrapper/menuItem.css"
+        href="/Templates/ContentMenuWrapper/menuItem.css"
+        load-href="/Templates/ContentMenuWrapper/menuItem.css"
       />
 
       <a class="content-item click-item">
@@ -72,10 +72,45 @@
         </article>
         <article class="item-content">
           <div class="link-h"><slot name="title">Title</slot></div>
-
           <slot name="summary"></slot>
         </article>
       </a>
+    </template>
+
+    <template id="local-article">
+      <link
+        rel="stylesheet"
+        href="/Templates/ContentMenuWrapper/menuItem.css"
+        load-href="/Templates/ContentMenuWrapper/menuItem.css"
+      />
+      <article class="content-item">
+        <article class="date-marker">
+          <div class="marker"></div>
+          <slot name="date" class="date">date</slot>
+        </article>
+        <details id="log-details">
+          <summary class="click-item">
+            <h2 class="link-h"><slot name="title"></slot></h2>
+            <section>
+              <slot name="summary"></slot>
+            </section>
+          </summary>
+          <!-- Devlog article content --------------------------------------->
+          <article class="entry-content">
+            <slot name="content"></slot>
+          </article>
+          <article class="close-buttons">
+            <button class="close-button next-button">
+              <div class="icon">&#x25B2;</div>
+              next
+            </button>
+            <button class="close-button prev-button">
+              <div class="icon">&#x25BC;</div>
+              previous
+            </button>
+          </article>
+        </details>
+      </article>
     </template>
 
     <!--===========================================================-->
@@ -115,13 +150,6 @@
           </button>
         </article>
       </details>
-    </template>
-    <template id="log-item-template">
-      <li class="devlog-entry h-entry">
-        <log-template>
-          <load-socket></load-socket>
-        </log-template>
-      </li>
     </template>
 
     <template id="index-entry-template" class="not-automated">

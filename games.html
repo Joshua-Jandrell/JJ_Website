@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../node_modules/swup/dist/swup.min.js" defer></script>
+    <script src="../JavaScript/setup.js" defer></script>
+    <title>Devlog</title>
+  </head>
+  <body>
+    <main id="swup">
+      <content-menu-wrapper>
+        <h1 slot="index-label" class="comment-h">Index</h1>
+        <ul slot="index-list">
+          <li>test</li>
+          <li>Another one</li>
+        </ul>
+        <h1 slot="content-lable">Tester</h1>
+        <ul slot="content-list" id="main-content" class="content-list">
+          <li>
+            <other-article>
+              <import-html
+                href="HTML/Articles/Dev/dev_s3-1_theActionPlan.html"
+              ></import-html>
+            </other-article>
+          </li>
+          <li>
+            <local-article>
+              <h1 slot="title" class="p-name unstyled">hot peas</h1>
+              <time datetime="24-06-2022" slot="date">24 June 20202</time>
+              <section slot="summary">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Veritatis repudiandae et ad modi cumque similique provident,
+                mollitia obcaecati optio tenetur excepturi nesciunt, fugit
+                deserunt libero iste ab laboriosam iusto. Ea!
+              </section>
+              <section slot="content">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
+                amet, omnis minus provident asperiores minima. Veritatis rerum,
+                tempora, dolorum eius aliquam amet veniam fugit ullam voluptate,
+                blanditiis quibusdam voluptatum quidem! Lorem ipsum dolor sit
+                amet consectetur adipisicing elit. Reprehenderit nobis excepturi
+                itaque nihil, dolores maiores voluptate expedita, consequuntur
+                unde doloribus harum fuga similique placeat debitis quis quia!
+                Inventore, tempore perspiciatis.
+              </section>
+            </local-article>
+          </li>
+        </ul>
+      </content-menu-wrapper>
+    </main>
+  </body>
+</html>

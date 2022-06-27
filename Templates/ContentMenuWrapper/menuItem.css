@@ -34,9 +34,9 @@
   width: max-content;
 }
 
-.content-item .link-h {
-  padding: 27pt 1pt 0pt;
-  margin: 0 3pt;
+.click-item .link-h {
+  padding: 27pt 5pt 0pt;
+  margin: 0 3pt 8pt;
   font-size: 2.5rem;
   font-family: monospace;
 
@@ -46,10 +46,11 @@
 
   transition: all 0.25s;
 }
-.content-item .link-h::before,
-.content-item .link-h::after {
+.click-item .link-h::before,
+.click-item .link-h::after {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 2.8rem;
+  font-weight: bold;
   display: block;
   color: orange;
 
@@ -59,30 +60,35 @@
   transition: all 0.25s;
 }
 
-.content-item .link-h::before {
+.click-item .link-h::before {
   content: "[";
   left: -1rem;
 }
-.content-item .link-h::after {
+.click-item .link-h::after {
   content: "]";
   right: -1rem;
 }
 
-.content-item:hover .link-h {
+.click-item:hover .link-h {
   color: orange;
   font-weight: bold;
+  cursor: pointer;
 }
-.content-item:hover .link-h::before,
-.content-item:hover .link-h::after {
+.click-item:hover .link-h::before,
+.click-item:hover .link-h::after {
   font-size: 3rem;
-  font-weight: bold;
   color: black;
 }
 
-.content-item:hover .link-h::before {
+.click-item:hover .link-h::before {
   left: -1.5rem;
 }
-.content-item:hover .link-h::after {
+.click-item:hover .link-h::after {
   content: "]";
   right: -1.5rem;
+}
+
+/* Details summary styling */
+.content-item summary {
+  display: inline;
 }

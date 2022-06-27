@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="[Work in porgress] The offical home of J0shua Jandrell (other than his house that is)"
+    />
+    <meta
+      name="keywords"
+      content="Joshua Jandrell, Profolio, Game desinger, Engineer, Wits University"
+    />
+    <link rel="stylesheet" href="Pages/Index/index.css" />
+    <link rel="stylesheet" href="clean.css" />
+    <!--<script src="Pages/Index/index.js"></script>-->
+    <script src="JS/basic.js"></script>
+    <script src="JS/updateBySection.js"></script>
+    <script src="JS/devIndex.js"></script>
+    <script src="JS/templates.js"></script>
+    <script src="JS/loadContent.js" defer></script>
+    <title>JJ/Joshua Jandrell</title>
+  </head>
+  <body class="max">
+    <!-- Itro section is shown before nav so that screan reader useres are appropratley greeted before we show them around (just like montior users)-->
+    <article class="introGrad" rol="introduction">
+      <section class="stickBlock" id="fib">
+        <div class="introTxt go-behind" id="hwt">Hello World.</div>
+        <div class="introTxt" id="imJJTxt z-2">I'm Joshua Jandrell</div>
+      </section>
+    </article>
+    <article class="intoNorm z-2" id="secondIntro">
+      <div class="introTxt basic slide-out" id="welcomeTxt">
+        Welcome to my website.
+        <div class="cover"></div>
+      </div>
+    </article>
+    <!-- #region Nav-->
+    <!--Note: intro section is before nav bar in html: this give screen reader users the same experance of the website reveal-->
+    <header class="topBar basic top-behind" id="hwt-nav-elem">
+      <nav-bar></nav-bar>
+    </header>
+    <!-- #endregion -->
+    <main class="e-content main-body basic" id="home">
+      <nav>
+        <ul class="index-nav">
+          <li>
+            <article class="index-panel">
+              <h2 class="slide-h center">
+                <span class="slide-out"
+                  >Have Some Fun
+                  <div class="cover"></div
+                ></span>
+              </h2>
+              <a href="./Pages/Portfolio/games.html" class="button-ha">
+                <h1 class="button-h">Games</h1>
+              </a>
+            </article>
+          </li>
+          <li>
+            <article class="index-panel">
+              <h2 class="slide-h center">
+                <span class="slide-out"
+                  >Read my Rants
+                  <div class="cover"></div
+                ></span>
+              </h2>
+              <a href="./Pages/Portfolio/games.html" class="button-ha">
+                <h1 class="button-h">Blog</h1>
+              </a>
+            </article>
+          </li>
+          <li>
+            <article class="index-panel">
+              <h2 class="com-h center">
+                <span class="slide-out"
+                  >Peek Behind the Scenes
+                  <div class="cover"></div
+                ></span>
+              </h2>
+              <a href="./Pages/Dev-log/devlog.html" class="button-ha">
+                <h1 class="button-h center">Dev-log</h1>
+              </a>
+            </article>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="section-divider" id="main" aria-hidden="true"></div>
+    </main>
+    <footer class="foot">
+      <bottom-foot></bottom-foot>
+    </footer>
+  </body>
+  <script defer>
+    // initalise doc spesfic features
+    const pathToRoot = "";
+    const selectId = "home-nav";
+    AddOnLoad("devlog-entry", "dev", "log-template");
+    MakeAllTemplates();
+    LoadCustomTemplates("Pages/HTML-templates/navBar.html");
+    LoadCustomTemplates("Pages/HTML-templates/shareIcons.html");
+    SetNavMarkers(["home", "about"], 0.1);
+    SetIndependantMarkers("button-ha", "open", true, 0.75);
+    SetIndependantMarkers("slide-out", "open", true, 0.75);
+    SetIndependantMarkers("go-behind", "forward", false, 0.1);
+  </script>
+</html>

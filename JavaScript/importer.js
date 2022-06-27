@@ -1,14 +1,13 @@
 // NB: This script must be deffereed in ordered to work.
+DoImportSetup();
 //#region Template Creation
 // constants
 const ignoreClass = "not-automated"; // this class must be added to a template for it not to be automatically created
-
-document.onload += DoImportSetup();
-
 function DoImportSetup() {
   console.log("wat");
   MakeAllTemplates();
   LoadExtenralTemplateHrefs();
+  DefineLoadElement();
 }
 
 // ===============================================================
@@ -92,26 +91,28 @@ function MakeLoadedTemplates(body) {
 //#endregion
 //#region LoadContent.Js
 // constants
-const elementName = "import-html";
-const attributeName = "href";
 const nestedClass = "importTarget";
 const nestedImportId = "elem-id";
 const loadEventName = "html-imported";
 
 const loadSockectName = "load-socket";
-
 // ===============================================================
-// Script run on load
-document.onload += customElements.define(
-  elementName,
-  class extends HTMLElement {
-    constructor() {
-      super();
-      let path = this.getAttribute(attributeName);
-      LoadContent(path, this);
+function DefineLoadElement() {
+  const elementName = "import-html";
+  customElements.define(
+    elementName,
+    class extends HTMLElement {
+      constructor() {
+        super();
+        let path = this.getAttribute("href");
+        console.log(path);
+        LoadContent(path, this);
+        //this.addEventListener("load", (event) => {});
+      }
     }
-  }
-);
+  );
+}
+
 // ===============================================================
 // general element loading funtion
 async function LoadHtml(path) {

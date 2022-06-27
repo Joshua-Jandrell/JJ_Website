@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 50pt 0 0 0;
 }
 
 h1.unstyled {
@@ -13,4 +13,18 @@ h1.unstyled {
 ul.content-list {
   list-style: none;
   padding-left: 0;
+}
+
+/* Heding styling */
+.comment-h {
+  color: rgb(47, 177, 203);
+  font-family: monospace;
+  font-weight: bold;
+}
+.comment-h::before {
+  display: inline;
+  width: fit-content;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  content: "// ";
 }

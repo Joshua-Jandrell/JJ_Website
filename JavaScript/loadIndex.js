@@ -8,9 +8,9 @@ function OnInit(pageName, hash) {
   autoTager.Claer();
 
   if (!loaded) {
-    LoadCustomTemplates(temaplatePath).then((response) => {
+    let tempateHref = GetRootPath(temaplatePath);
+    LoadCustomTemplates(tempateHref).then((response) => {
       loaded = true;
-      var h = hash;
       MakePageList(pageName, hash);
       console.log(hash);
     });
@@ -234,13 +234,14 @@ function MakeIndex(pageDetails, hash) {
   }
   function SetIndexHref(indexElem, localTag) {
     let anchor = indexElem.querySelector("a");
-    anchor.href = localTag;
+    anchor.href = "#" + localTag;
   }
 }
 
 // JS drvien local vanigation
 function GotoHash(hash) {
   let hashId = hash.replace("#", "");
-  console.log("goto" + hashId);
+  console.log("goto" + document.getElementById(hashId));
   //document.getElementById(hashId).scrollIntoView(true);
+  swup.scrollTo(document.getElementById(hashId));
 }

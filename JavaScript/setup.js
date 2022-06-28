@@ -10,7 +10,9 @@ function SetSwup() {
       'a[href^="' +
       window.location.origin +
       '"]:not([data-no-swup]), a[href^="./"]:not([data-no-swup]), a[href^="#"]:not([data-no-swup]), a[href^="/"]:not([data-no-swup])',
+    plugins: [new SwupScrollPlugin()],
   };
+
   const swup = new Swup(options);
   swup.on("contentReplaced", Init);
   swup.on("samePageWithHash", HashNav);
@@ -26,6 +28,7 @@ function Init() {
   console.log("inti " + page);
   navBar.SetPage(page);
   OnInit(page, hash);
+  window.scrollTo(0, 0);
 }
 
 function HashNav(event) {

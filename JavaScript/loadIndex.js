@@ -2,6 +2,9 @@
 const indexTemplateId = "index-entry-template";
 const temaplatePath = "/Templates/ContentMenuWrapper/menuWrapper.html";
 let loaded = false;
+// Button clsses
+const nextButtonClass = "next-button";
+const prevButtonClass = "prev-button";
 
 // Called when a new Page is intialised
 function OnInit(pageName, hash) {
@@ -118,25 +121,40 @@ class NavAutoTager {
   constructor(prefix) {
     this.prefix = prefix;
     this.index = 0;
+    this.hashLinks = [];
   }
 
-  SetTag(element) {
+  SetAutoTag(element, navIndex) {
     let tag = this.prefix + this.index.toString();
-    element.id = tag;
+    this.SetTag(element, tag, navIndex);
     this.index++;
+  }
+  SetTag(element, tag, navIndex) {
+    element.id = tag;
+    this.hashLinks[navIndex] = tag;
     return tag;
   }
 
   Claer() {
     this.index = 0;
+    this.hashLinks = [];
   }
 
-  TryTag(element, tagElement) {
+  TryTag(element, tagElement, navIndex) {
     if (tagElement == null) {
-      return this.SetTag(element);
+      return this.SetAutoTag(element, navIndex);
     } else {
-      element.id = tagElement.innerHTML;
-      return element.id;
+      return this.SetTag(element, tagElement.innerHTML, navIndex);
+    }
+  }
+
+  GetPrevTag(tag) {
+    let tagIndex = this.hashLinks.indexOf(tag);
+    tagIndex--;
+    if (tagIndex > 0) {
+      return this.hashLinks[tagIndex];
+    } else {
+      return null;
     }
   }
 }
@@ -183,10 +201,11 @@ function MakePageList(pageName, hash) {
 // index setup methods
 function MakeIndex(pageDetails, hash) {
   pageDetails.Claer();
+  let i = 0;
   pageDetails.hrefList.forEach((href) => {
     let indexElement = MakeIndexEntry(pageDetails);
     LaodEntry(pageDetails, href).then((mainElem) => {
-      SetNav(mainElem, indexElement);
+      SetNav(mainElem, indexElement, i);
       if ("#" + mainElem.id == hash) {
         console.log("FOund" + hash);
         GotoHash(hash);
@@ -218,11 +237,11 @@ function MakeIndex(pageDetails, hash) {
     return parentElem.appendChild(templateCopy);
   }
 
-  function SetNav(mainEntry, indexElem) {
+  function SetNav(mainEntry, indexElem, index) {
     entryName = mainEntry.getElementsByClassName("p-name")[0].innerHTML;
     entryTag = mainEntry.getElementsByClassName("nav-tag")[0];
 
-    let navTag = autoTager.TryTag(mainEntry, entryTag);
+    let navTag = autoTager.TryTag(mainEntry, entryTag, index);
 
     SetIndexName(indexElem, entryName);
     SetIndexHref(indexElem, navTag);
@@ -238,10 +257,19 @@ function MakeIndex(pageDetails, hash) {
   }
 }
 
+//=========================== Nv
+// Nav setup
+Function;
+
 // JS drvien local vanigation
 function GotoHash(hash) {
   let hashId = hash.replace("#", "");
   console.log("goto" + document.getElementById(hashId));
-  //document.getElementById(hashId).scrollIntoView(true);
-  swup.scrollTo(document.getElementById(hashId));
+  if (typeof swup !== "undefined") {
+    swup.scrollTo(document.getElementById(hashId));
+  } else {
+    document.getElementById(hashId).scrollIntoView(true);
+  }
 }
+
+function GoToPrevious(hash) {}

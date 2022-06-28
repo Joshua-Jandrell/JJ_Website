@@ -63,6 +63,20 @@ const pageLists = {
     ],
     "log-item-template"
   ),
+  "blog.html": new PageDetails(
+    "blog",
+    ".",
+    [
+      "/HTML/Articles/Blog/blog_s1-1_atmt.html",
+      "/HTML/Articles/Blog/blog_s1-2_sm.html",
+      "/HTML/Articles/Blog/blog_s1-3_met.html",
+      "/HTML/Articles/Blog/blog_s1-4_re0.html",
+      "/HTML/Articles/Blog/blog_s1-5_infgeo.html",
+      "/HTML/Articles/Blog/blog_s1-6_uxi.html",
+      "/HTML/Articles/Blog/blog_s1-7_mm.html",
+    ],
+    "log-item-template"
+  ),
 };
 
 class NavAutoTager {

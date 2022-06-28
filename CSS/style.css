@@ -3,7 +3,8 @@ body {
   padding: 50pt 0 0 0;
 }
 
-h1.unstyled {
+h1.unstyled,
+h2.unstyled {
   font-size: inherit;
   margin: inherit;
   padding: inherit;

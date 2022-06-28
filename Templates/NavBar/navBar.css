@@ -46,9 +46,12 @@
   font-weight: 500;
   text-align: center;
   position: relative;
-  background-color: bisque;
 
   transition: all 0.5s;
+}
+
+#nav-bar ul.nav-list a.select {
+  color: black;
 }
 #nav-bar ul.nav-list a:hover {
   color: orange;

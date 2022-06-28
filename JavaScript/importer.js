@@ -1,10 +1,8 @@
 // NB: This script must be deffereed in ordered to work.
-DoImportSetup();
 //#region Template Creation
 // constants
 const ignoreClass = "not-automated"; // this class must be added to a template for it not to be automatically created
 function DoImportSetup() {
-  console.log("wat");
   MakeAllTemplates();
   LoadExtenralTemplateHrefs();
   DefineLoadElement();
@@ -15,7 +13,6 @@ function DoImportSetup() {
 function LoadExtenralTemplateHrefs() {
   if (typeof templateHrefs !== "undefined") {
     templateHrefs.forEach((href) => {
-      console.log(href);
       LoadCustomTemplates(href);
     });
   }
@@ -105,7 +102,7 @@ function DefineLoadElement() {
       constructor() {
         super();
         let path = this.getAttribute("href");
-        console.log(path);
+
         LoadContent(path, this);
         //this.addEventListener("load", (event) => {});
       }
@@ -130,22 +127,29 @@ async function LoadHtml(path) {
 }
 // Async funtions
 async function LoadContent(path, element) {
-  LoadHtml(path)
-    .then((doc) => {
-      let body = doc.body;
-      FixLinks(body);
-      let parent = element.parentElement;
-      parent.innerHTML = body.innerHTML;
-      return parent;
-    })
-    .then((elem) => {
-      // Format any loaded code
-      if (typeof FormatCode === "function") FormatCode("code-snip", elem);
+  return new Promise((resolve) => {
+    LoadHtml(path)
+      .then((doc) => {
+        return PutDocIntoDOMElement(doc, element);
+      })
+      .then((elem) => {
+        // Format any loaded code
+        if (typeof FormatCode === "function") FormatCode("code-snip", elem);
 
-      // dispatch load event
-      let loadEvent = MakeLoadEvent(elem);
-      element.dispatchEvent(loadEvent);
-    });
+        // dispatch load event
+        let loadEvent = MakeLoadEvent(elem);
+        element.dispatchEvent(loadEvent);
+        return elem;
+      })
+      .then((elem) => resolve(elem));
+  });
+}
+function PutDocIntoDOMElement(newDoc, element) {
+  let body = newDoc.body;
+  FixLinks(body);
+  let parent = element.parentElement;
+  parent.innerHTML = body.innerHTML;
+  return parent;
 }
 // ===============================================================
 // Events

@@ -8,9 +8,11 @@
 
     <link rel="stylesheet" href="./CSS/style.css" />
     <link rel="stylesheet" href="./Templates/NavBar/navBar.css" />
-    <!--<script src="./node_modules/swup/dist/swup.min.js" defer></script>-->
-    <script src="https://unpkg.com/swup@latest/dist/swup.min.js"></script>
+    <link rel="stylesheet" href="./CSS/swup.css" />
+    <script src="./node_modules/swup/dist/swup.min.js" defer></script>
     <script src="./JavaScript/importer.js" id="importer" defer></script>
+    <script src="./JavaScript/loadIndex.js" defer></script>
+    <script src="./Templates/NavBar/navbar.js" defer></script>
 
     <script>
       const pathToRoot = ".";
@@ -20,11 +22,9 @@
   </head>
   <body>
     <headder>
-      <div>
-        <import-html href="Templates/NavBar/navBar.html"></import-html>
-      </div>
+      <nav-bar></nav-bar>
     </headder>
     Stay
-    <main id="swup" class="trastion-fade">Noice</main>
+    <main id="swup" class="transition-fade">Noice</main>
   </body>
 </html>

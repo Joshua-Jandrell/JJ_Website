@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">#dev_1-10</span>
+    <h1 slot="title" class="p-name unstyled">
+      Pseudo square brackets: what, how, why?
+    </h1>
+    <time slot="date" datetime="2022-16-04" class="dt-published"
+      >17 April 2022</time
+    >
+    <span slot="summary" class="p-summary">
+      Square brackets have been a recurring motif on my sight because they
+      invoke ideas of theology and programming.
+      <span class="inline-comment">(They also look cool!)</span>
+      But using inline text elements to represent them is tedious and creates
+      clutter for screen reader users: there must be a better way&hellip;</span
+    >
+    <span slot="content" class="e-contenet">
+      <section>
+        <h3 class="dev-h">Why do you want these square brackets anyway?</h3>
+        <p>
+          Decoration. This site isn't exactly putting on a sceptical with pretty
+          images and fancy graphics. Of course, this is by design - but having
+          no decoration at all is boring. The brackets add a bit of intrigue and
+          variety while acting as a motif. They give the site a distinct
+          aesthetic style with should make it more memorable to visitors.
+          Furthermore, it ensures that all pages on the site (I know, this
+          sounds like a horribly mixed metaphor…) are look like parts of a
+          common whole; even when their layout and content is varied.
+        </p>
+        <p class="retoric" aria-roledescription="retoric">
+          Okay, cool. But why use square brackets for this?
+        </p>
+        <p>
+          Decoration. This site isn't exactly putting on a sceptical with pretty
+          images and fancy graphics. Of course, this is by design - but having
+          no decoration at all is boring. The brackets add a bit of intrigue and
+          variety while acting as a motif. They give the site a distinct
+          aesthetic style with should make it more memorable to visitors.
+          Furthermore, it ensures that all pages on the site (I know, this
+          sounds like a horribly mixed metaphor…) are look like parts of a
+          common whole; even when their layout and content is varied.
+        </p>
+        <p class="retoric" aria-roledescription="retoric">
+          So? Why not are semi colons, ampersands, or OTHER BRACKETS - these are
+          used in code too!
+        </p>
+        <p>Well, yes. But square ones are the best! (In my case anyway).</p>
+        <p>
+          Firstly, square brackets are often used for indexing in programming
+          languages. And this is how I am using brackets on my site. They
+          indicate tilts and section: items that would appear in and index. If
+          my site were some sort of dictionary class, this is exactly how a
+          under might expect to retrieve the section associated with a title.
+          Tying a functional meaning to the elements is important because it
+          reinforces the connection to programming (and shows that I know what
+          I'm doing).
+        </p>
+        <p>
+          Other coding syntax elements lack his meaning. Semi-colons are just
+          line endings and curly brackets often just contain sections of code.
+          (As for good old round brackets, their meaning is already well defined
+          as an element of English punctuation. Not not just meaningless,
+          they're but confusing too!)
+        </p>
+        <p>
+          I also like square brackets because they appear strong and confident.
+          Most containers on this site have crisp, sharp boarders with unrounded
+          edges - square braces fit comfortably into this astatic. (Although I
+          must confess square braces may have also informed this athletic)
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">So what's wrong with them?</h3>
+        Look at these two random containers:
+        <article class="demo-square-bracket-divs">
+          <div class="square-bracket-bad">
+            [<span class="inner">Something in brackets</span>]
+          </div>
+          <div class="square-bracket-good">Something in brackets</div>
+        </article>
+        <p class="retoric" aria-roledescription="retoric">
+          Is this a trick or something?Ones one is on top the other is on the
+          bottom?
+        </p>
+        <p>
+          If you are viewing this site on a monitor, they probably look the
+          same. But if you view them with a screen reader one is haven then the
+          other is hell. (And not becuase of that top and bottom thing.)
+        </p>
+        <p class="retoric" aria-roledescription="retoric">
+          Is this a trick or something?Ones one is on top the other is on the
+          bottom?
+        </p>
+        <p>
+          Open square bracket imagine close square bracket if I spoke like open
+          square brace this close square brace.
+        </p>
+
+        <p class="retoric" aria-roledescription="retoric">
+          I can't even understand what you are saying.
+        </p>
+        <p>
+          Exactly! That's what happens if <em>decorative</em> square brackets
+          are added as inline characters. Like I did with the first div (and
+          most of the early headers on this site).
+        </p>
+        <p>Take a look at the code for the first one to see what I mean:</p>
+        <pre>
+              <code class="code-snip">
+&ltstyle&gt
+.square-bracket-bad {
+font-weight: bold;
+color: rgb(47, 177, 203);
+}
+.square-bracket-bad .inner {
+font-weight: normal;
+color: black;
+margin: 0 10px;
+}
+&lt/style&gt
+
+&ltdiv class="square-bracket-bad"&gt
+[&ltspan class="inner"&gtSomething in brackets&lt/span&gt]
+&lt/div&gt
+              </code>
+            </pre>
+
+        <p class="retoric" aria-roledescription="retoric">
+          Oh dear. That's a bummer... I'm guessing the second div is
+          different...
+        </p>
+      </section>
+      <section>
+        <h3 class="sub-h">How do you fix this></h3>
+        <p>
+          Magic.
+          <span class="inline-comment"
+            >(Actually CSS, which is basically the same thing.)</span
+          >
+        </p>
+        <p>
+          I made used of the ::before and ::after CSS pseudo elements. These
+          elements render (you'll never guess this) before and after their
+          parent element. Think of them like the bullet points on a list. They
+          are pretty neat and simple to use.
+        </p>
+        <p>Just look at the code for the lower div:</p>
+        <pre>
+              <code class="code-snip">
+&ltstyle&gt
+.square-bracket-good {
+font-weight: normal;
+color: black;
+}
+.square-bracket-good::before {
+content: "[";
+font-weight: bold;
+color: rgb(47, 177, 203);
+margin-right: 10px;
+}
+.square-bracket-good::after {
+content: "]";
+font-weight: bold;
+color: rgb(47, 177, 203);
+margin-left: 10px;
+}
+&lt/style&gt
+
+&ltdiv class="square-bracket-good"&gtSomething in brackets&lt/div&gt
+              </code>
+            </pre>
+        <p>
+          Did you notice the lack of braces? Well screen reader users noticed
+          that too! So did web crawlers and anything else that is interfacing
+          directly with the code on my site. Removing square brackets and other
+          decretive clutter makes the code more sematic and machine readable.
+        </p>
+        <p>
+          Pseudo elements aren't real. They can't hurt you. (Pseudo literally
+          means fake!) These elements are defined entirely with scc styling
+          which means that, like all good children in the Middle Ages, they can
+          be seen but not heard.
+        </p>
+        <p>
+          Another great thing about the pseudo element approach is the
+          flexibility it gives me. Let's say I get hooked on C++ and decide that
+          titles aren't really indexes _ there're pointers. So, I want to change
+          all of the []'s into *'s. If I need to change the characters next to
+          every single heading, I'd probably give up or pass out from boredom.
+          Fortunately, with pseudo elements this is as simple as changing two
+          lines of CSS . If the style s applied to a class, this can allow
+          innumerable html elements to be reformatted.
+        </p>
+        <p>
+          Done! Now I must go get rid of all those legacy brackets on my site.
+          (Or write a program to do it for me). Wish me luck!
+        </p>
+      </section>
+    </span>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../../../JS/templates.js" defer></script>
+    <script src="../../../JS/loadContent.js" defer></script>
+    <link rel="stylesheet" href="../../../clean.css" />
+    <link rel="stylesheet" href="../devlog.css" />
+    <title>Testing Templates</title>
+  </head>
+  <body>
+    <import-html href="./injection.html"></import-html>
+    <h1 class="main-h">hmmm</h1>
+    <template id="log-entry-temp">
+      <link rel="stylesheet" href="../../../clean.css" />
+      <h1 class="main-h">Template boi</h1>
+      <h2 class="main-h"><slot name="jeff"></slot></h2>
+    </template>
+  </body>
+</html>

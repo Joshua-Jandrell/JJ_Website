@@ -1,7 +1,7 @@
 // This script should be defered
 SetSwup();
-DoImportSetup();
-init();
+//DoImportSetup();
+//Init();
 
 function SetSwup() {
   let options = {
@@ -11,10 +11,10 @@ function SetSwup() {
       '"]:not([data-no-swup]), a[href^="./"]:not([data-no-swup]), a[href^="#"]:not([data-no-swup]), a[href^="/"]:not([data-no-swup])',
   };
   const swup = new Swup(options);
-  swup.on("contentReplaced", init);
+  swup.on("contentReplaced", Init);
 }
 
-function init() {
+function Init() {
   let path = window.location.pathname;
   let page = path.split("/").pop();
   if (typeof navBar === "undefined") {

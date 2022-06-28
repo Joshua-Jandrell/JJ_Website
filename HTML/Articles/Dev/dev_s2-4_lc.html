@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">#dev_2-04</span>
+    <h1 slot="title" class="p-name unstyled">
+      Now let’s load some external scripts
+    </h1>
+    <time slot="date" datetime="2022-05-27" class="dt-published"
+      >27 May 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      Templates are cool and all but even with all that terrific template
+      tricker – content is stuck on one page. The dev-log is
+      <em>still</em> almost 2000 lines long – and growing with each entry. This
+      is not feasible. There must be a better way wich is way better&hellip;
+    </article>
+    <article slot="content" class="e-contenet">
+      <section>
+        <h3 class="dev-h">What's wrong with that?</h3>
+        <p>
+          Would you like to scroll through 2000 lines to of code to find the
+          section you are trying to edit? What happens when it becomes 10 000?
+          Not only that, eventually this big scary document is going to take a
+          performance hit while loading.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">So, I’m guessing you have a plan&hellip;?</h3>
+        <p>You bet I do! It’s time for an html injection! (well, sort of)</p>
+        <p>
+          Imagine if you could pull the content of one html document into
+          another. Then each dev-log entry could have it’s own article (no, I'm
+          not refereing to the html element). All I’d need to do is have some
+          basic skeleton code in the main article; pull the entries in and Bob’s
+          your sister’s cousin’s father: we have ourselves a dev-log. One the
+          content is loaded automatically I’ll be able to automate the indexing
+          and navigation too which will definitely help reduce the tedium of
+          cross-refferancing links.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">Won’t this make you site slow?</h3>
+        <p>
+          No. not really. At the end of the day the same amount of HTML needs to
+          be loaded (I may have some overhead for metadata but that’s
+          insignificant given the number of lines of waffling I produce) before
+          the page can be rendered. Currently that’s being done synchronously
+          before the user lands on the web page. Importing custom html is
+          asynchronous (or at least it can be) so the page itself will load
+          quickly and the user will arrive at the dev-log faster than before.
+          They may have to wait a couple milliseconds for the content to be
+          loaded in – but the total load time should even out.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">Okay, how are you going to do thus?</h3>
+        <p>
+          The first thing we need to be able to do is fetch the contents of a
+          separate html file using he
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"
+            class="inline-link"
+            target="_blank"
+            >Fetch API</a
+          >. Then, once the external html file has been loaded we can format it
+          as text. I am using the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">then()</code></a
+          >
+          promise protoype to ensure that my script waits for the docuemment to
+          be loaded before it continutes to execute.
+        </p>
+        <pre><code class="code-snip">
+<script>
+  fetch(path)
+  .then((response) => {
+    // When the page is loaded convert it to text
+    return response.text();
+  });
+</script>
+        </code></pre>
+        <p>
+          But I'm not doen yet, <code class="inline">text != html</code>. I can
+          access the content of the loaded file as html once I have converete it
+          to DOM elements with the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/DOMParser"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">DOM parser</code></a
+          >. The
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/DOMParser"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">DOM parser</code></a
+          >
+          is essentailly compiling the text as valid html.The DOMParser can then
+          parse the file we fetch into a readable html document.
+        </p>
+        <pre><code class="code-snip">
+<script>
+  fetch(path)
+  .then((response) => {
+    return response.text();
+  })
+  .then((text) => {
+        // Now convert the text int HTML
+    let parser = new DOMParser();
+    return parser.parseFromString(text, "text/html");
+  });
+</script>
+        </code></pre>
+        <p>
+          Once the text has be parsed to html we can treat it like any other DOM
+          elemnt (becuase we literally just turned it into one). Now it’s a
+          simple matter of adding the content to the element of our choice.
+        </p>
+        <p>
+          I'm also goin to puy my scrip in an
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">async</code></a
+          >
+
+          funtion so that I can call it several times and not delay the
+          execution of other scripts while we wait for it to load.
+        </p>
+        <pre><code class="code-snip">
+<script>
+async function LoadContent(path, element) {
+fetch(path)
+  .then((response) => {
+    return response.text();
+  })
+  .then((text) => {
+      let parser = new DOMParser();
+      return parser.parseFromString(text, "text/html");
+  })
+  .then((doc) => {
+      // When the page is loaded convert it to text
+      let html = doc.body.innerHTML;
+      element.innerHTML = html;
+  });
+}
+</script>
+        </code></pre>
+        <p>
+          The
+          <code class="inline">path</code> specifies the url of the imported
+          html while the <code class="inline">element</code> indicates a
+          placeholder element in the DOM. I can fill the placeholder with the
+          loaded content to seamlessly introduce imported html. Once loaded this
+          external content will be completely identical to regualr static
+          markup.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">But where does the 'path' come from?</h3>
+        <p>
+          In an ideal world I would be using a backend langue to locate all of
+          the <code class="inline">.html</code> files in a given directory and
+          return them to the frontend. But unfortunately, GitHub pages made for
+          explicitly static sites, su I’m going to need to get creative&hellip;
+        </p>
+        <p>
+          My current answer is using
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements"
+            class="inline-link"
+            target="_blank"
+            >cuntom html elements</a
+          >.
+        </p>
+        <p>
+          I could define the element,
+          <code class="inline">import-html</code> which automatically fetches an
+          html file at the path specified by its
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-href"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">href</code></a
+          >
+          attribute. (I could use
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-src"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">src</code></a
+          >
+          to indicate that I am imbedding the resource pointed to by the path,
+          however src allocates screen space for the resources it load which I
+          don’t particularly want or need.).
+        </p>
+        <pre><code class="code-snip">
+
+<script>
+  document.onload += customElements.define(
+  "import-html",
+  class extends HTMLElement {
+    constructor() {
+      super();
+      let path = this.getAttribute(attributeName);
+      LoadContent(path, this);
+    }
+  }
+);
+</script>
+
+
+<!--Will get replaced by content loaded from path.html-->
+&lt;import-html href ="some/path.html"&gt;&lt;/import-html&gt;
+          </code></pre>
+        <p>
+          I've tweaked the <code class="inline">LoadContent()</code> funtion so
+          that the<code class="inline">&lt;import-html&gt;</code> will replace
+          itself with the loaded content. Thus, it appears as if our custom load
+          socket never existed and the content it imported was there the whole
+          time.
+        </p>
+        <pre><code class="code-snip">
+<script>
+  async function LoadContent(path, element) {
+    fetch(path)
+    .then((response) => {
+        return response.text();
+      })
+      .then((text) => {
+        let parser = new DOMParser();
+        return parser.parseFromString(text, "text/html");
+      })
+      .then((doc) => {
+        // Replace the parent's inner html so that the '<import-html>' tag vanishes
+        let body = doc.body;
+        let parent = element.parentElement;
+        parent.innerHTML = body.innerHTML;
+        return parent;
+      });
+  }
+</script>
+        </code></pre>
+        <p>
+          Replacing the inner html of the parent does mean that we run the risk
+          of unintentionally destroying the sampling of
+          <code class="inline">&lt;import-html&gt;</code>, but other than that
+          I’m very happy with this solution. Once set up it is very convenient
+          to use. It can keep the main html document short and sweet with tonnes
+          of content only one line away.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">What is this shadow magic!?</h3>
+        <p>No, no - no shady business here.</p>
+        <p>
+          Unlike with the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">shadowRoot</code></a
+          >
+          there are no strings attached. I am importing good old pure vanilla
+          html code. No stings (or docuemnt fragments) attached.
+        </p>
+        <p>
+          But wait- there’s more. Just because I’m not importing shadow DOM
+          elements now doesn’t mean that I can’t later. Because I’m working with
+          pure HTML all of the templet functionality I had before is still at my
+          disposal. I can import custom elements, or containers with specified
+          slots and any matching document
+          <a
+            href=" https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">&lt;template&gt;</code></a
+          >
+          will be applies. I can even import more templates (provided I only
+          define their custom elements after the import has complete)
+        </p>
+        <p>
+          I’m super excited to have some fun with my shiny new tools. It’s time
+          to have some fun.
+        </p>
+      </section>
+    </article>
+  </body>
+</html>

@@ -2,6 +2,7 @@
 //#region Template Creation
 // constants
 const ignoreClass = "not-automated"; // this class must be added to a template for it not to be automatically created
+const lightClass = "light-template";
 function DoImportSetup() {
   MakeAllTemplates();
   LoadExtenralTemplateHrefs();
@@ -67,9 +68,12 @@ function MakeLightTemplate(templateName) {
 
 // Requires loadContent.js
 async function LoadCustomTemplates(href) {
-  let rootHref = GetRootPath(href);
-  LoadHtml(href).then((doc) => {
-    return MakeLoadedTemplates(doc.body);
+  return new Promise((resolve) => {
+    LoadHtml(href)
+      .then((doc) => {
+        return MakeLoadedTemplates(doc.body);
+      })
+      .then((response) => resolve(resolve));
   });
 }
 
@@ -84,6 +88,7 @@ function MakeLoadedTemplates(body) {
     FixLinks(template.content);
     MakeShadowTemplate(template.id);
   });
+  return body;
 }
 //#endregion
 //#region LoadContent.Js

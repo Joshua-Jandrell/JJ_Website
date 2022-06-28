@@ -1,10 +1,20 @@
 // Ths script mus be ferrederd and only called after importer.js has been loaded
 const indexTemplateId = "index-entry-template";
+const temaplatePath = "/Templates/ContentMenuWrapper/menuWrapper.html";
+let loaded = false;
 
 // Called when a new Page is intialised
 function OnInit(pageName) {
   autoTager.Claer();
-  MakePageList(pageName);
+
+  if (!loaded) {
+    LoadCustomTemplates(temaplatePath).then((response) => {
+      loaded = true;
+      MakePageList(pageName);
+    });
+  } else {
+    MakePageList(pageName);
+  }
 }
 
 // spcial classes
@@ -58,8 +68,31 @@ const pageLists = {
     "devlog",
     ".",
     [
+      "/HTML/Articles/Dev/dev_s3-2_rs.html",
+      "/HTML/Articles/Dev/dev_s3-1_ap.html",
       "/HTML/Articles/Dev/dev_s3-0_nb.html",
-      "/HTML/Articles/Dev/dev_s3-2_repoStruct.html",
+      // -- old ---
+      "./HTML/Articles/Dev/dev_s2-fin_aMess.html",
+      //"./Pages/Dev-log/Articles/cssHeaddings.html", // put more entries in here => Update still needed
+      "./HTML/Articles/Dev/dev_s2-5_ai.html",
+      "./HTML/Articles/Dev/dev_s2-4_lc.html",
+      "./HTML/Articles/Dev/dev_s2-3_shadow.html",
+      "./HTML/Articles/Dev/dev_s2-2_tt.html",
+      "./HTML/Articles/Dev/dev_s2-1_fd.html",
+      "./HTML/Articles/Dev/dev_s2-0_arb.html",
+      "./HTML/Articles/Dev/dev_s1-12_rrrb.html",
+      "./HTML/Articles/Dev/dev_s1-11_bb.html",
+      "./HTML/Articles/Dev/dev_s1-10_psb.html",
+      "./HTML/Articles/Dev/dev_s1-9_s0.html",
+      "./HTML/Articles/Dev/dev_s1-8_cw0.html",
+      "./HTML/Articles/Dev/dev_s1-7_dw0.html",
+      "./HTML/Articles/Dev/dev_s1-6_bw0.html",
+      "./HTML/Articles/Dev/dev_s1-5_gp0.html",
+      "./HTML/Articles/Dev/dev_s1-4_gw0.html",
+      "./HTML/Articles/Dev/dev_s1-3_ab0.html",
+      "./HTML/Articles/Dev/dev_s1-2_hn0.html",
+      "./HTML/Articles/Dev/dev_s1-1_lohp.html",
+      "./HTML/Articles/Dev/dev_s1-0_wit.html",
     ],
     "log-item-template"
   ),
@@ -67,13 +100,13 @@ const pageLists = {
     "blog",
     ".",
     [
-      "/HTML/Articles/Blog/blog_s1-1_atmt.html",
-      "/HTML/Articles/Blog/blog_s1-2_sm.html",
-      "/HTML/Articles/Blog/blog_s1-3_met.html",
-      "/HTML/Articles/Blog/blog_s1-4_re0.html",
-      "/HTML/Articles/Blog/blog_s1-5_infgeo.html",
-      "/HTML/Articles/Blog/blog_s1-6_uxi.html",
       "/HTML/Articles/Blog/blog_s1-7_mm.html",
+      "/HTML/Articles/Blog/blog_s1-6_uxi.html",
+      "/HTML/Articles/Blog/blog_s1-5_infgeo.html",
+      "/HTML/Articles/Blog/blog_s1-4_re0.html",
+      "/HTML/Articles/Blog/blog_s1-3_met.html",
+      "/HTML/Articles/Blog/blog_s1-2_sm.html",
+      "/HTML/Articles/Blog/blog_s1-1_atmt.html",
     ],
     "log-item-template"
   ),
@@ -134,6 +167,7 @@ function CopyIndexTemplateElem() {
 }
 
 // =============================
+// Mehtod to load in content
 // Mhthod to be called on load
 function MakePageList(pageName) {
   if (pageName in pageLists) {

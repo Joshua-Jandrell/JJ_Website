@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">#dev_2-01</span>
+    <h1 slot="title" class="p-name unstyled">Fixing the dev-log</h1>
+    <time slot="date" datetime="2022-05-24" class="dt-published"
+      >24 May 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      <p>
+        Every entry added to an unoptimized dev-log is an entry wasted. As it
+        stands it’s a monolithic block of html and I’m sick of it. It’s hard to
+        work on, tricky to navigate and impossible to maintain. . I know I’m
+        going to redo this whole thing, It’s just a matter of time.
+      </p>
+      <p>And that time is now!</p>
+    </article>
+    <article slot="content" class="e-contenet">
+      <section>
+        <h3 class="dev-h">What’s the problem?</h3>
+        <p>There are several:</p>
+        <ol>
+          <li>
+            Firstly: The left-hand index is not scrollable and gives users no
+            indication of where they are in the dev-log.
+          </li>
+          <li>
+            Secondly: Sections pop open allowing users to read more articles.
+            This is fine if the reader starts at the top and moves down. But
+            what if they want to move up the log? They currently need to scroll
+            all the way though the article they just read which is hardly
+            conveniently.
+          </li>
+          <li>
+            Thirdly: Things could be more fluid. The details/summary tags are
+            the correct approach; however they jump open suddenly which might
+            confuse the user if they follow a link to a section that remains
+            cloased then they get there. What if they think there is no more
+            content to be found?
+          </li>
+          <li>
+            Finally: The log is getting cumbersome and tedious to manage. The
+            html is long and only growing. Even simple tasks like setting up
+            index links can be tedious. Ideally, I would automat the entire
+            thing – but I have no backend on Git-hub pages. I think I can still
+            make my life easier than it is now.
+          </li>
+        </ol>
+        <p>Now that I know what's wrong, it's time to start fixing.</p>
+      </section>
+    </article>
+  </body>
+</html>

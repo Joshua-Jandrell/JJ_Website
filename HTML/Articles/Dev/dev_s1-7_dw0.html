@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">#dev_1-07</span>
+    <h1 slot="title" class="p-name unstyled">Developing this log</h1>
+    <time slot="date" datetime="2022-15-04" class="dt-published"
+      >15 April 2022</time
+    >
+    <span slot="summary" class="p-summary">
+      After the blog section is the dev-log (development log) which keeps record
+      of all the trials and tribulations while making the site. It will included
+      styles guides, wireframes, reflections and well… you know because you're
+      here.</span
+    >
+    <span slot="content" class="e-contenet">
+      <section>
+        <h3 class="dev-h">Dev-log? What? Why?</h3>
+        <p>
+          It's basically a design journal for this site. Documenting the website
+          design process helps me design and show that I am a thoughtful
+          designer. It allows visitors (and myself) to understand what I was
+          doing and possibly learn from my successes and mistakes.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">How will the dev-log section be structured?</h3>
+        <article>
+          <img
+            class="log-img big"
+            id="dev_wire_frame-img"
+            load-src="/Assets/Images/Wire-frames/devlog-section-wire.png"
+            alt="The wire frame for the dev-log section"
+          /><br />
+          <label for="#dev_wire_frame-img" class="log-label">
+            Wireframe for the dev-log section
+          </label>
+        </article>
+        <p>
+          Similar structure to blog because it has similar features: periodic
+          entries.
+        </p>
+        <p>
+          List and featured articles swap position for visual variety, making
+          the dev-log feel distinct and separate from the blog.
+        </p>
+        <p>
+          The scroll list entri will be displayed as a time-line to show that
+          develoment is a continous process with icremental installments the
+          build on each-other.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">How will dev-log entires be structured?</h3>
+        <article>
+          <img
+            class="log-img big"
+            id="dev_page_wire_frame-img"
+            load-src="/Assets/Images/Wire-frames/devlog-wire.png"
+            alt="The wire frame for the dev-log page"
+          /><br />
+          <label for="#dev_page_wire_frame-img" class="log-label">
+            Wireframe for the dev-log (this page)
+          </label>
+        </article>
+        <p>Unlike blog the dev-log is one continues document.</p>
+        <p class="retoric" aria-roledescription="retoric">WHY?</p>
+        <p>
+          Because this shows that development is a continuous process and that
+          or articles are related and follow chronologically. In contrast each
+          blog post convers a different topic.
+        </p>
+        <p>
+          The timeline motif will be in the main dev-log section to show that it
+          is a cautious process. This also indicates that entireties build on
+          what has already be done.
+        </p>
+        <p>
+          Sections in the dev-log will be collapsed using the &lt;details&gt;
+          and &lt;summary&gt; widget so that users can scroll through the log
+          more easily.
+        </p>
+        <p>
+          I am slightly concerned that with time a single continuous document of
+          this nature will become difficult to manage and slow to load. I may
+          need to add some sort of document fetching system using JS.
+        </p>
+      </section></span
+    >
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">#dev_1-03</span>
+    <h1 slot="title" class="p-name unstyled">
+      Thinking <em>About</em> the next section
+    </h1>
+    <time slot="date" datetime="2022-13-04" class="dt-published"
+      >13 April 2022</time
+    >
+    <span slot="summary" class="p-summary">
+      A brief look at the layout of the About section. this section will be
+      directly below the home section. If a visitor keeps moving down the site
+      they will get there next.</span
+    >
+    <span slot="content" class="e-contenet">
+      <section>
+        <h3 class="dev-h">Why put the About section next?</h3>
+        <p>
+          I don't know how long a visitor will scroll so it's important I get to
+          the point. Once have show them a bit of what I do (in the home
+          navigation section) I should tell them who I am. The point of the site
+          is to market myself so I should get to the product (me) as soon as
+          possible.
+        </p>
+        <p>
+          This part should be short an to the point so that the visitor feels it
+          will not take too long to read.
+        </p>
+        <p>
+          It will make extensive use of collapsible inline text so that if the
+          viewer wants to read more they can, without the section feeling too
+          long or wordy. This also allows vistor to interact with the site,
+          deliveing a more engaging and intresting experance.
+        </p>
+        <p>
+          I don't want to come off as pretentiously formal so this will be a bit
+          tongue in cheek. As much as I want to seem qualified, I also want to
+          sound interesting.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">How will this section be structured?</h3>
+        <img
+          class="article-ing"
+          id="about_wire_frmae"
+          load-src="/Assets/Images/Wire-frames/home-nav-img.png"
+          alt="A wire frame for the about section with a profile picture and persolnal details on the left and details about me on the right."
+        /><br />
+        <label for="about_wire_frmae" class="log-label">
+          wireframe for the About section
+        </label>
+        <br />
+        <ul>
+          <li>
+            Text offset to the right to balance the left-aligned heading. This
+            will make the section layout appear more interesting and less
+            text-heavy. I assume that this will lead the viewer eyes downwards
+            diagonally. Their eyes will then move from the title to the profile
+            picture and then to the text. They will then move back and read the
+            contact information.
+          </li>
+          <li>
+            Profile pic is in the top left so that the introduction feels
+            personal and the visitor can put a face to my name.
+          </li>
+          <li>
+            Contact icons (for social media etc) will appear at the top left. In
+            this position they are easily visible but do not feel like obnoxious
+            clutter. These icons encourage the visitor to reach out to me (which
+            is exactly what I want them to do).
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="dev-h">Some notes after coding the About section</h3>
+        <p>
+          Gosh this is awful! Nothing behaves How I want it to. I used the
+          &lt;section&gt; and &lt;details&gt; widget to make the popout more
+          accessible- but they don't stay I one line. When they are opened they
+          fly to the bottom of the page for some reason which looks awful.
+        </p>
+        <p>
+          Perhaps I can make these work better with JavaScript later on but for
+          now they feel like a janky wase of time.
+        </p>
+        <article class="article-img-wrapper">
+          <article>
+            <img
+              class="article-img left"
+              id="about_popout_closed"
+              load-src="/Assets/Images/Wire-frames/Popout_open_screenshot.png"
+              alt="Image of the about section in an early developlement phase with popout text closed."
+            /><br />
+            <label for="about_popout_closed" class="log-label">
+              All is fine when popout is closed...
+            </label>
+          </article>
+          <article>
+            <img
+              class="article-img right"
+              id="about_popout_open"
+              load-src="/Assets/Images/Wire-frames/Popout_closed_screenshot.png"
+              alt="The popout text is not open and the continainer is missaligned"
+            /><br />
+            <label for="about_popout_open" class="log-label">
+              But it's a mess when it's open.
+            </label>
+          </article>
+        </article>
+        <aside class="inline-comment">
+          Don't mind the weird formating and stange picture - it's all just
+          filler.
+        </aside>
+        <p>
+          The widget was clearly intened to be used for text-blocks rather than
+          inline elements and it shows here. I'm also worried that users might
+          think that it is a hyperlink and not click on it.
+        </p>
+        <p>
+          I want this feature in on my site. It is interesting and exciting. But
+          it's currently a pain to setup becuse the widget has so many sections.
+          It doesn't even look as good I would like I will come back and figure
+          this out later; if and when time permits. Right now I need to focus on
+          constructing the rest of the site.
+        </p>
+      </section>
+    </span>
+  </body>
+</html>

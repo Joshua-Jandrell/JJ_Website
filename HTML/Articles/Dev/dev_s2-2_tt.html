@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">#dev_2-02</span>
+    <h1 slot="title" class="p-name unstyled">Template time!</h1>
+    <time slot="date" datetime="2022-05-24" class="dt-published"
+      >24 May 2022</time
+    >
+    <script load-src="/JavaScript/Demos/formatCode.js"></script>
+    <article slot="summary" class="p-summary">
+      <p>
+        Let’s start with the 4th thing first: Once I fix the log formatting, I
+        will be able to think of the rest more clearly – and without the danger
+        of a thousand do-overs.
+      </p>
+      <p>And that time is now!</p>
+    </article>
+    <article slot="content" class="e-contenet">
+      <section>
+        <h3 class="dec-h">Why do you want templates?</h3>
+        <p>
+          Each entry has the same HTML structure and code. Some of it has
+          important sematic value, but most of it is redundant styling structure
+          and formatting. Copying it is tedious and goodness knows what I’d do
+          if I wanted to change something. This is certainly not feasible. If
+          only there were some sort of template that I could use to copy code
+          thoughout the document.
+        </p>
+        <p>
+          Well I'm in luck! The HTML
+          <a
+            href=" https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">&lt;template&gt;</code></a
+          >
+          element is exactly that.
+        </p>
+        <p>Now wall we need to do is set it up</p>
+      </section>
+      <section>
+        <h3 class="dev-h">
+          Wait – setup? Aren't templets meant to be less work?
+        </h3>
+        <p>
+          Yes, they <em>are</em> less work. Even if you have a template for just
+          one or two lines of common code can start to add if you have to repeat
+          them dozens of time. The template element my talk a small bit of
+          effort to set up – but trust me it’s worth it.
+        </p>
+        <p>
+          The alternative is wating tonnes of time on tedious and repetitive
+          tasks and going mad while scrolling to try find you place in a
+          document that’s five times linger than it should be. And god forbid
+          you want to tweak a small structural detail on that thing you just
+          copied 500 time. You’ll defiantly with you had a single reference
+          element to change with a couple clicks.
+        </p>
+        <p>
+          Besides, the way we gonna do it you'll have setup once and as may
+          templates as your heart desires for ever more.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">Oooh, okay. How do we start?</h3>
+        <p>
+          The first step is making ourselves a
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot"
+            class="inline-link"
+            target="_blakc"
+            ><code class="inline">slot</code></a
+          >
+          element. What’s copy pasting that code one last time?
+        </p>
+        <pre><code id="template-time-code_0" class="code-snip">
+&lt;template id="my-first-template"&gt;
+  &lt;h1&gt;I am a temeplate&lt;/h1&gt;
+  &lt;p&gt;
+    Isn't this cool!
+  &lt;/p&gt;
+&lt;/template&gt;
+        </code></pre>
+        <template id="my-first-template">
+          <h1>I am a template</h1>
+          <p>Isn't that cool!</p>
+        </template>
+      </section>
+      <section>
+        <h3 class="dev-h">But I don’t see anything</h3>
+        <p>
+          Exactly. Our template isn’t rendered by the browser. It will be
+          totally invisible to the user until the time comes for use to use it.
+          Then when we ready we can clone it with JS. For all i
+        </p>
+        <p>
+          Rememeber to give your template a unique
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">id</code></a
+          >
+          so that you can easiliy find it in javascript.
+        </p>
+        <pre><code id="template-time-code_1" class="code-snip">
+let template = document.getElementById('my-first-template'));
+        </code></pre>
+        <p>
+          We going to need some sort of container for our template: let's make
+          it and find it with JS
+        </p>
+        <label for="temeplate-time-code_2">HTML container</label>
+        <pre><code id="template-time-code_2" class="code-snip">
+&lt;div id="template-container"&lt;div&gt;/div&gt;
+        </code></pre>
+        <label for="temeplate-time-code_3">Finding it with JS</label>
+        <pre><code id="template-time-code_3" class="code-snip">
+let parent = document.getElementById("parent-container");
+        </code></pre>
+        <p>
+          Now we need to clone the content of the templet so that we can append
+          it to out template. (cloning the
+          <code class="inline">&lt;template&gt;</code> elment itslef would just
+          make another invisible copy of the original - which is a bit silly.)
+          So we access the content of the template instead.
+        </p>
+        <p>
+          It's <strong>very important</strong> to get this bit right. Template
+          content is stored in a
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">DocumentFragment</code></a
+          >
+          to keep it out of sight and mind. If we are wroking with the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM"
+            class="inline-link"
+            target="_blank"
+            >Shadow DOM</a
+          >
+          then this donsn't bother us.
+        </p>
+        <label for="temeplate-time-code_4"
+          >Attaching a template using a
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">shadowRoot</code></a
+          ></label
+        >
+        <pre><code id="template-time-code_5" class="code-snip">
+let shadowRoot = parent.attachShadow({ mode: "open" });
+shadowRoot.appendChild(template.content.cloneNode(true));
+        </code></pre>
+        <p>
+          But, if we wnat a templae in the light DOM (regular DOM) so we must
+          use
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Element/firstElementChild"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">firstElementChild</code></a
+          >
+          to fully extract template content - otherwise it won't register event
+          properly and it won't look be searchable with
+          <abbr title="javascript">JS</abbr>
+        </p>
+        <pre><code id="template-time-code_6" class="code-snip">
+// Make sure to find the child of the content fragment
+let templateContent = template.content.firstElementChild;
+parent.appendChild(templateContent..cloneNode(true));
+        </code></pre>
+        <p>And bang! You have a template!</p>
+        <article class="dev-preview">
+          <div>
+            <h1>I am a template</h1>
+            <p>Isn't that cool!</p>
+          </div>
+        </article>
+      </section>
+      <section>
+        <h3 class="dev-h">That's still tedious</h3>
+        <p>
+          Yes, having to all that each time I want to use a JS template would be
+          an absolute pain. Fortunately JavaScript has me covered:
+        </p>
+        <p>
+          Wouldn’t it be nice if each time I wanted to use a template I could
+          just open a single HTML container for it and the rest would happen
+          automatically?
+        </p>
+        <p class="retoric">
+          I'm guessing you asking becuase you know how you can&hellip;
+        </p>
+        <p>
+          Well, yes: I can! By defining my own
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements"
+            class="inline-link"
+            target="_blank"
+            >cuntom element</a
+          >
+        </p>
+        <pre><code id="template-time-code_7" class="code-snip">
+let elementName = "jeff-jeff";
+elementName.define(
+  templateName,
+  class extends HTMLElement {
+    constructor() {
+      super();
+
+    }
+  }
+);
+        </code></pre>
+        <p>
+          The code above makes a custom element named
+          <code class="inline">jeff-jeff</code>. (Note the hyphen: all user
+          defined html tags must have a hyphen be valid. I’m guessing this to
+          prevent the awaked situation where you redefine something that already
+          exists.)
+        </p>
+        <p>
+          We have an acceptable name, but what else?
+          <code class="inline">jeff-jeff</code> doesn’t really do anything other
+          than exist as valid html.
+        </p>
+        <p>
+          But with a few simple tweaks we can adjust that template code from
+          earlier to clone a template into every single
+          <code class="inline">jeff-jeff</code> tag. I’m going to be giving
+          <code class="inline">jeff-jeff</code> a
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">shadowRoot</code></a
+          >
+          because I find shadow templates more useful; but this wouod work with
+          the ligth DOM code too.
+        </p>
+        <pre><code id="template-time-code_8" class="code-snip">
+let elementName = "jeff-jeff";
+let templateId = "jeff-jeff";
+elementName.define(
+  templateName,
+  class extends HTMLElement {
+    constructor() {
+      super();
+      // Find the template
+      let template = document.getElementById(templateName);
+
+      // Give the custom element a shadow root
+      let shadowRoot = this.attachShadow({ mode: "open" });
+
+      // Clone the themplate content and append it to the shadow root
+      shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+  }
+);
+        </code></pre>
+        <p>
+          You may have noticed that I've givent the template used the same id as
+          the custome element. I think this convetion is logical and I'm goign
+          to make full use for it to reduce the number of variables required.
+        </p>
+        <p>
+          If I generalize the code to make custom template elements, I can throw
+          it into a function and make an element for any template I please.
+        </p>
+        <pre><code id="template-time-code_9" class="code-snip">
+function MakeShadowTemplate(templateName) {
+  customElements.define(
+    templateName,
+    class extends HTMLElement {
+      constructor() {
+        super();
+        let template = document.getElementById(templateName);
+        let shadowRoot = this.attachShadow({ mode: "open" });
+        shadowRoot.appendChild(template.content.cloneNode(true));
+      }
+    }
+  );
+          }
+        </code></pre>
+        <p>
+          But wait: there’s more. I don’t even need to call this function
+          myself. I can automatically loop through all the templates on any
+          document and all my custom element can be automatically defined and
+          the template content automatically appended.
+        </p>
+        <pre><code id="template-time-code_10" class="code-snip">
+let templates = document.getElementsByTagName("template");
+Array.from(templates).forEach((template) => {
+  MakeShadowTemplate(template.Id);
+});
+        </code></pre>
+        <p>
+          Add this script to your document, set it to refer and bingo - you can
+          have as may templates as you like.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">But what about cutom content?</h3>
+        <p>
+          It's all well and good to copy and elemnt that is identical. But what
+          if two nodes have similar structures but slightly diffetent content?
+        </p>
+        <p>
+          Great news! HTML has us convered again. All we need to to is add soome
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot"
+            class="inline-link"
+            target="_blakc"
+            ><code class="inline">slot</code></a
+          >
+          elements to a shadow template:
+        </p>
+        <p>Pop slots into a template (be sure to name them)</p>
+        <pre><code id="template-time-code_11" class="code-snip">
+<template id="another-template">
+  <style>
+    .template-block{
+      display: block;
+      width: fit-content;
+      background-color: aliceblue;
+      padding: 20px;
+      margin: 10px auto;
+      border: 1px solid rgb(47, 177, 203);
+    }
+  </style>
+  <div class="template-block">
+  <slot name="custom-content">This content will be replaced</slot>
+  <p>This content will remain.</p>
+</div>
+</template>
+        </code></pre>
+        <p>
+          And then define the slot content inside the cutom template element.
+        </p>
+        <pre><code id="template-time-code_11" class="code-snip">
+
+<another-template>
+  <strong slot="custome-content">This will display in the first template!</strong>
+</another-template>
+<another-template>
+  <span slot="custome-content">This goes in the second template.</span>
+</another-template>
+        </code></pre>
+        <p>Now let's load some temlpates</p>
+
+        <!-- In time I want to make this into an interactive element where the user can see the code used redered next to the result -->
+        <article class="code-results dev-preview">
+          <another-template>
+            <div class="template-block">
+              <strong>This will display in the first template</strong>
+              <p>This content will stay.</p>
+            </div>
+          </another-template>
+          <another-template>
+            <div class="template-block">
+              <span>This goes in the second template.</span>
+              <p>This content will stay.</p>
+            </div>
+          </another-template>
+        </article>
+        <p>
+          Note: elements with the slot property repalce the slot elements when
+          the shadow template is rendered. That's why we can se the
+          <code class="inline">&lt;strong&gt;</code> strying on the firest
+          template.
+        </p>
+
+        <p>
+          This simple and convenient functionality is exactly why I use
+          shadowRoot with my templates. Like document fragments, shadow roots
+          exits in their own separate document realm. They are hard to access
+          and need their own style sheets (they cannot get style directly from
+          the document. However, the cost shadow magic should be worth it;
+          provided I use this power wisely.
+        </p>
+        <p>
+          In the next article I'll be talikg about some of the dangers of the
+          shadow DOM and how I must use it wisely.
+        </p>
+      </section>
+    </article>
+  </body>
+</html>

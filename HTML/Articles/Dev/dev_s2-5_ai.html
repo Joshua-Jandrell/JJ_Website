@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">#dev_2-05</span>
+    <h1 slot="title" class="p-name unstyled">Automatic index making</h1>
+    <time slot="date" datetime="2022-05-28" class="dt-published"
+      >28 May 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      Now that I have successfully set up html loading in the dev-log the feed
+      html is far shorter. In-fact the markup for the index is longer than the
+      feed itself. This can’t be right. Seems like something else to fix with JS
+    </article>
+    <article slot="content" class="e-contenet">
+      <section>
+        <h3 class="dev-h">What’s wrong with a long index.</h3>
+        <p>Everything!</p>
+        <p>
+          It’s tedious and cumbersome. Each time a new entry is made a new link
+          in the index must be created. This is painfully tedious and
+          essentially doubles the setup time. Then there’s still the issue of
+          human error which could result in broken links and unhappy users.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">Time for JS automation</h3>
+        <p>
+          Not only will this save me from setting up links, but it might also
+          actually make the page better too. In the current system links simply
+          jump users to the corresponding
+          <code class="inline">&lt;details&gt;</code> ,
+          <code class="inline">&lt;summary&gt;</code> section.
+        </p>
+        <h3 class="dev-h">I’m guessing JavaScript can do this?</h3>
+        <p>You bet it can!</p>
+        <p>
+          In theory it’s as easy as finding all the element with some ‘index
+          entry’ class, cloning its content into an html template. And appending
+          that template to a list.
+        </p>
+        <pre><code class="code-snip">
+&lt;script&gt;
+  function SetIndex(content)
+    let template = document.getElementById('template-id');
+    let list = document.getElementById('nav-list-id');
+    clone = template.content.firstElemnetChild.cloneNone(true);
+    list.appendChild(clone);
+&lt;/script&gt;
+        </code></pre>
+        <p>
+          We can event find and set the content elements based on class name.
+          This would allow us to automatically populate our index item with
+          content. Microformats like ‘h-name’ could be used to put entry names
+          into their corresponding index anchors.
+        </p>
+        <p class="retoric">But don’t you need to set a hyperlink somehow?</p>
+        <p>
+          Yip. That’s simple. All we need to do is set the
+          <code class="inline">href</code> of the
+          <code class="inline">&lt;a&gt;</code> tag in our nav elemnt to be the
+          <code class="inline">id</code> of the content element.
+        </p>
+        <pre><code class="code-snip">
+<script>
+
+  // Find and loop though all elemnts which are know to be entires
+  contents = document.getElementsByClassName('devlog-entry-className')
+  Array.from(contents).forEach((content)=>{
+    SetIndexEntry(content)
+  });
+
+
+  function SetIndex(content){
+    let template = document.getElementById('template-id');
+    let list = document.getElementById('nav-list-id');
+
+    clone = template.content.firstElemnetChild.cloneNone(true);
+
+    // setting clone content to be the name of the articel
+    clone.getElementsByClassName('p-name')[0].innerHtml = content.getElementsByClassName('p-name')[0].innerHtml;
+
+    // set anchor to link to content
+    clone.getElementsByTagName('a')[0].href= content.id;
+
+    // appned clone to the list
+    list.appendChild(clone);
+  }
+</script>
+        </code></pre>
+        <p>There’s just one issue&hellip;</p>
+      </section>
+      <section>
+        <h3 class="dev-h">What's the catch?</h3>
+        <p>
+          Well it’s all well and good to find the content of a static html
+          element that has already been loaded. But I’m dynamically importing my
+          log entries. They might not be fully loaded when I call the add index
+          function.
+        </p>
+        <p>
+          You can’t do fancy trickery to access and set index names when the
+          html containing that name doesn’t exist yet&hellip;
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">What now?</h3>
+        <p>
+          Fortunately, there is a solution: events. I can dispatch a custom
+          event that’s called when the html content has finished loading. This
+          is event will let me know that the content is there and safe to
+          access. I'll be useing a custom event so that I can sent the specific
+          elemnt - making it earlier for me to refferance.
+        </p>
+        <pre><code class="code-snip">
+<script>
+  async function LoadContent(path, element) {
+    fetch(path)
+    .then((response) => {
+        return response.text();
+      })
+      .then((text) => {
+        let parser = new DOMParser();
+        return parser.parseFromString(text, "text/html");
+      })
+      .then((doc) => {
+        // Replace the parent's inner html so that the '<import-html>' tag vanishes
+        let body = doc.body;
+        let parent = element.parentElement;
+        parent.innerHTML = body.innerHTML;
+        return parent;
+      }).then((elem)=>{
+        loadEvent= new CustomEvent('onImport', {
+          detail: { element: elem }
+        });
+        elem.dispatchEvent(loadEvent);
+      })
+    }
+</script>
+        </code></pre>
+
+        <p>
+          The all I need to do is set up a listener to update the content of my
+          clone when it's imported. (Note: becuse I load into the parent element
+          I'm goign to need to serch for a class on the parent element - not the
+          <code class="inline">&lt;import-html&gt;</code> element. I want the
+          eleent whose content will be repelaced.)
+        </p>
+
+        <p>
+          We can event find and set the content elements based on class name.
+          This would allow us to automatically populate our index item with
+          content. Microformats like ‘h-name’ could be used to put entry names
+          into their corresponding index anchors.
+        </p>
+        <p class="retoric">But don’t you need to set a hyperlink somehow?</p>
+        <p>
+          Yip. That’s simple. All we need to do is set the
+          <code class="inline">href</code> of the
+          <code class="inline">&lt;a&gt;</code> tag in our nav elemnt to be the
+          <code class="inline">id</code> of the content element.
+        </p>
+        <pre><code class="code-snip">
+<script>
+
+// Find and loop though all elemnts which are know to be entires
+contents = document.getElementsByClassName('devlog-entry-className')
+Array.from(contents).forEach((content)=>{
+  SetIndexEntry(content)
+});
+
+
+function SetIndex(content){
+  let template = document.getElementById('template-id');
+  let list = document.getElementById('nav-list-id');
+
+  clone = template.content.firstElemnetChild.cloneNone(true);
+  list.appendChild(clone);
+
+  // Add an event listender to the on load event
+  content.addEventListener("onImport", (loadedContent) => {
+      UpdateContent(clone,loadedContent);
+    })
+}
+
+// Updated the content of the index element
+function UpdateContent(newElem, loadedContent){
+  newElem.getElementsByClassName('p-name')[0].innerHtml = loadedContent.getElementsByClassName('p-name')[0].innerHtml;
+  newElem.getElementsByTagName('a')[0].href= loadContent.id;
+}
+</script>
+      </code></pre>
+        <p>
+          Note: In need to clone the elements in the order that I get
+          <code class="inline">content</code> containers. If I only create the
+          clone after the content has been loaded then there is no gurentee that
+          my index items will applear in the same order as the entries they
+          point to. The load funtion is asynchronous so each load will finish
+          based on the size of the file rather than the order in which it was
+          called. The resut would have been entrues ordered by files size: that
+          would make navigation quite confunsing.
+        </p>
+      </section>
+    </article>
+  </body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">#dev_2-03</span>
+    <h1 slot="title" class="p-name unstyled">The dangers of the dark arts</h1>
+    <time slot="date" datetime="2022-05-26" class="dt-published"
+      >26 May 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      <p>
+        Since I began my investigation into templates, I have fallen in love
+        with the shadow DOM. Embracing the darkness has given me great power.
+        But like all fallen heroes – I looks Like I’m going to end up paying the
+        price…
+      </p>
+      <p>
+        But why? What is the shadow DOM? What is it good for? And why should I
+        worry.
+      </p>
+    </article>
+    <article slot="content" class="e-contenet">
+      <section>
+        <h3 class="dev-h">What lurks in the shadows?</h3>
+
+        <p>
+          In short html generally exists in a document. (No shit sherlock.) Any
+          element that we insert is also part of the document. (duh.) elements
+          in the document are an be retrieved by code that searches the document
+          and will have CSS styles from the document applied to them. (Yes –
+          this is literally how HTML works).
+        </p>
+        <p>But what if it wasn’t?</p>
+        <p>
+          The
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM"
+            class="inline-link"
+            target="_blank"
+            >shadow DOM</a
+          >
+          introduces a whole new world of nuance and mystery. The shadow also
+          contains a document. Like all malevolent phantoms this shadow needs a
+          host – any HTML element will do. As soon as the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">shadowRoot</code></a
+          >
+          has been attached to its host a dark curse is cast and a document is
+          spawned inside you document.
+        </p>
+        <pre><code class="code-snip">
+// attachShadow the shadow to a host
+let shadowRoot = this.attachShadow({ mode: "open" });
+
+// Now we can add content to the shadow DOM
+shadowRoot.appendChild(someElem.cloneNode(true));
+      </code></pre>
+        <p>
+          No. This is not the same as just inserting a new element. The shadow
+          DOM is encapsulated – CSS and JS form the external document struggle
+          to penetrate this dark real. And yes, yes you can put shadow DOMs
+          inside your shadow DOM: DOM-ception here we come.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">But what is this shadow so powerful?</h3>
+        <p>
+          It was the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot"
+            class="inline-link"
+            target="_blakc"
+            ><code class="inline">&lt;slot&gt;</code></a
+          >
+          and
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot"
+            class="inline-link"
+            target="_blakc"
+            ><code class="inline">slot</code></a
+          >
+          elements that did it for me. Because the shadow DOM is separate from
+          the main document, slot names and Id’s within a shadow template can be
+          ‘unique’ to their [shadow] DOM, even when there are multiple clones of
+          the template in the light DOM. This makes it far easier to reference
+          specific element within a single instance of a template (once you have
+          access to the template that is).
+        </p>
+        <p>
+          Oh, and did I mention that slots allow you to define specific content
+          for certain templates within your container. These slots are
+          automatically updated with the correct HTML once a shadow root with
+          matching slot element is appended to a container. (The original light
+          DOM contents will not be rendered when a shadow root is appended.)
+          And, if the custom contents of the slot are updated [in the light
+          DOM], the shadow slot will update automatically. Simple and easy
+          template customisation -what’s not to like.
+        </p>
+        <p>
+          Encapsulation is also fantastic – although I’m not using it to m full
+          advantage. Because shadow elements are undisturbed by CSS and JS in
+          the main document (unless accessed explicitly), you can throw a shadow
+          element into any doc without worrying that something might go wrong
+          because it has the same class, id or whatever as something else. This
+          is fantastic if you want to make a side with modular and reusable
+          pieces of code.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">
+          But Isn’t there a punishment for using such witchcraft?
+        </h3>
+        <p>
+          Unfortunately, yes. There can be. CSS from the main document not being
+          applied to the shadow DOM can be frustrating at times when you want a
+          consisted style without repeating code. Luckily, if the wost comes to
+          the works you can always add the same style sheets to a template
+          element – phew.
+        </p>
+        <p>
+          Searching a shadow DOM with JS is hard by design. You need to
+          explicitly access the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">shadowRoot</code></a
+          >
+          attribute of its host.
+        </p>
+        <pre><code class="code-snip">
+            let shadowHost = document.getElemntById('know-host');
+            let shadow = shadowHost.shadowRoot;
+
+            // Now we can serch the shadow like a normal document
+            let andSoON = shadow.getElemntsClassName("etc");
+        </code></pre>
+        <p>
+          There is good reason for this to avoid encapsulation (or 300
+          containers with the same id when a template is used.
+        </p>
+        <p>
+          But it also has dubious consequences. You see web crawlers are afraid
+          of the dark. They couldn’t be bothered to check every element for a
+          <code class="inline">shadowRoot</code> – and you can make them. Spider
+          bots squash the shadow DOM like a bug. Any content in a shadowRoot is
+          banished to the void: unread and un-analysed.
+        </p>
+        <p>
+          In some cases (like a repetitive nav element) that’s totally fine. But
+          some of my main articles are currently being loaded in a shadow
+          element which is a bit of a problem. Sure the user can see it but to
+          search engines is doesn’t even exist. I need to fix how I load in
+          content (which I’ll be discussing in the next entry). The shadow DOM
+          should only be used for repetitive elements that need not be analysed
+          - like templates. The brilliant slot functionality and DOM
+          fragmentation suggest that this is what the shadow real was made for.
+          (Banishing repeated clones).
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">How do I save myself from the darkness?</h3>
+        <p>
+          I don’t I embrace it. <code class="inline">shadowRoot</code>s are
+          great! Unfortunately, I’m not really using encapsulation to my
+          advantage at the moment. My website was structured with monolithic,
+          all powerful CSS scripts in mind. I would defiantly like to go for the
+          modular, single element approach but that would require a review of
+          over 1000 lines of CSS and I’m not in the mood for that yet.
+        </p>
+        <p>
+          The key here is that the shadow DOM is just one of may tricks up my
+          sleave. I has it’s use and it has it’s place – but using it all the
+          time is like putting block text in an
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a"
+            class="inline-link"
+            target="_blank"
+            ><code class="inline">&lt;a&gt;</code></a
+          >
+          tag because hyperlinks are cool. (The are damn awesome - but in
+          moderation)
+        </p>
+        <p.
+      </section>
+    </article>
+  </body>
+</html>

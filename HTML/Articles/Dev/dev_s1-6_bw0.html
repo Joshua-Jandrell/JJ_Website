@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">#dev_1-06</span>
+    <h1 slot="title" class="p-name unstyled">Blog structure</h1>
+    <time slot="date" datetime="2022-15-04" class="dt-published"
+      >15 April 2022</time
+    >
+    <span slot="summary" class="p-summary">
+      <p>How should the blog section and blog posts be structured?</p>
+      <p>
+        Games will be followed by a blog section. Visitor's know what I do but
+        now they get to see who I am. The blogs should feel conversational and
+        I'll try to make them a bit humorous.
+      </p></span
+    >
+    <span slot="content" class="e-contenet"
+      ><section>
+        <h3 class="dev-h">Why should the blogs be informal?</h3>
+        <p>
+          I want to give the impression that the blogs are not censored or
+          formalised. Using casual language like contraction shows that that the
+          blogs aren't meant to be overly academic or formal. The deformalized
+          context makes them feel more genuine. This section gives visitors an
+          idea of who I am and how I think. I'm not going to give any false
+          pretences.
+        </p>
+        <p>
+          That said, I'm also not going to be an idol. This is the internet:
+          putting too much of myself out there is dangerous and might come to
+          bite me. I need to set boundary. I won't share everything or pour my
+          heart out. I'll give my genuine opinions, but not all my opinions.
+          I'll avoid swearing (event though everyone f@king does it) and try not
+          to make and radically contentious claims. I must bare in mind that I
+          am a brand and I can't bring my future employer's name into disrepute.
+        </p>
+        <p>
+          I know this approach is a bit of a cop-out. Perhaps as I get more
+          confident about being online I'll get bolder. This is still quite
+          scary for me: I don't even use social media.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">Structure of the Blog section</h3>
+        <article>
+          <img
+            class="article-img"
+            id="blog_wire_frame-img"
+            load-src="/Assets/Images/Wire-frames/blog-wire-img.png"
+            alt="An image of the blog section wireframe"
+          /><br />
+          <label for="#blog_wire_frame-img" class="log-label">
+            Wireframe for the blog section
+          </label>
+        </article>
+        <p>
+          Recent blogs are most prominent, displayed in large blocks to the left
+          - a natural starting point for the English-reader's eye. New work
+          emphasised here because it is likely better and more topical. A short
+          blurb is porvided for each post to get the visitor interested to read
+          more.
+        </p>
+        <p>
+          There is a list of all blogs is placed in a scroll space to the right
+          for easy reference. This shows viewer there is more to read if they
+          want. As the blog gets bigger I might sort blog entries into lists
+          based on category and have a more comprehensive display of blogs on a
+          seperate page. I may also add a search feature in further. For now
+          this should be fine.
+        </p>
+        <p>
+          Splash text (will eventually be randomised) is placed below the blog
+          title. This sets a conversational tone and makes things fun. Blog
+          section should feel friendly and inviting.
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">Structure of the blog pages.</h3>
+        <article>
+          <img
+            class="article-img"
+            id="blog_wire_frame-img"
+            load-src="/Assets/Images/Wire-frames/blog-bottom-wire-img.png"
+            alt="Wireframe of the top of the blog post, depicitng the blog title, a data and an area for the blog article."
+          /><br />
+          <label for="#blog_wire_frame-img" class="log-label">
+            Wireframe for top of a post
+          </label>
+        </article>
+        <article>
+          <img
+            class="log-img big"
+            id="blog_wire_frame-img"
+            load-src="/Assets/Images/Wire-frames/blog-bottom-wire-img.png"
+            alt="Wireframe for the bottom of the blog post, depicitng
+            share links and related articles."
+          /><br />
+          <label for="#blog_wire_frame-img" class="log-label">
+            wirefram for the bottom of a post
+          </label>
+        </article>
+        <p>
+          Blog index gives can get a sense of the article structure. This is
+          particularly helpful for screen reader users.
+        </p>
+        <p>
+          Back button next to title, allows the user to return to main blog
+          section if they wish (can be tweaked to send them to previous paged
+          using JS later).
+        </p>
+        <p>
+          The related blog sections are included to enrage the visitor to keep
+          reading. They are paced on the side and agian at the bottom. The
+          bottom ones will be in the same preview format that is used on the
+          homepage. when the reader reaches the bottom of the page they are
+          finished with the blog - sample posts should help to get them
+          interested in something else.
+        </p>
+        <p>
+          Share icons will allow the user to share the url over their social
+          media. The url for this can be generated from the following site:
+          <a
+            href="https://www.sharelinkgenerator.com/"
+            target="_blank"
+            class="inline-link"
+            rel="external"
+            >Share Link Generator: Facebook, Twitter, LinkedIn, Pinterest, and
+            Email mailto forms.</a
+          >
+          This is super useful!
+        </p>
+      </section>
+      <section>
+        <h3 class="dev-h">Post coding notes</h3>
+        <p>
+          Removed the right-hand related articles tab: this was redundant
+          clutter. The reader will only need to look for more to read when they
+          are finished reading (at the end of the page) If I want to refer to
+          another article during the blog I can do so with a hyperlink.
+        </p>
+        <p>
+          The footer section of the blog is stylistically distinct so that the
+          reader can clearly see they have finished reading.
+        </p>
+      </section></span
+    >
+  </body>
+</html>

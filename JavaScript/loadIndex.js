@@ -4,16 +4,18 @@ const temaplatePath = "/Templates/ContentMenuWrapper/menuWrapper.html";
 let loaded = false;
 
 // Called when a new Page is intialised
-function OnInit(pageName) {
+function OnInit(pageName, hash) {
   autoTager.Claer();
 
   if (!loaded) {
     LoadCustomTemplates(temaplatePath).then((response) => {
       loaded = true;
-      MakePageList(pageName);
+      var h = hash;
+      MakePageList(pageName, hash);
+      console.log(hash);
     });
   } else {
-    MakePageList(pageName);
+    MakePageList(pageName, hash);
   }
 }
 
@@ -169,9 +171,9 @@ function CopyIndexTemplateElem() {
 // =============================
 // Mehtod to load in content
 // Mhthod to be called on load
-function MakePageList(pageName) {
+function MakePageList(pageName, hash) {
   if (pageName in pageLists) {
-    MakeIndex(pageLists[pageName]);
+    MakeIndex(pageLists[pageName], hash);
   } else {
     console.warn("Page name " + pageName + " is not defined");
   }
@@ -179,12 +181,16 @@ function MakePageList(pageName) {
 // =============================
 
 // index setup methods
-function MakeIndex(pageDetails) {
+function MakeIndex(pageDetails, hash) {
   pageDetails.Claer();
   pageDetails.hrefList.forEach((href) => {
     let indexElement = MakeIndexEntry(pageDetails);
     LaodEntry(pageDetails, href).then((mainElem) => {
       SetNav(mainElem, indexElement);
+      if ("#" + mainElem.id == hash) {
+        console.log("FOund" + hash);
+        GotoHash(hash);
+      }
     });
   });
 
@@ -230,4 +236,11 @@ function MakeIndex(pageDetails) {
     let anchor = indexElem.querySelector("a");
     anchor.href = localTag;
   }
+}
+
+// JS drvien local vanigation
+function GotoHash(hash) {
+  let hashId = hash.replace("#", "");
+  console.log("goto" + hashId);
+  //document.getElementById(hashId).scrollIntoView(true);
 }

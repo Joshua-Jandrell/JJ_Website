@@ -2,6 +2,8 @@
 const indexTemplateId = "index-entry-template";
 const temaplatePath = "/Templates/ContentMenuWrapper/menuWrapper.html";
 let loaded = false;
+let currentPageDetails;
+const openClass = "open";
 // Button clsses
 const nextButtonClass = "next-button";
 const prevButtonClass = "prev-button";
@@ -77,27 +79,27 @@ const pageLists = {
       "/HTML/Articles/Dev/dev_s3-1_ap.html",
       "/HTML/Articles/Dev/dev_s3-0_nb.html",
       // -- old ---
-      "./HTML/Articles/Dev/dev_s2-fin_aMess.html",
+      "/HTML/Articles/Dev/dev_s2-fin_aMess.html",
       //"./Pages/Dev-log/Articles/cssHeaddings.html", // put more entries in here => Update still needed
-      "./HTML/Articles/Dev/dev_s2-5_ai.html",
-      "./HTML/Articles/Dev/dev_s2-4_lc.html",
-      "./HTML/Articles/Dev/dev_s2-3_shadow.html",
-      "./HTML/Articles/Dev/dev_s2-2_tt.html",
-      "./HTML/Articles/Dev/dev_s2-1_fd.html",
-      "./HTML/Articles/Dev/dev_s2-0_arb.html",
-      "./HTML/Articles/Dev/dev_s1-12_rrrb.html",
-      "./HTML/Articles/Dev/dev_s1-11_bb.html",
-      "./HTML/Articles/Dev/dev_s1-10_psb.html",
-      "./HTML/Articles/Dev/dev_s1-9_s0.html",
-      "./HTML/Articles/Dev/dev_s1-8_cw0.html",
-      "./HTML/Articles/Dev/dev_s1-7_dw0.html",
-      "./HTML/Articles/Dev/dev_s1-6_bw0.html",
-      "./HTML/Articles/Dev/dev_s1-5_gp0.html",
-      "./HTML/Articles/Dev/dev_s1-4_gw0.html",
-      "./HTML/Articles/Dev/dev_s1-3_ab0.html",
-      "./HTML/Articles/Dev/dev_s1-2_hn0.html",
-      "./HTML/Articles/Dev/dev_s1-1_lohp.html",
-      "./HTML/Articles/Dev/dev_s1-0_wit.html",
+      "/HTML/Articles/Dev/dev_s2-5_ai.html",
+      "/HTML/Articles/Dev/dev_s2-4_lc.html",
+      "/HTML/Articles/Dev/dev_s2-3_shadow.html",
+      "/HTML/Articles/Dev/dev_s2-2_tt.html",
+      "/HTML/Articles/Dev/dev_s2-1_fd.html",
+      "/HTML/Articles/Dev/dev_s2-0_arb.html",
+      "/HTML/Articles/Dev/dev_s1-12_rrrb.html",
+      "/HTML/Articles/Dev/dev_s1-11_bb.html",
+      "/HTML/Articles/Dev/dev_s1-10_psb.html",
+      "/HTML/Articles/Dev/dev_s1-9_s0.html",
+      "/HTML/Articles/Dev/dev_s1-8_cw0.html",
+      "/HTML/Articles/Dev/dev_s1-7_dw0.html",
+      "/HTML/Articles/Dev/dev_s1-6_bw0.html",
+      "/HTML/Articles/Dev/dev_s1-5_gp0.html",
+      "/HTML/Articles/Dev/dev_s1-4_gw0.html",
+      "/HTML/Articles/Dev/dev_s1-3_ab0.html",
+      "/HTML/Articles/Dev/dev_s1-2_hn0.html",
+      "/HTML/Articles/Dev/dev_s1-1_lohp.html",
+      "/HTML/Articles/Dev/dev_s1-0_wit.html",
     ],
     "log-item-template"
   ),
@@ -121,9 +123,10 @@ class NavAutoTager {
   constructor(prefix) {
     this.prefix = prefix;
     this.index = 0;
-    this.hashLinks = [];
+    this.navElems = [];
+    this.currElem = null;
   }
-
+  // Setup
   SetAutoTag(element, navIndex) {
     let tag = this.prefix + this.index.toString();
     this.SetTag(element, tag, navIndex);
@@ -131,13 +134,13 @@ class NavAutoTager {
   }
   SetTag(element, tag, navIndex) {
     element.id = tag;
-    this.hashLinks[navIndex] = tag;
+    this.navElems[navIndex] = { tag: new LocalNavElem(element) };
     return tag;
   }
 
   Claer() {
     this.index = 0;
-    this.hashLinks = [];
+    this.navElems = [];
   }
 
   TryTag(element, tagElement, navIndex) {
@@ -147,19 +150,73 @@ class NavAutoTager {
       return this.SetTag(element, tagElement.innerHTML, navIndex);
     }
   }
+  //===============================================================
+  // Public
+  Goto(elementId) {
+    this.CloseCurrent();
+    this.currElem = this.GetNavElem(elementId);
+    if ((this.currElem = null)) {
+      console.warn("Attenpted to navigate to null element");
+      return;
+    }
+    GotoElem(this.currElem);
+    this.currElem.Open();
+  }
 
-  GetPrevTag(tag) {
-    let tagIndex = this.hashLinks.indexOf(tag);
-    tagIndex--;
-    if (tagIndex > 0) {
-      return this.hashLinks[tagIndex];
+  GotoNext(elementId) {
+    this.Goto(this.GetNextElem(elementId));
+  }
+  GotoPrev(elementId) {
+    this.Goto(this.GetPrevElem(elementId));
+  }
+  // other utils
+  CloseCurrent() {
+    if (this.currElem != null) {
+      this.currElem.Close();
+    }
+  }
+  GetNavElem(tag) {
+    return this.navElems[tag];
+  }
+  GetPrevElem(tag) {
+    let tagIndex = this.navElems.indexOf(tag) + 1;
+
+    if (tagIndex < this.navElems.length) {
+      return this.navElems[tagIndex];
+    } else {
+      return null;
+    }
+  }
+
+  GetNextElem(tag) {
+    let tagIndex = this.navElems.indexOf(tag) - 1;
+    if (tagIndex >= 0) {
+      return this.navElems[tagIndex];
     } else {
       return null;
     }
   }
 }
+
 // constant class instances
 const autoTager = new NavAutoTager("index_");
+
+class LocalNavElem {
+  constructor(element) {
+    this.element = element;
+    this.shadow = element.shadowRoot;
+    this.details = this.shadow.querySelector("details");
+  }
+
+  Open() {
+    this.details.setAttribute("open", "true");
+    this.classList.add(openClass);
+  }
+  Close() {
+    this.details.removeAttribute("open");
+    this.details.classList.remove(openClass);
+  }
+}
 
 // Accesing possibly loaded docuemnts and prevously refferanced items
 async function GetDocument(href) {
@@ -200,12 +257,14 @@ function MakePageList(pageName, hash) {
 
 // index setup methods
 function MakeIndex(pageDetails, hash) {
+  currentPageDetails = pageDetails;
   pageDetails.Claer();
   let i = 0;
   pageDetails.hrefList.forEach((href) => {
     let indexElement = MakeIndexEntry(pageDetails);
     LaodEntry(pageDetails, href).then((mainElem) => {
       SetNav(mainElem, indexElement, i);
+      SetButtons(mainElem, i);
       if ("#" + mainElem.id == hash) {
         console.log("FOund" + hash);
         GotoHash(hash);
@@ -259,17 +318,49 @@ function MakeIndex(pageDetails, hash) {
 
 //=========================== Nv
 // Nav setup
-Function;
+function SetButtons(element, navIndex) {
+  let buttons = element.shadowRoot.querySelectorAll("button");
+  console.log(Array.from(buttons));
+  Array.from(buttons).forEach((button) => {
+    if (button.classList.contains(prevButtonClass)) {
+      console.log("forund prev");
+      SetPrevButton(button, navIndex);
+      console.log(button);
+    } else if (button.classList.contains(nextButtonClass)) {
+      SetNextButton(elementbutton);
+    }
+  });
+}
 
+function SetPrevButton(button, navIndex) {
+  button.addEventListener("click", (e) => {
+    GoToPrevious(navIndex);
+  });
+}
+function SetNextButton(button, navIndex) {
+  button.addEventListener("click", (e) => {
+    GoToNext(navIndex);
+  });
+}
 // JS drvien local vanigation
 function GotoHash(hash) {
   let hashId = hash.replace("#", "");
-  console.log("goto" + document.getElementById(hashId));
+  GotoElem(document.getElementById(hashId));
+}
+function GotoElem(elem) {
   if (typeof swup !== "undefined") {
-    swup.scrollTo(document.getElementById(hashId));
+    swup.scrollTo(elem);
   } else {
-    document.getElementById(hashId).scrollIntoView(true);
+    elem.scrollIntoView(true);
   }
 }
 
-function GoToPrevious(hash) {}
+function GoToPrevious(hash) {
+  autoTager.GoToPrevious();
+}
+
+function GoToNext(hash) {
+  console.log("nice" + hash);
+}
+// shadow templatehandling
+function GetShadowTemplate(element) {}

@@ -133,6 +133,7 @@ async function LoadHtml(path) {
 // Async funtions
 async function LoadContent(path, element) {
   return new Promise((resolve) => {
+    console.log(path);
     LoadHtml(path)
       .then((doc) => {
         return PutDocIntoDOMElement(doc, element);

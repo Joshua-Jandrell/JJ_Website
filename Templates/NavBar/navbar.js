@@ -16,6 +16,7 @@ class NavBar {
   SetPage(pageName) {
     if (this.elem != null) {
       if (this.page != null) {
+        console.log(this.navLinks[this.page]);
         this.navLinks[this.page].classList.remove(selectedClass);
       }
       this.navLinks[pageName].classList.add(selectedClass);

@@ -16,7 +16,9 @@ function SetSwup() {
 
   const swup = new Swup(options);
   swup.on("contentReplaced", Init);
-  swup.on("samePageWithHash", HashNav);
+  swup.on("scrollDone", HashNav);
+  // window.addEventListener('locationchange', function () );
+  console.log(swup);
 }
 
 function Init() {
@@ -32,7 +34,14 @@ function Init() {
   window.scrollTo(0, 0);
 }
 
-function HashNav(event) {
-  console.log("hahaha");
-  GotoHash(window.location.hash);
+function HashNav() {
+  console.log("hahaha" + window.location.hash.slice(1));
+  autoTager.Open(window.location.hash.slice(1));
+}
+function Test() {
+  console.log("eish" + window.location.hash.slice(1));
+}
+
+function Huh() {
+  swup.scrollTo();
 }

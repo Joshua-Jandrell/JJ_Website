@@ -17,7 +17,6 @@ function OnInit(pageName, hash) {
     LoadCustomTemplates(tempateHref).then((response) => {
       loaded = true;
       MakePageList(pageName, hash);
-      console.log(hash);
     });
   } else {
     MakePageList(pageName, hash);
@@ -26,7 +25,14 @@ function OnInit(pageName, hash) {
 
 // spcial classes
 class PageDetails {
-  constructor(pageName, rootPath, hrefList, templateId = "log-item-template") {
+  constructor(
+    pageName,
+    rootPath,
+    hrefList,
+    isSingle = false,
+    templateId = "log-item-template",
+    isExternal = false
+  ) {
     this.pageName = pageName;
     this.rootPath = rootPath;
     this.mainListId = "content-list";
@@ -36,6 +42,7 @@ class PageDetails {
     this.hrefList = hrefList;
     this.templateId = templateId;
     this.template = null;
+    this.isExternal = isExternal;
   }
 
   GetMainListElem() {
@@ -123,7 +130,9 @@ class NavAutoTager {
   constructor(prefix) {
     this.prefix = prefix;
     this.index = 0;
-    this.navElems = [];
+    this.navElems = {};
+    this.navAnchors = {};
+    this.navTags = [];
     this.currElem = null;
   }
   // Setup
@@ -134,13 +143,21 @@ class NavAutoTager {
   }
   SetTag(element, tag, navIndex) {
     element.id = tag;
-    this.navElems[navIndex] = { tag: new LocalNavElem(element) };
+    this.navTags[navIndex] = tag;
+    this.navElems[tag] = new LocalNavElem(element);
     return tag;
+  }
+  SetIndexHref(indexElem, tag) {
+    let anchor = indexElem.querySelector("a");
+    anchor.href = "#" + tag;
+    // Wierd I know but this is to appease swup
+    this.navAnchors[tag] = anchor;
   }
 
   Claer() {
     this.index = 0;
-    this.navElems = [];
+    this.navElems = {};
+    this.navTags = [];
   }
 
   TryTag(element, tagElement, navIndex) {
@@ -152,24 +169,36 @@ class NavAutoTager {
   }
   //===============================================================
   // Public
-  Goto(elementId) {
+  Open(id) {
     this.CloseCurrent();
-    this.currElem = this.GetNavElem(elementId);
-    if ((this.currElem = null)) {
+    let newElem = this.GetNavElem(id);
+    if (newElem == null) {
       console.warn("Attenpted to navigate to null element");
       return;
     }
-    GotoElem(this.currElem);
-    this.currElem.Open();
+    newElem.Open();
+    this.currElem = newElem;
   }
-
-  GotoNext(elementId) {
-    this.Goto(this.GetNextElem(elementId));
+  Goto(id) {
+    this.CloseCurrent();
+    if (id == null) {
+      return;
+    }
+    this.navAnchors[id].click();
   }
-  GotoPrev(elementId) {
-    this.Goto(this.GetPrevElem(elementId));
+  GotoNext(id) {
+    this.Goto(this.GetNextElem(id));
   }
+  GotoPrev(id) {
+    this.Goto(this.GetPrevId(id));
+  }
+  //===============================================================
   // other utils
+  SetCurrent(id) {
+    //this.CloseCurrent();
+    //this.currElem = this.navElems[id];
+    this.Goto(id);
+  }
   CloseCurrent() {
     if (this.currElem != null) {
       this.currElem.Close();
@@ -178,20 +207,20 @@ class NavAutoTager {
   GetNavElem(tag) {
     return this.navElems[tag];
   }
-  GetPrevElem(tag) {
-    let tagIndex = this.navElems.indexOf(tag) + 1;
+  GetPrevId(tag) {
+    let tagIndex = this.navTags.indexOf(tag) + 1;
 
-    if (tagIndex < this.navElems.length) {
-      return this.navElems[tagIndex];
+    if (tagIndex < this.navTags.length) {
+      return this.navTags[tagIndex];
     } else {
       return null;
     }
   }
 
   GetNextElem(tag) {
-    let tagIndex = this.navElems.indexOf(tag) - 1;
+    let tagIndex = this.navTags.indexOf(tag) - 1;
     if (tagIndex >= 0) {
-      return this.navElems[tagIndex];
+      return this.navTags[tagIndex];
     } else {
       return null;
     }
@@ -206,11 +235,22 @@ class LocalNavElem {
     this.element = element;
     this.shadow = element.shadowRoot;
     this.details = this.shadow.querySelector("details");
+    this.details.addEventListener("click", this.Click);
+    this.details.setAttribute("nav-id", element.id);
   }
 
+  Click() {
+    // NB: open atribute only added after click
+    if (!this.hasAttribute("open")) {
+      this.classList.add(openClass);
+      autoTager.SetCurrent(this.getAttribute("nav-id"));
+    } else {
+      this.classList.remove(openClass);
+    }
+  }
   Open() {
     this.details.setAttribute("open", "true");
-    this.classList.add(openClass);
+    this.details.classList.add(openClass);
   }
   Close() {
     this.details.removeAttribute("open");
@@ -262,12 +302,13 @@ function MakeIndex(pageDetails, hash) {
   let i = 0;
   pageDetails.hrefList.forEach((href) => {
     let indexElement = MakeIndexEntry(pageDetails);
+    let navIndex = i;
+    i++;
     LaodEntry(pageDetails, href).then((mainElem) => {
-      SetNav(mainElem, indexElement, i);
-      SetButtons(mainElem, i);
+      SetNav(mainElem, indexElement, navIndex);
+      SetButtons(mainElem);
       if ("#" + mainElem.id == hash) {
-        console.log("FOund" + hash);
-        GotoHash(hash);
+        autoTager.Goto(mainElem.id);
       }
     });
   });
@@ -303,64 +344,39 @@ function MakeIndex(pageDetails, hash) {
     let navTag = autoTager.TryTag(mainEntry, entryTag, index);
 
     SetIndexName(indexElem, entryName);
-    SetIndexHref(indexElem, navTag);
+    autoTager.SetIndexHref(indexElem, navTag);
+
+    return navTag;
   }
 
   function SetIndexName(indexElem, entryName) {
     let indexName = indexElem.getElementsByClassName("p-name")[0];
     indexName.innerHTML = entryName;
-  }
-  function SetIndexHref(indexElem, localTag) {
-    let anchor = indexElem.querySelector("a");
-    anchor.href = "#" + localTag;
+    return entryName;
   }
 }
 
 //=========================== Nv
 // Nav setup
-function SetButtons(element, navIndex) {
+function SetButtons(element) {
   let buttons = element.shadowRoot.querySelectorAll("button");
-  console.log(Array.from(buttons));
   Array.from(buttons).forEach((button) => {
     if (button.classList.contains(prevButtonClass)) {
-      console.log("forund prev");
-      SetPrevButton(button, navIndex);
-      console.log(button);
+      SetPrevButton(button, element);
     } else if (button.classList.contains(nextButtonClass)) {
-      SetNextButton(elementbutton);
+      SetNextButton(button, element);
     }
   });
 }
 
-function SetPrevButton(button, navIndex) {
+function SetPrevButton(button, element) {
+  let id = element.id;
   button.addEventListener("click", (e) => {
-    GoToPrevious(navIndex);
+    autoTager.GotoPrev(id);
   });
 }
-function SetNextButton(button, navIndex) {
+function SetNextButton(button, element) {
   button.addEventListener("click", (e) => {
-    GoToNext(navIndex);
+    autoTager.GotoNext(element.id);
   });
 }
-// JS drvien local vanigation
-function GotoHash(hash) {
-  let hashId = hash.replace("#", "");
-  GotoElem(document.getElementById(hashId));
-}
-function GotoElem(elem) {
-  if (typeof swup !== "undefined") {
-    swup.scrollTo(elem);
-  } else {
-    elem.scrollIntoView(true);
-  }
-}
-
-function GoToPrevious(hash) {
-  autoTager.GoToPrevious();
-}
-
-function GoToNext(hash) {
-  console.log("nice" + hash);
-}
-// shadow templatehandling
-function GetShadowTemplate(element) {}

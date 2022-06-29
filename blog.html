@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./node_modules/swup/dist/swup.min.js" defer></script>
-    <script src="./JavaScript/setup.js" defer></script>
     <title>JJ/Blog</title>
     <link rel="stylesheet" href="./CSS/style.css" />
     <link rel="stylesheet" href="./Templates/NavBar/navBar.css" />
@@ -13,7 +11,7 @@
 
     <script>
       const pathToRoot = ".";
-      const templateHrefs = ["/Templates/ContentMenuWrapper/menuWrapper.html"];
+      const templateHrefs = [];
     </script>
     <script src="./JavaScript/External/scroll-plugin/dist/SwupScrollPlugin.js"></script>
     <script src="./JavaScript/External/swup/dist/swup.js" defer></script>
@@ -24,6 +22,9 @@
     <script src="JavaScript/setup.js" defer></script>
   </head>
   <body>
+    <header>
+      <nav-bar></nav-bar>
+    </header>
     <main id="swup" class="transition-fade">
       <content-menu-wrapper>
         <h1 slot="index-label" class="comment-h">Index</h1>
@@ -35,11 +36,17 @@
         <ul slot="content-list" id="content-list" class="content-list"></ul>
       </content-menu-wrapper>
 
-      <template id="log-item-template">
+      <template
+        id="log-item-template"
+        class="not-automated"
+        offpage-href="./index.htm"
+      >
         <li class="devlog-entry h-entry">
-          <local-article>
-            <load-socket></load-socket>
-          </local-article>
+          <a>
+            <other-article>
+              <load-socket></load-socket>
+            </other-article>
+          </a>
         </li>
       </template>
     </main>

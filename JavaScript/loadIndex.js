@@ -1,6 +1,9 @@
 // Ths script mus be ferrederd and only called after importer.js has been loaded
 const indexTemplateId = "index-entry-template";
 const temaplatePath = "/Templates/ContentMenuWrapper/menuWrapper.html";
+// Template detilis
+const templateId = "log-item-template";
+const externalAttribute = "offpage-href";
 let loaded = false;
 let currentPageDetails;
 const openClass = "open";
@@ -25,14 +28,7 @@ function OnInit(pageName, hash) {
 
 // spcial classes
 class PageDetails {
-  constructor(
-    pageName,
-    rootPath,
-    hrefList,
-    isSingle = false,
-    templateId = "log-item-template",
-    isExternal = false
-  ) {
+  constructor(pageName, rootPath, hrefList, isSingle = false) {
     this.pageName = pageName;
     this.rootPath = rootPath;
     this.mainListId = "content-list";
@@ -40,9 +36,9 @@ class PageDetails {
     this.navId = "index-list";
     this.navElem = null;
     this.hrefList = hrefList;
+    this.isSingle = isSingle;
     this.templateId = templateId;
     this.template = null;
-    this.isExternal = isExternal;
   }
 
   GetMainListElem() {
@@ -63,6 +59,8 @@ class PageDetails {
     if (this.template == null) {
       this.template = document.getElementById(this.templateId);
     }
+    console.log("should have templat" + this.templateId);
+    console.log(this.template);
     return this.template;
   }
 
@@ -108,7 +106,7 @@ const pageLists = {
       "/HTML/Articles/Dev/dev_s1-1_lohp.html",
       "/HTML/Articles/Dev/dev_s1-0_wit.html",
     ],
-    "log-item-template"
+    false
   ),
   "blog.html": new PageDetails(
     "blog",
@@ -122,7 +120,7 @@ const pageLists = {
       "/HTML/Articles/Blog/blog_s1-2_sm.html",
       "/HTML/Articles/Blog/blog_s1-1_atmt.html",
     ],
-    "log-item-template"
+    false
   ),
 };
 
@@ -195,8 +193,6 @@ class NavAutoTager {
   //===============================================================
   // other utils
   SetCurrent(id) {
-    //this.CloseCurrent();
-    //this.currElem = this.navElems[id];
     this.Goto(id);
   }
   CloseCurrent() {
@@ -243,7 +239,7 @@ class LocalNavElem {
     // NB: open atribute only added after click
     if (!this.hasAttribute("open")) {
       this.classList.add(openClass);
-      autoTager.SetCurrent(this.getAttribute("nav-id"));
+      //autoTager.SetCurrent(this.getAttribute("nav-id"));
     } else {
       this.classList.remove(openClass);
     }
@@ -285,12 +281,20 @@ function CopyIndexTemplateElem() {
 
 // =============================
 // Mehtod to load in content
-// Mhthod to be called on load
+// Method to be called on load
 function MakePageList(pageName, hash) {
   if (pageName in pageLists) {
-    MakeIndex(pageLists[pageName], hash);
+    MakePage(pageLists[pageName], hash);
   } else {
     console.warn("Page name " + pageName + " is not defined");
+  }
+}
+
+function MakePage(pageDetails, hash) {
+  if (pageDetails.isSingle) {
+    console.log("Single page");
+  } else {
+    MakeIndex(pageDetails, hash);
   }
 }
 // =============================
@@ -299,19 +303,37 @@ function MakePageList(pageName, hash) {
 function MakeIndex(pageDetails, hash) {
   currentPageDetails = pageDetails;
   pageDetails.Claer();
+  console.log(pageDetails.GetMainTemplate());
+  let external = pageDetails.GetMainTemplate().hasAttribute(externalAttribute);
   let i = 0;
   pageDetails.hrefList.forEach((href) => {
     let indexElement = MakeIndexEntry(pageDetails);
     let navIndex = i;
     i++;
     LaodEntry(pageDetails, href).then((mainElem) => {
-      SetNav(mainElem, indexElement, navIndex);
-      SetButtons(mainElem);
-      if ("#" + mainElem.id == hash) {
-        autoTager.Goto(mainElem.id);
+      if (external) {
+        console.log("EXTERAN");
+        DoExternalNavSetup;
+      } else {
+        DoInternalNavSetup(mainElem, indexElement, navIndex);
       }
     });
   });
+
+  async function DoInternalNavSetup(mainElem, indexElement, navIndex) {
+    SetNav(mainElem, indexElement, navIndex);
+    SetButtons(mainElem);
+    if ("#" + mainElem.id == hash) {
+      autoTager.Goto(mainElem.id);
+    }
+  }
+
+  async function DoExternalNavSetup(
+    mainElem,
+    indexElem,
+    navIndex,
+    externalRoot
+  ) {}
 
   async function LaodEntry(pageDetails, href) {
     let mainEntryWrapper = MakeMainEntryWrapper(pageDetails);

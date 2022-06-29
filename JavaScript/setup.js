@@ -1,8 +1,11 @@
 // This script should be defered
-SetSwup();
-DoImportSetup();
-Init();
-console.log("noni");
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  SetSwup();
+  DoImportSetup();
+  Init();
+  console.log("noni");
+});
 
 function SetSwup() {
   let options = {

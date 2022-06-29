@@ -29,3 +29,100 @@ ul.content-list {
   font-family: Arial, Helvetica, sans-serif;
   content: "// ";
 }
+
+/* sidenav styling */
+#index-list {
+  color: red;
+
+  list-style: none;
+  padding-left: 0;
+
+  height: 75vh;
+  overflow-y: scroll;
+
+  border-right: 2pt solid rgb(47, 177, 203);
+}
+/* Scroll styling */
+#index-list::-webkit-scrollbar {
+  width: 5pt;
+  transition: all 0.25s;
+}
+#index-list::-webkit-scrollbar:hover {
+  width: 20px;
+}
+#index-list::-webkit-scrollbar-track {
+  background: aliceblue;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(47, 177, 203);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}
+/* List item styling */
+#index-list li {
+  background-color: aliceblue;
+  margin: 0;
+  padding: 3pt 20pt;
+
+  text-align: justify;
+
+  border-right: 2pt solid rgb(47, 177, 203);
+}
+#index-list li a {
+  text-decoration: none;
+  color: black;
+  font-size: 1em;
+
+  display: block;
+  position: relative;
+
+  padding: 0 0.5em;
+  width: fit-content;
+
+  background-color: aquamarine;
+}
+
+#index-list li a::before {
+  display: block;
+  width: fit-content;
+  content: "[";
+  position: absolute;
+  color: orange;
+
+  left: -5pt;
+
+  background: 
+}
+
+#index-list li a::after {
+  display: block;
+  width: fit-content;
+  content: "]";
+  position: absolute;
+  color: orange;
+
+  font-size: 1.5em;
+  top: -0.25em;
+
+  right: -5pt;
+}
+
+/* === Scroll bar styling === */ /*
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(47, 177, 203);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+*/

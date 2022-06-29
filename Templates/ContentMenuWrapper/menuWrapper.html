@@ -65,7 +65,7 @@
         load-href="/Templates/ContentMenuWrapper/menuItem.css"
       />
 
-      <a class="content-item click-item">
+      <a class="content-item click-item" onclick="return false">
         <article class="date-marker">
           <div class="marker"></div>
           <slot name="date" class="date">date</slot>
@@ -149,10 +149,10 @@
       <li>
         <a
           href=""
-          class="u-nav blog-nav"
+          class="u-nav blog-nav blog-h p-name"
           id="entry-link"
           onclick="//CloseCheckbox('index-toggle')"
-          ><h4 class="blog-h p-name">Loading...</h4></a
+          >Loading...</a
         >
       </li>
     </template>

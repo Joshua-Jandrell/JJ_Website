@@ -1,9 +1,10 @@
 // Ths script mus be ferrederd and only called after importer.js has been loaded
 const indexTemplateId = "index-entry-template";
 const temaplatePath = "/Templates/ContentMenuWrapper/menuWrapper.html";
+const loadedArticles = {};
 // Template detilis
 const templateId = "log-item-template";
-const externalAttribute = "offpage-href";
+const externalRootAttribute = "href";
 let loaded = false;
 let currentPageDetails;
 const openClass = "open";
@@ -54,13 +55,14 @@ class PageDetails {
     }
     return this.navElem;
   }
+  GetRootPath() {
+    return this.GetMainTemplate().getAttribute(externalRootAttribute);
+  }
 
   GetMainTemplate() {
     if (this.template == null) {
       this.template = document.getElementById(this.templateId);
     }
-    console.log("should have templat" + this.templateId);
-    console.log(this.template);
     return this.template;
   }
 
@@ -74,55 +76,6 @@ class PageDetails {
     this.template = null;
   }
 }
-const loadedArticles = {};
-const pageLists = {
-  "devlog.html": new PageDetails(
-    "devlog",
-    ".",
-    [
-      "/HTML/Articles/Dev/dev_s3-2_rs.html",
-      "/HTML/Articles/Dev/dev_s3-1_ap.html",
-      "/HTML/Articles/Dev/dev_s3-0_nb.html",
-      // -- old ---
-      "/HTML/Articles/Dev/dev_s2-fin_aMess.html",
-      //"./Pages/Dev-log/Articles/cssHeaddings.html", // put more entries in here => Update still needed
-      "/HTML/Articles/Dev/dev_s2-5_ai.html",
-      "/HTML/Articles/Dev/dev_s2-4_lc.html",
-      "/HTML/Articles/Dev/dev_s2-3_shadow.html",
-      "/HTML/Articles/Dev/dev_s2-2_tt.html",
-      "/HTML/Articles/Dev/dev_s2-1_fd.html",
-      "/HTML/Articles/Dev/dev_s2-0_arb.html",
-      "/HTML/Articles/Dev/dev_s1-12_rrrb.html",
-      "/HTML/Articles/Dev/dev_s1-11_bb.html",
-      "/HTML/Articles/Dev/dev_s1-10_psb.html",
-      "/HTML/Articles/Dev/dev_s1-9_s0.html",
-      "/HTML/Articles/Dev/dev_s1-8_cw0.html",
-      "/HTML/Articles/Dev/dev_s1-7_dw0.html",
-      "/HTML/Articles/Dev/dev_s1-6_bw0.html",
-      "/HTML/Articles/Dev/dev_s1-5_gp0.html",
-      "/HTML/Articles/Dev/dev_s1-4_gw0.html",
-      "/HTML/Articles/Dev/dev_s1-3_ab0.html",
-      "/HTML/Articles/Dev/dev_s1-2_hn0.html",
-      "/HTML/Articles/Dev/dev_s1-1_lohp.html",
-      "/HTML/Articles/Dev/dev_s1-0_wit.html",
-    ],
-    false
-  ),
-  "blog.html": new PageDetails(
-    "blog",
-    ".",
-    [
-      "/HTML/Articles/Blog/blog_s1-7_mm.html",
-      "/HTML/Articles/Blog/blog_s1-6_uxi.html",
-      "/HTML/Articles/Blog/blog_s1-5_infgeo.html",
-      "/HTML/Articles/Blog/blog_s1-4_re0.html",
-      "/HTML/Articles/Blog/blog_s1-3_met.html",
-      "/HTML/Articles/Blog/blog_s1-2_sm.html",
-      "/HTML/Articles/Blog/blog_s1-1_atmt.html",
-    ],
-    false
-  ),
-};
 
 class NavAutoTager {
   constructor(prefix) {
@@ -294,7 +247,7 @@ function MakePage(pageDetails, hash) {
   currentPageDetails = pageDetails;
   pageDetails.Claer();
   if (pageDetails.isSingle) {
-    console.log("Single page");
+    MakeArticle(pageDetails);
   } else {
     MakeIndex(pageDetails, hash);
   }
@@ -303,28 +256,49 @@ function MakePage(pageDetails, hash) {
 
 // === Single type page
 
-function MakeArticle(pageDetails, hash) {
-  LaodEntry(pageDetails, hash);
+function MakeArticle(pageDetails) {
+  let paramsString = window.location.search;
+  let urlParams = new URLSearchParams(paramsString);
+  let hash = urlParams.get("href");
+  LoadEntry(pageDetails, hash);
+  LoadUnlinkedIndex(pageDetails, hash);
+}
+// load an index that is not directly linked to any itens
+async function LoadUnlinkedIndex(pageDetails, currentHref) {
+  pageDetails.hrefList.forEach((href) => {
+    LoadExternalNav(pageDetails, href);
+  });
+}
+
+// not this should not case any major perfoance issues becuase content accesed has been pre-loaded (so we don't have the overhead of loading every article for every page)
+async function LoadExternalNav(pageDetails, href) {
+  let indexElem = MakeIndexEntry(pageDetails);
+  indexElem.querySelector("a").href = MakeExternalHref(
+    pageDetails.GetRootPath(),
+    href
+  );
+  GetDocument(href).then((doc) => {
+    //let name = doc.getElementsByClassName("p-name").innerHTML;
+    SetIndexName(indexElem, doc);
+  });
 }
 
 // === Index type page
 
 // index setup methods
 function MakeIndex(pageDetails, hash) {
-  console.log(pageDetails.GetMainTemplate());
   let externalRoot = pageDetails
     .GetMainTemplate()
-    .getAttribute(externalAttribute);
+    .getAttribute(externalRootAttribute);
   let i = 0;
   pageDetails.hrefList.forEach((href) => {
     let indexElement = MakeIndexEntry(pageDetails);
     let navIndex = i;
     i++;
-    LaodEntry(pageDetails, href).then((mainElem) => {
+    LoadEntry(pageDetails, href).then((mainElem) => {
       if (externalRoot == null || externalRoot == "") {
-        DoInternalNavSetup(mainElem, indexElement, navIndex);
+        DoInternalNavSetup(mainElem, indexElement, navIndex, hash);
       } else {
-        console.log("EXTERAN");
         DoExternalNavSetup(
           mainElem,
           indexElement,
@@ -335,68 +309,76 @@ function MakeIndex(pageDetails, hash) {
       }
     });
   });
-
-  async function DoInternalNavSetup(mainElem, indexElement, navIndex) {
-    SetInternalNav(mainElem, indexElement, navIndex);
-    SetButtons(mainElem);
-    if ("#" + mainElem.id == hash) {
-      autoTager.Goto(mainElem.id);
-    }
-  }
-
-  async function DoExternalNavSetup(
-    mainElem,
-    indexElem,
-    navIndex,
-    externalRoot,
-    articlaHref
-  ) {
-    let href = externalRoot + "#" + articlaHref;
-    mainElem.shadowRoot.querySelector("a").href = href;
-    indexElem.querySelector("a").href = href;
-    SetIndexName(indexElem, mainElem);
-  }
-
-  async function LaodEntry(pageDetails, href) {
-    let mainEntryWrapper = MakeMainEntryWrapper(pageDetails);
-    let loadSocket = mainEntryWrapper.querySelector("load-socket");
-    return new Promise((resolve) => {
-      GetDocument(href).then((doc) => {
-        let article = PutDocIntoDOMElement(doc, loadSocket);
-        resolve(article);
-      });
-    });
-  }
-
-  function MakeMainEntryWrapper(pageDetails) {
-    let parentElem = pageDetails.GetMainListElem();
-    let templateCopy = pageDetails.CopyMainTemplate();
-    parentElem.appendChild(templateCopy);
-    return templateCopy;
-  }
-
-  function MakeIndexEntry(pageDetails) {
-    let parentElem = pageDetails.GetIndexListElem();
-    let templateCopy = CopyIndexTemplateElem();
-    return parentElem.appendChild(templateCopy);
-  }
-
-  // ---- Internal
-  function SetInternalNav(mainEntry, indexElem, index) {
-    let entryTag = mainEntry.getElementsByClassName("nav-tag")[0];
-    let navTag = autoTager.TryTag(mainEntry, entryTag, index);
-    SetIndexName(indexElem, mainEntry);
-    autoTager.SetIndexHref(indexElem, navTag);
-    return navTag;
-  }
-
-  function SetIndexName(indexElem, mainEntry) {
-    entryName = mainEntry.getElementsByClassName("p-name")[0].innerHTML;
-    let indexName = indexElem.getElementsByClassName("p-name")[0];
-    indexName.innerHTML = entryName;
-    return entryName;
+}
+async function DoInternalNavSetup(mainElem, indexElement, navIndex, hash) {
+  SetInternalNav(mainElem, indexElement, navIndex);
+  SetButtons(mainElem);
+  if ("#" + mainElem.id == hash) {
+    autoTager.Goto(mainElem.id);
   }
 }
+
+async function DoExternalNavSetup(
+  mainElem,
+  indexElem,
+  navIndex,
+  externalRoot,
+  articlaHref
+) {
+  let href = MakeExternalHref(externalRoot, articlaHref);
+  let indexAnchor = indexElem.querySelector("a");
+  indexAnchor.href = href;
+  SetIndexName(indexElem, mainElem);
+  mainElem.shadowRoot.querySelector("a").onClick = () => {
+    indexAnchor.click();
+    return false;
+  };
+}
+
+function MakeExternalHref(root, contentHref) {
+  return root + "?" + "href=" + contentHref;
+}
+
+async function LoadEntry(pageDetails, href) {
+  let mainEntryWrapper = MakeMainEntryWrapper(pageDetails);
+  let loadSocket = mainEntryWrapper.querySelector("load-socket");
+  return new Promise((resolve) => {
+    GetDocument(href).then((doc) => {
+      let article = PutDocIntoDOMElement(doc, loadSocket);
+      resolve(article);
+    });
+  });
+}
+
+function MakeMainEntryWrapper(pageDetails) {
+  let parentElem = pageDetails.GetMainListElem();
+  let templateCopy = pageDetails.CopyMainTemplate();
+  parentElem.appendChild(templateCopy);
+  return templateCopy;
+}
+
+function MakeIndexEntry(pageDetails) {
+  let parentElem = pageDetails.GetIndexListElem();
+  let templateCopy = CopyIndexTemplateElem();
+  return parentElem.appendChild(templateCopy);
+}
+
+// ---- Internal
+function SetInternalNav(mainEntry, indexElem, index) {
+  let entryTag = mainEntry.getElementsByClassName("nav-tag")[0];
+  let navTag = autoTager.TryTag(mainEntry, entryTag, index);
+  SetIndexName(indexElem, mainEntry);
+  autoTager.SetIndexHref(indexElem, navTag);
+  return navTag;
+}
+
+function SetIndexName(indexElem, mainEntry) {
+  entryName = mainEntry.getElementsByClassName("p-name")[0].innerHTML;
+  let indexName = indexElem.getElementsByClassName("p-name")[0];
+  indexName.innerHTML = entryName;
+  return entryName;
+}
+
 //----- External
 //function SetExternalLink()
 

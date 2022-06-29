@@ -8,6 +8,7 @@ class NavBar {
       "index.html": "home-nav",
       "games.html": "games-nav",
       "blog.html": "blog-nav",
+      "blogPage.html": "blog-nav",
       "devlog.html": "devlog-nav",
       "about.html": "about-nav",
     };
@@ -16,7 +17,7 @@ class NavBar {
   SetPage(pageName) {
     if (this.elem != null) {
       if (this.page != null) {
-        console.log(this.elem);
+        console.log(this.navLinks + " vs " + this.page);
         this.navLinks[this.page].classList.remove(selectedClass);
       }
       this.navLinks[pageName].classList.add(selectedClass);
@@ -43,15 +44,17 @@ class NavBar {
 const navBar = new NavBar();
 
 // Definition for cusstom element
-customElements.define(
-  "nav-bar",
-  class extends HTMLElement {
-    constructor() {
-      super();
-      let href = GetRootPath("/Templates/NavBar/navBar.html");
-      LoadContent(href, this).then((navElem) => {
-        navBar.SetElem(navElem);
-      });
+document.addEventListener("DOMContentLoaded", (event) => {
+  customElements.define(
+    "nav-bar",
+    class extends HTMLElement {
+      constructor() {
+        super();
+        let href = GetRootPath("/Templates/NavBar/navBar.html");
+        LoadContent(href, this).then((navElem) => {
+          navBar.SetElem(navElem);
+        });
+      }
     }
-  }
-);
+  );
+});

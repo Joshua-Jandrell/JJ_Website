@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JJ/Blog</title>
+    <title>JJ/BlogX</title>
     <link rel="stylesheet" href="./CSS/style.css" />
     <link rel="stylesheet" href="./Templates/NavBar/navBar.css" />
     <link rel="stylesheet" href="./CSS/swup.css" />
@@ -36,16 +36,12 @@
         <ul slot="content-list" id="content-list" class="content-list"></ul>
       </content-menu-wrapper>
 
-      <template
-        id="log-item-template"
-        class="not-automated"
-        offpage-href="./blogPage.html"
-      >
-        <li class="devlog-entry h-entry">
+      <template id="log-item-template" class="not-automated">
+        <article class="devlog-entry h-entry">
           <other-article>
             <load-socket></load-socket>
           </other-article>
-        </li>
+        </article>
       </template>
     </main>
   </body>

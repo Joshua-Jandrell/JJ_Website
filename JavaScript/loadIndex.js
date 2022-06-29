@@ -291,6 +291,8 @@ function MakePageList(pageName, hash) {
 }
 
 function MakePage(pageDetails, hash) {
+  currentPageDetails = pageDetails;
+  pageDetails.Claer();
   if (pageDetails.isSingle) {
     console.log("Single page");
   } else {
@@ -299,10 +301,16 @@ function MakePage(pageDetails, hash) {
 }
 // =============================
 
+// === Single type page
+
+function MakeArticle(pageDetails, hash) {
+  LaodEntry(pageDetails, hash);
+}
+
+// === Index type page
+
 // index setup methods
 function MakeIndex(pageDetails, hash) {
-  currentPageDetails = pageDetails;
-  pageDetails.Claer();
   console.log(pageDetails.GetMainTemplate());
   let externalRoot = pageDetails
     .GetMainTemplate()

@@ -304,24 +304,32 @@ function MakeIndex(pageDetails, hash) {
   currentPageDetails = pageDetails;
   pageDetails.Claer();
   console.log(pageDetails.GetMainTemplate());
-  let external = pageDetails.GetMainTemplate().hasAttribute(externalAttribute);
+  let externalRoot = pageDetails
+    .GetMainTemplate()
+    .getAttribute(externalAttribute);
   let i = 0;
   pageDetails.hrefList.forEach((href) => {
     let indexElement = MakeIndexEntry(pageDetails);
     let navIndex = i;
     i++;
     LaodEntry(pageDetails, href).then((mainElem) => {
-      if (external) {
-        console.log("EXTERAN");
-        DoExternalNavSetup;
-      } else {
+      if (externalRoot == null || externalRoot == "") {
         DoInternalNavSetup(mainElem, indexElement, navIndex);
+      } else {
+        console.log("EXTERAN");
+        DoExternalNavSetup(
+          mainElem,
+          indexElement,
+          navIndex,
+          externalRoot,
+          href
+        );
       }
     });
   });
 
   async function DoInternalNavSetup(mainElem, indexElement, navIndex) {
-    SetNav(mainElem, indexElement, navIndex);
+    SetInternalNav(mainElem, indexElement, navIndex);
     SetButtons(mainElem);
     if ("#" + mainElem.id == hash) {
       autoTager.Goto(mainElem.id);
@@ -332,8 +340,14 @@ function MakeIndex(pageDetails, hash) {
     mainElem,
     indexElem,
     navIndex,
-    externalRoot
-  ) {}
+    externalRoot,
+    articlaHref
+  ) {
+    let href = externalRoot + "#" + articlaHref;
+    mainElem.shadowRoot.querySelector("a").href = href;
+    indexElem.querySelector("a").href = href;
+    SetIndexName(indexElem, mainElem);
+  }
 
   async function LaodEntry(pageDetails, href) {
     let mainEntryWrapper = MakeMainEntryWrapper(pageDetails);
@@ -359,24 +373,24 @@ function MakeIndex(pageDetails, hash) {
     return parentElem.appendChild(templateCopy);
   }
 
-  function SetNav(mainEntry, indexElem, index) {
-    entryName = mainEntry.getElementsByClassName("p-name")[0].innerHTML;
-    entryTag = mainEntry.getElementsByClassName("nav-tag")[0];
-
+  // ---- Internal
+  function SetInternalNav(mainEntry, indexElem, index) {
+    let entryTag = mainEntry.getElementsByClassName("nav-tag")[0];
     let navTag = autoTager.TryTag(mainEntry, entryTag, index);
-
-    SetIndexName(indexElem, entryName);
+    SetIndexName(indexElem, mainEntry);
     autoTager.SetIndexHref(indexElem, navTag);
-
     return navTag;
   }
 
-  function SetIndexName(indexElem, entryName) {
+  function SetIndexName(indexElem, mainEntry) {
+    entryName = mainEntry.getElementsByClassName("p-name")[0].innerHTML;
     let indexName = indexElem.getElementsByClassName("p-name")[0];
     indexName.innerHTML = entryName;
     return entryName;
   }
 }
+//----- External
+//function SetExternalLink()
 
 //=========================== Nv
 // Nav setup

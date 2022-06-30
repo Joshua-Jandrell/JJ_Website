@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content=" You are a varsity student and you have just got your first project
+      of the semester: make a game with twine. Manage your energy,
+      focus, and stress levels to ensure you submit quality work on
+      time. (Yes, this game is semi-autobiographical.)"
+    />
+    <meta name="keywords" content="Twine, narravtive game, CSS" />
+    <meta name="author" content="Joshua Jandrell" />
+    <link rel="stylesheet" href="../../portfolio.css" />
+    <link rel="stylesheet" href="../../../../clean.css" />
+
+    <script src="../../../../JS/loadContent.js"></script>
+    <script src="../../../../JS/basic.js"></script>
+    <script src="../../../../JS/templates.js"></script>
+    <title>Joshua Jandrell / Project</title>
+  </head>
+  <body class="basic max">
+    <header class="topBar basic z10" id="topDiv">
+      <nav-bar>
+        <span slot="page-name">JJ / Games</span>
+      </nav-bar>
+    </header>
+    <!-- Main artilce ========================================================================-->
+    <main class="gamepage-main">
+      <h1 class="main-h center">Project</h1>
+      <h2 class="sub-h center">
+        A text-based, resource management, project simulator made in Twine
+      </h2>
+      <article class="gamepage-wrapper e-content">
+        <article class="game-info-wrapper">
+          <section>
+            <p>
+              You are a varsity student and you have just got your first project
+              of the semester: make a game with twine. Manage your energy,
+              focus, and stress levels to ensure you submit quality work on
+              time. (Yes, this game is semi-autobiographical.)
+            </p>
+            <p>
+              Project is a resource management game in which the levels of
+              resources effect the appearance of the environment. Getting too
+              tired, stressed, or losing focus will make it harder for you to
+              play the game.
+            </p>
+            <p>
+              I learnt a lot in the three weeks spent working on this game. It
+              was my first-time using twine and css. It found it to be a
+              changing but fulfilling experience.
+            </p>
+            <p>Now good luck getting that A!</p>
+          </section>
+        </article>
+        <!-- downloads=============================================================================-->
+        <article class="game-download-wrapper single">
+          <h2 class="sub-h">Play</h2>
+          <ul class="downloads">
+            <li class>
+              <a href="build/Project.html" target="_blank" rel="nofollow"
+                >Play in browser!</a
+              >
+            </li>
+          </ul>
+        </article>
+        <article class="game-credits-wrapper">
+          <section>
+            <h2 class="sub-h">Features include:</h2>
+            <ul>
+              <li>Exactly 5 minute of gameplay.</li>
+              <li>Variables effected by incremental decisions</li>
+              <li>
+                Cat laucnhing using the unity physics engine (and Hooke's Law)
+              </li>
+              <li>CSS styling effected by variables</li>
+              <li>
+                Decision effected by CSS in a vicious feedback loop? - you tell
+                me.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <ul class="credits-grid">
+              <li class="row">
+                <div class="field">Release date</div>
+                <div class="answer p-author">
+                  <time datetime="2021-08-20">20 August 2021</time>
+                </div>
+              </li>
+              <li class="row">
+                <div class="field">Game Design</div>
+                <div class="answer">
+                  <span class="p-author">J. Jandrell</span>
+                </div>
+              </li>
+              <li class="row">
+                <div class="field">Progrmamming</div>
+                <div class="answer">J. Jandrell</div>
+              </li>
+              <li class="row">
+                <div class="field">Story Editor</div>
+                <div class="answer p-author">
+                  <a
+                    href="https://twinery.org/"
+                    rel="external"
+                    target="_blank"
+                    class="inline-link"
+                    >Twine</a
+                  >
+                </div>
+              </li>
+            </ul>
+          </section>
+        </article>
+        <!-- Images of the game =============================================================================-->
+        <article class="game-images-wrapper">
+          <img
+            src="Screenshots/1-min.png"
+            alt="Image of homescreen"
+            class="game-image"
+          />
+          <img
+            src="Screenshots/2-min.png"
+            alt="Image of gameplays"
+            class="Image of gamepley"
+          />
+          <img
+            src="Screenshots/3-min.png"
+            alt="Image of gameplay"
+            class="game-image"
+          />
+          <img
+            src="Screenshots/4-min.png"
+            alt="Image of gameplay"
+            class="game-image"
+          />
+        </article>
+      </article>
+    </main>
+    <article class="bottom-back">
+      <button id="u-back" class="u-back" onclick="GoBack()">Back</button>
+    </article>
+    <footer class="foot">
+      <bottom-foot></bottom-foot>
+    </footer>
+  </body>
+  <script>
+    const pathToRoot = "../../../../";
+    const selectId = "games-nav";
+    LoadCustomTemplates("Pages/HTML-templates/navBar.html");
+    LoadCustomTemplates("Pages/HTML-templates/shareIcons.html");
+  </script>
+</html>

@@ -10,6 +10,27 @@ h2.unstyled {
   padding: inherit;
 }
 
+/* Genral styling */
+.center {
+  text-align: center;
+}
+
+a.inline-link {
+  text-decoration: solid orange underline;
+  color: inherit;
+}
+a.inline-link code,
+code.inline {
+  display: inline-block;
+  background-color: aliceblue;
+  outline: 1pt solid rgb(47, 177, 203);
+  padding: 0pt 2pt;
+  border-radius: 2pt;
+}
+a.inline-link code {
+  font-weight: 550;
+}
+
 /* Stuling for content select sections */
 ul.content-list {
   list-style: none;
@@ -32,15 +53,14 @@ ul.content-list {
 
 /* sidenav styling */
 #index-list {
-  color: red;
-
   list-style: none;
   padding-left: 0;
 
-  height: 75vh;
+  max-height: 75vh;
   overflow-y: scroll;
 
   border-right: 2pt solid rgb(47, 177, 203);
+  background: aliceblue;
 }
 /* Scroll styling */
 #index-list::-webkit-scrollbar {
@@ -64,49 +84,52 @@ ul.content-list {
 #index-list li {
   background-color: aliceblue;
   margin: 0;
-  padding: 3pt 20pt;
-
-  text-align: justify;
-
-  border-right: 2pt solid rgb(47, 177, 203);
+  padding: 20pt 17pt 20pt 20pt;
 }
 #index-list li a {
+  font-weight: 500;
   text-decoration: none;
   color: black;
   font-size: 1em;
 
-  display: block;
   position: relative;
+  display: table;
 
   padding: 0 0.5em;
-  width: fit-content;
-
-  background-color: aquamarine;
+  transition: all 0.5s;
 }
 
-#index-list li a::before {
-  display: block;
-  width: fit-content;
-  content: "[";
-  position: absolute;
+#index-list li a:hover {
   color: orange;
-
-  left: -5pt;
-
-  background: 
 }
 
+#index-list li a::before,
 #index-list li a::after {
-  display: block;
-  width: fit-content;
-  content: "]";
+  display: table-cell;
+  vertical-align: center;
+  font-weight: 600;
   position: absolute;
-  color: orange;
-
-  font-size: 1.5em;
-  top: -0.25em;
-
-  right: -5pt;
+  top: 0;
+  color: rgba(0, 0, 0, 0);
+  transition: all 0.5s;
+}
+#index-list li a::before {
+  content: "[";
+  left: 0.25vw;
+}
+#index-list li a::after {
+  content: "]";
+  right: 0.25vw;
+}
+#index-list li a:hover::before,
+#index-list li a:hover::after {
+  color: black;
+}
+#index-list li a:hover::before {
+  left: -0.5vw;
+}
+#index-list li a:hover::after {
+  right: -0.5vw;
 }
 
 /* === Scroll bar styling === */ /*

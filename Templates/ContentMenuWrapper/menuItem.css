@@ -37,7 +37,7 @@
 .click-item .link-h {
   padding: 27pt 5pt 0pt;
   margin: 0 3pt 8pt;
-  font-size: 2.5rem;
+  font-size: 20pt;
   font-family: monospace;
 
   position: relative;
@@ -49,7 +49,7 @@
 .click-item .link-h::before,
 .click-item .link-h::after {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 2.8rem;
+  font-size: 110%;
   font-weight: bold;
   display: block;
   color: orange;
@@ -76,7 +76,7 @@
 }
 .click-item:hover .link-h::before,
 .click-item:hover .link-h::after {
-  font-size: 3rem;
+  font-size: 120%;
   color: black;
 }
 
@@ -91,4 +91,15 @@
 /* Details summary styling */
 .content-item summary {
   display: inline;
+}
+
+.content-item details .entry-content {
+  max-height: 0vh;
+  height: fit-content;
+  overflow-y: hidden;
+  transition: all 3s;
+}
+.content-item details.open .entry-content {
+  max-height: 1000vh;
+  transition: all 3s;
 }

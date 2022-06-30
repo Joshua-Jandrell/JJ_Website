@@ -37,10 +37,21 @@ const blogLinks = [
   "/HTML/Articles/Blog/blog_s1-1_atmt.html",
 ];
 
+const gameLinks = [
+  "/HTML/Articles/Game/game_s1-1_cat.html",
+  "/HTML/Articles/Game/game_s1-2_idol.html",
+  "/HTML/Articles/Game/game_s1-3_proj.html",
+  "/HTML/Articles/Game/game_s1-4_pin.html",
+  "/HTML/Articles/Game/game_s1-6_life.html",
+  "/HTML/Articles/Game/game_s1-8_help.html",
+];
+
 const pageLists = {
   "devlog.html": new PageDetails("devlog", ".", devLinks, false),
   "blog.html": new PageDetails("blog", ".", blogLinks, false),
   "blogPage.html": new PageDetails("blogPage", ".", blogLinks, true),
+  "games.html": new PageDetails("games", ".", gameLinks, false),
+  "gamePage.html": new PageDetails("gamesPage", ".", gameLinks, true),
 };
 
 document.addEventListener("DOMContentLoaded", (event) => {

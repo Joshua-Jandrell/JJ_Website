@@ -7,6 +7,7 @@ class NavBar {
     this.navLinks = {
       "index.html": "home-nav",
       "games.html": "games-nav",
+      "gamePage.html": "games-nav",
       "blog.html": "blog-nav",
       "blogPage.html": "blog-nav",
       "devlog.html": "devlog-nav",

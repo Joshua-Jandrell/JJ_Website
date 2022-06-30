@@ -58,6 +58,7 @@
       </li>
     </template>
 
+    <!--================ Article wrappers ===========================-->
     <template id="other-article">
       <link
         rel="stylesheet"
@@ -77,10 +78,30 @@
       </a>
     </template>
 
-    <template id="local-article">
+    <template id="main-article">
       <link
         rel="stylesheet"
         href="/Templates/ContentMenuWrapper/menuItem.css"
+        load-href="/Templates/ContentMenuWrapper/menuItem.css"
+      />
+      <div class="main-h p-name"><slot name="title">Title</slot></div>
+      <span class="sub"
+        >By
+        <slot name="author"
+          ><a class="inline-link">Joshua Jandrell</a></slot
+        ></span
+      ><br />
+      <slot name="date" class="date">date</slot>
+      <section class="e-content">
+        <slot name="summary"></slot>
+        <slot name="content"></slot>
+      </section>
+    </template>
+
+    <template id="local-article">
+      <link
+        rel="stylesheet"
+        href="./Templates/ContentMenuWrapper/menuItem.css"
         load-href="/Templates/ContentMenuWrapper/menuItem.css"
       />
       <article class="content-item">
@@ -91,9 +112,7 @@
         <details id="log-details">
           <summary class="click-item">
             <h2 class="link-h"><slot name="title"></slot></h2>
-            <section>
-              <slot name="summary"></slot>
-            </section>
+            <slot name="summary"></slot>
           </summary>
           <!-- Devlog article content --------------------------------------->
           <article class="entry-content">

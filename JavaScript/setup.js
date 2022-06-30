@@ -97,5 +97,5 @@ function HashNav() {
 }
 
 function Huh() {
-  swup.scrollTo();
+  swup.scrollTo(000);
 }

@@ -102,6 +102,7 @@ class NavAutoTager {
     let anchor = indexElem.querySelector("a");
     anchor.href = "#" + tag;
     // Wierd I know but this is to appease swup
+    anchor.addEventListener("click", this.OnAnchorClick);
     this.navAnchors[tag] = anchor;
   }
 
@@ -109,6 +110,7 @@ class NavAutoTager {
     this.index = 0;
     this.navElems = {};
     this.navTags = [];
+    this.navAnchors = {};
   }
 
   TryTag(element, tagElement, navIndex) {
@@ -136,6 +138,12 @@ class NavAutoTager {
       return;
     }
     this.navAnchors[id].click();
+  }
+  OnAnchorClick() {
+    let hrefParts = this.href.split("#");
+    let tag = hrefParts.pop();
+    // Note 'this' is the link here so autotager must be refferaced
+    autoTager.Open(tag);
   }
   GotoNext(id) {
     this.Goto(this.GetNextElem(id));

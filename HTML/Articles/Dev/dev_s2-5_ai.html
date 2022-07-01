@@ -44,15 +44,14 @@
           entry’ class, cloning its content into an html template. And appending
           that template to a list.
         </p>
-        <pre><code class="code-snip">
-&lt;script&gt;
-  function SetIndex(content)
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
+  function SetIndex(content){
     let template = document.getElementById('template-id');
     let list = document.getElementById('nav-list-id');
     clone = template.content.firstElemnetChild.cloneNone(true);
     list.appendChild(clone);
-&lt;/script&gt;
-        </code></pre>
+  }
+        </code-block></pre>
         <p>
           We can event find and set the content elements based on class name.
           This would allow us to automatically populate our index item with
@@ -66,9 +65,7 @@
           <code class="inline">&lt;a&gt;</code> tag in our nav elemnt to be the
           <code class="inline">id</code> of the content element.
         </p>
-        <pre><code class="code-snip">
-<script>
-
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
   // Find and loop though all elemnts which are know to be entires
   contents = document.getElementsByClassName('devlog-entry-className')
   Array.from(contents).forEach((content)=>{
@@ -91,8 +88,7 @@
     // appned clone to the list
     list.appendChild(clone);
   }
-</script>
-        </code></pre>
+        </code-block></pre>
         <p>There’s just one issue&hellip;</p>
       </section>
       <section>
@@ -117,8 +113,7 @@
           access. I'll be useing a custom event so that I can sent the specific
           elemnt - making it earlier for me to refferance.
         </p>
-        <pre><code class="code-snip">
-<script>
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
   async function LoadContent(path, element) {
     fetch(path)
     .then((response) => {
@@ -129,7 +124,7 @@
         return parser.parseFromString(text, "text/html");
       })
       .then((doc) => {
-        // Replace the parent's inner html so that the '<import-html>' tag vanishes
+        // Replace the parent's inner html so that the '&lt;import-html>' tag vanishes
         let body = doc.body;
         let parent = element.parentElement;
         parent.innerHTML = body.innerHTML;
@@ -141,8 +136,7 @@
         elem.dispatchEvent(loadEvent);
       })
     }
-</script>
-        </code></pre>
+        </code-block></pre>
 
         <p>
           The all I need to do is set up a listener to update the content of my
@@ -165,9 +159,7 @@
           <code class="inline">&lt;a&gt;</code> tag in our nav elemnt to be the
           <code class="inline">id</code> of the content element.
         </p>
-        <pre><code class="code-snip">
-<script>
-
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
 // Find and loop though all elemnts which are know to be entires
 contents = document.getElementsByClassName('devlog-entry-className')
 Array.from(contents).forEach((content)=>{
@@ -193,8 +185,7 @@ function UpdateContent(newElem, loadedContent){
   newElem.getElementsByClassName('p-name')[0].innerHtml = loadedContent.getElementsByClassName('p-name')[0].innerHtml;
   newElem.getElementsByTagName('a')[0].href= loadContent.id;
 }
-</script>
-      </code></pre>
+      </code-block></pre>
         <p>
           Note: In need to clone the elements in the order that I get
           <code class="inline">content</code> containers. If I only create the

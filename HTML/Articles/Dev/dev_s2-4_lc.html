@@ -22,7 +22,7 @@
     </article>
     <article slot="content" class="e-contenet">
       <section>
-        <h3 class="dev-h">What's wrong with that?</h3>
+        <h2 class="dev-h">What's wrong with that?</h2>
         <p>
           Would you like to scroll through 2000 lines to of code to find the
           section you are trying to edit? What happens when it becomes 10 000?
@@ -31,7 +31,7 @@
         </p>
       </section>
       <section>
-        <h3 class="dev-h">So, I’m guessing you have a plan&hellip;?</h3>
+        <h2 class="dev-h">So, I’m guessing you have a plan&hellip;?</h2>
         <p>You bet I do! It’s time for an html injection! (well, sort of)</p>
         <p>
           Imagine if you could pull the content of one html document into
@@ -45,7 +45,7 @@
         </p>
       </section>
       <section>
-        <h3 class="dev-h">Won’t this make you site slow?</h3>
+        <h2 class="dev-h">Won’t this make you site slow?</h2>
         <p>
           No. not really. At the end of the day the same amount of HTML needs to
           be loaded (I may have some overhead for metadata but that’s
@@ -59,7 +59,7 @@
         </p>
       </section>
       <section>
-        <h3 class="dev-h">Okay, how are you going to do thus?</h3>
+        <h2 class="dev-h">Okay, how are you going to do thus?</h2>
         <p>
           The first thing we need to be able to do is fetch the contents of a
           separate html file using he
@@ -79,15 +79,12 @@
           promise protoype to ensure that my script waits for the docuemment to
           be loaded before it continutes to execute.
         </p>
-        <pre><code class="code-snip">
-<script>
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
   fetch(path)
   .then((response) => {
     // When the page is loaded convert it to text
     return response.text();
-  });
-</script>
-        </code></pre>
+        </code-block></pre>
         <p>
           But I'm not doen yet, <code class="inline">text != html</code>. I can
           access the content of the loaded file as html once I have converete it
@@ -107,8 +104,7 @@
           is essentailly compiling the text as valid html.The DOMParser can then
           parse the file we fetch into a readable html document.
         </p>
-        <pre><code class="code-snip">
-<script>
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
   fetch(path)
   .then((response) => {
     return response.text();
@@ -118,8 +114,7 @@
     let parser = new DOMParser();
     return parser.parseFromString(text, "text/html");
   });
-</script>
-        </code></pre>
+        </code-block></pre>
         <p>
           Once the text has be parsed to html we can treat it like any other DOM
           elemnt (becuase we literally just turned it into one). Now it’s a
@@ -137,7 +132,7 @@
           funtion so that I can call it several times and not delay the
           execution of other scripts while we wait for it to load.
         </p>
-        <pre><code class="code-snip">
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
 <script>
 async function LoadContent(path, element) {
 fetch(path)
@@ -155,7 +150,7 @@ fetch(path)
   });
 }
 </script>
-        </code></pre>
+        </code-block></pre>
         <p>
           The
           <code class="inline">path</code> specifies the url of the imported
@@ -167,7 +162,7 @@ fetch(path)
         </p>
       </section>
       <section>
-        <h3 class="dev-h">But where does the 'path' come from?</h3>
+        <h2 class="dev-h">But where does the 'path' come from?</h2>
         <p>
           In an ideal world I would be using a backend langue to locate all of
           the <code class="inline">.html</code> files in a given directory and
@@ -204,7 +199,7 @@ fetch(path)
           however src allocates screen space for the resources it load which I
           don’t particularly want or need.).
         </p>
-        <pre><code class="code-snip">
+        <pre><code-block code-lang="language-html" code-label="HTML:">
 
 <script>
   document.onload += customElements.define(
@@ -222,7 +217,7 @@ fetch(path)
 
 <!--Will get replaced by content loaded from path.html-->
 &lt;import-html href ="some/path.html"&gt;&lt;/import-html&gt;
-          </code></pre>
+          </code-block></pre>
         <p>
           I've tweaked the <code class="inline">LoadContent()</code> funtion so
           that the<code class="inline">&lt;import-html&gt;</code> will replace
@@ -230,8 +225,7 @@ fetch(path)
           socket never existed and the content it imported was there the whole
           time.
         </p>
-        <pre><code class="code-snip">
-<script>
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
   async function LoadContent(path, element) {
     fetch(path)
     .then((response) => {
@@ -242,15 +236,14 @@ fetch(path)
         return parser.parseFromString(text, "text/html");
       })
       .then((doc) => {
-        // Replace the parent's inner html so that the '<import-html>' tag vanishes
+        // Replace the parent's inner html so that the '&lt;import-html&gt;' tag vanishes
         let body = doc.body;
         let parent = element.parentElement;
         parent.innerHTML = body.innerHTML;
         return parent;
       });
   }
-</script>
-        </code></pre>
+        </code-block></pre>
         <p>
           Replacing the inner html of the parent does mean that we run the risk
           of unintentionally destroying the sampling of
@@ -261,7 +254,7 @@ fetch(path)
         </p>
       </section>
       <section>
-        <h3 class="dev-h">What is this shadow magic!?</h3>
+        <h2 class="dev-h">What is this shadow magic!?</h2>
         <p>No, no - no shady business here.</p>
         <p>
           Unlike with the

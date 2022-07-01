@@ -12,7 +12,6 @@
     <time slot="date" datetime="2022-05-24" class="dt-published"
       >24 May 2022</time
     >
-    <script load-src="/JavaScript/Demos/formatCode.js"></script>
     <article slot="summary" class="p-summary">
       <p>
         Let’s start with the 4th thing first: Once I fix the log formatting, I
@@ -23,7 +22,7 @@
     </article>
     <article slot="content" class="e-contenet">
       <section>
-        <h3 class="dec-h">Why do you want templates?</h3>
+        <h2 class="dec-h">Why do you want templates?</h2>
         <p>
           Each entry has the same HTML structure and code. Some of it has
           important sematic value, but most of it is redundant styling structure
@@ -45,9 +44,9 @@
         <p>Now wall we need to do is set it up</p>
       </section>
       <section>
-        <h3 class="dev-h">
+        <h2 class="dev-h">
           Wait – setup? Aren't templets meant to be less work?
-        </h3>
+        </h2>
         <p>
           Yes, they <em>are</em> less work. Even if you have a template for just
           one or two lines of common code can start to add if you have to repeat
@@ -68,7 +67,7 @@
         </p>
       </section>
       <section>
-        <h3 class="dev-h">Oooh, okay. How do we start?</h3>
+        <h2 class="dev-h">Oooh, okay. How do we start?</h2>
         <p>
           The first step is making ourselves a
           <a
@@ -79,21 +78,23 @@
           >
           element. What’s copy pasting that code one last time?
         </p>
-        <pre><code id="template-time-code_0" class="code-snip">
-&lt;template id="my-first-template"&gt;
-  &lt;h1&gt;I am a temeplate&lt;/h1&gt;
-  &lt;p&gt;
+        <pre
+          class="unstyled"
+        ><code-display code-lang="language-HTML" code-label="HTML:">
+<template id="my-first-template">
+  <h1>I am a temeplate</h1>
+  <p>
     Isn't this cool!
-  &lt;/p&gt;
-&lt;/template&gt;
-        </code></pre>
+  </p>
+</template>
+        </code-display></pre>
         <template id="my-first-template">
           <h1>I am a template</h1>
           <p>Isn't that cool!</p>
         </template>
       </section>
       <section>
-        <h3 class="dev-h">But I don’t see anything</h3>
+        <h2 class="dev-h">But I don’t see anything</h2>
         <p>
           Exactly. Our template isn’t rendered by the browser. It will be
           totally invisible to the user until the time comes for use to use it.
@@ -109,21 +110,21 @@
           >
           so that you can easiliy find it in javascript.
         </p>
-        <pre><code id="template-time-code_1" class="code-snip">
+        <pre><code-block code-label="JaveScript:" code-lang="language-js">
 let template = document.getElementById('my-first-template'));
-        </code></pre>
+        </code-block></pre>
         <p>
           We going to need some sort of container for our template: let's make
           it and find it with JS
         </p>
         <label for="temeplate-time-code_2">HTML container</label>
-        <pre><code id="template-time-code_2" class="code-snip">
-&lt;div id="template-container"&lt;div&gt;/div&gt;
-        </code></pre>
+        <pre><code-block code-label="HTML:" code-lang="language-html">
+<div id="template-container"></div>
+        </code-block></pre>
         <label for="temeplate-time-code_3">Finding it with JS</label>
-        <pre><code id="template-time-code_3" class="code-snip">
+        <pre><code-block code-label="JavaScript:" code-lang="language-js">
 let parent = document.getElementById("parent-container");
-        </code></pre>
+        </code-block></pre>
         <p>
           Now we need to clone the content of the templet so that we can append
           it to out template. (cloning the
@@ -158,10 +159,10 @@ let parent = document.getElementById("parent-container");
             ><code class="inline">shadowRoot</code></a
           ></label
         >
-        <pre><code id="template-time-code_5" class="code-snip">
+        <pre><code-block code-label="JavaScript" code-lang="language-js">
 let shadowRoot = parent.attachShadow({ mode: "open" });
 shadowRoot.appendChild(template.content.cloneNode(true));
-        </code></pre>
+        </code-block></pre>
         <p>
           But, if we wnat a templae in the light DOM (regular DOM) so we must
           use
@@ -175,12 +176,15 @@ shadowRoot.appendChild(template.content.cloneNode(true));
           properly and it won't look be searchable with
           <abbr title="javascript">JS</abbr>
         </p>
-        <pre><code id="template-time-code_6" class="code-snip">
+        <pre><code-block code-label="JavaScript" code-lang="language-js">
 // Make sure to find the child of the content fragment
 let templateContent = template.content.firstElementChild;
 parent.appendChild(templateContent..cloneNode(true));
-        </code></pre>
+        </code-block></pre>
         <p>And bang! You have a template!</p>
+        <pre><code-display code-label="HTML:" code-lang="language-html">
+          <my-first-template></my-first-template>
+        </code-display></pre>
         <article class="dev-preview">
           <div>
             <h1>I am a template</h1>
@@ -189,7 +193,7 @@ parent.appendChild(templateContent..cloneNode(true));
         </article>
       </section>
       <section>
-        <h3 class="dev-h">That's still tedious</h3>
+        <h2 class="dev-h">That's still tedious</h2>
         <p>
           Yes, having to all that each time I want to use a JS template would be
           an absolute pain. Fortunately JavaScript has me covered:
@@ -211,7 +215,7 @@ parent.appendChild(templateContent..cloneNode(true));
             >cuntom element</a
           >
         </p>
-        <pre><code id="template-time-code_7" class="code-snip">
+        <pre><code-block code-lang="language-js" code-label='JavaScript:'>
 let elementName = "jeff-jeff";
 elementName.define(
   templateName,
@@ -222,7 +226,7 @@ elementName.define(
     }
   }
 );
-        </code></pre>
+        </code-block></pre>
         <p>
           The code above makes a custom element named
           <code class="inline">jeff-jeff</code>. (Note the hyphen: all user
@@ -249,7 +253,7 @@ elementName.define(
           because I find shadow templates more useful; but this wouod work with
           the ligth DOM code too.
         </p>
-        <pre><code id="template-time-code_8" class="code-snip">
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
 let elementName = "jeff-jeff";
 let templateId = "jeff-jeff";
 elementName.define(
@@ -268,7 +272,7 @@ elementName.define(
     }
   }
 );
-        </code></pre>
+        </code-block></pre>
         <p>
           You may have noticed that I've givent the template used the same id as
           the custome element. I think this convetion is logical and I'm goign
@@ -278,7 +282,7 @@ elementName.define(
           If I generalize the code to make custom template elements, I can throw
           it into a function and make an element for any template I please.
         </p>
-        <pre><code id="template-time-code_9" class="code-snip">
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
 function MakeShadowTemplate(templateName) {
   customElements.define(
     templateName,
@@ -292,26 +296,26 @@ function MakeShadowTemplate(templateName) {
     }
   );
           }
-        </code></pre>
+        </code-block></pre>
         <p>
           But wait: there’s more. I don’t even need to call this function
           myself. I can automatically loop through all the templates on any
           document and all my custom element can be automatically defined and
           the template content automatically appended.
         </p>
-        <pre><code id="template-time-code_10" class="code-snip">
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
 let templates = document.getElementsByTagName("template");
 Array.from(templates).forEach((template) => {
   MakeShadowTemplate(template.Id);
 });
-        </code></pre>
+        </code-block></pre>
         <p>
           Add this script to your document, set it to refer and bingo - you can
           have as may templates as you like.
         </p>
       </section>
       <section>
-        <h3 class="dev-h">But what about cutom content?</h3>
+        <h2 class="dev-h">But what about cutom content?</h2>
         <p>
           It's all well and good to copy and elemnt that is identical. But what
           if two nodes have similar structures but slightly diffetent content?
@@ -327,7 +331,7 @@ Array.from(templates).forEach((template) => {
           elements to a shadow template:
         </p>
         <p>Pop slots into a template (be sure to name them)</p>
-        <pre><code id="template-time-code_11" class="code-snip">
+        <pre><code-block code-lang="language-html" code-label="HTML:">
 <template id="another-template">
   <style>
     .template-block{
@@ -344,36 +348,21 @@ Array.from(templates).forEach((template) => {
   <p>This content will remain.</p>
 </div>
 </template>
-        </code></pre>
+        </code-block></pre>
         <p>
           And then define the slot content inside the cutom template element.
         </p>
-        <pre><code id="template-time-code_11" class="code-snip">
-
-<another-template>
-  <strong slot="custome-content">This will display in the first template!</strong>
-</another-template>
-<another-template>
-  <span slot="custome-content">This goes in the second template.</span>
-</another-template>
-        </code></pre>
+        <code-display code-lang="language-html" code-label="HTML:">
+          <another-template>
+            <strong slot="custom-content"
+              >This will display in the first template!</strong
+            >
+          </another-template>
+          <another-template>
+            <span slot="custom-content">This goes in the second template.</span>
+          </another-template>
+        </code-display>
         <p>Now let's load some temlpates</p>
-
-        <!-- In time I want to make this into an interactive element where the user can see the code used redered next to the result -->
-        <article class="code-results dev-preview">
-          <another-template>
-            <div class="template-block">
-              <strong>This will display in the first template</strong>
-              <p>This content will stay.</p>
-            </div>
-          </another-template>
-          <another-template>
-            <div class="template-block">
-              <span>This goes in the second template.</span>
-              <p>This content will stay.</p>
-            </div>
-          </another-template>
-        </article>
         <p>
           Note: elements with the slot property repalce the slot elements when
           the shadow template is rendered. That's why we can se the

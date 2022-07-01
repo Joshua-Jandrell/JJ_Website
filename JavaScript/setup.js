@@ -101,7 +101,6 @@ function HashNav() {
 }
 
 function CloseHashNav() {
-  console.log("good?");
   autoTager.CloseCurrent();
 }
 

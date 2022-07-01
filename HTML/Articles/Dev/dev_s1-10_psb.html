@@ -112,12 +112,12 @@
           most of the early headers on this site).
         </p>
         <p>Take a look at the code for the first one to see what I mean:</p>
-        <pre>
-              <code class="code-snip">
+        <pre><code-block code-lang="language-HTML" code-label="HTML:">
+       
 &ltstyle&gt
 .square-bracket-bad {
 font-weight: bold;
-color: rgb(47, 177, 203);
+color: orange;
 }
 .square-bracket-bad .inner {
 font-weight: normal;
@@ -129,12 +129,12 @@ margin: 0 10px;
 &ltdiv class="square-bracket-bad"&gt
 [&ltspan class="inner"&gtSomething in brackets&lt/span&gt]
 &lt/div&gt
-              </code>
-            </pre>
+             
+        </code-block></pre>
 
         <p class="retoric" aria-roledescription="retoric">
           Oh dear. That's a bummer... I'm guessing the second div is
-          different...
+          different&hellip;
         </p>
       </section>
       <section>
@@ -152,8 +152,8 @@ margin: 0 10px;
           are pretty neat and simple to use.
         </p>
         <p>Just look at the code for the lower div:</p>
-        <pre>
-              <code class="code-snip">
+        <pre><code-block code-lang="language-HTML" code-label="HTML:">
+          
 &ltstyle&gt
 .square-bracket-good {
 font-weight: normal;
@@ -162,20 +162,20 @@ color: black;
 .square-bracket-good::before {
 content: "[";
 font-weight: bold;
-color: rgb(47, 177, 203);
+color: orange;
 margin-right: 10px;
 }
 .square-bracket-good::after {
 content: "]";
 font-weight: bold;
-color: rgb(47, 177, 203);
+color: orange;
 margin-left: 10px;
 }
 &lt/style&gt
 
 &ltdiv class="square-bracket-good"&gtSomething in brackets&lt/div&gt
-              </code>
-            </pre>
+             
+        </code-block></pre>
         <p>
           Did you notice the lack of braces? Well screen reader users noticed
           that too! So did web crawlers and anything else that is interfacing

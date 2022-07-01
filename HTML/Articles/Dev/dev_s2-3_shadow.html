@@ -26,7 +26,7 @@
     </article>
     <article slot="content" class="e-contenet">
       <section>
-        <h3 class="dev-h">What lurks in the shadows?</h3>
+        <h2 class="dev-h">What lurks in the shadows?</h2>
 
         <p>
           In short html generally exists in a document. (No shit sherlock.) Any
@@ -56,13 +56,13 @@
           has been attached to its host a dark curse is cast and a document is
           spawned inside you document.
         </p>
-        <pre><code class="code-snip">
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
 // attachShadow the shadow to a host
 let shadowRoot = this.attachShadow({ mode: "open" });
 
 // Now we can add content to the shadow DOM
 shadowRoot.appendChild(someElem.cloneNode(true));
-      </code></pre>
+      </code-block></pre>
         <p>
           No. This is not the same as just inserting a new element. The shadow
           DOM is encapsulated – CSS and JS form the external document struggle
@@ -71,7 +71,7 @@ shadowRoot.appendChild(someElem.cloneNode(true));
         </p>
       </section>
       <section>
-        <h3 class="dev-h">But what is this shadow so powerful?</h3>
+        <h2 class="dev-h">But what is this shadow so powerful?</h2>
         <p>
           It was the
           <a
@@ -115,9 +115,9 @@ shadowRoot.appendChild(someElem.cloneNode(true));
         </p>
       </section>
       <section>
-        <h3 class="dev-h">
+        <h2 class="dev-h">
           But Isn’t there a punishment for using such witchcraft?
-        </h3>
+        </h2>
         <p>
           Unfortunately, yes. There can be. CSS from the main document not being
           applied to the shadow DOM can be frustrating at times when you want a
@@ -136,13 +136,13 @@ shadowRoot.appendChild(someElem.cloneNode(true));
           >
           attribute of its host.
         </p>
-        <pre><code class="code-snip">
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
             let shadowHost = document.getElemntById('know-host');
             let shadow = shadowHost.shadowRoot;
 
             // Now we can serch the shadow like a normal document
             let andSoON = shadow.getElemntsClassName("etc");
-        </code></pre>
+        </code-block></pre>
         <p>
           There is good reason for this to avoid encapsulation (or 300
           containers with the same id when a template is used.
@@ -167,7 +167,7 @@ shadowRoot.appendChild(someElem.cloneNode(true));
         </p>
       </section>
       <section>
-        <h3 class="dev-h">How do I save myself from the darkness?</h3>
+        <h2 class="dev-h">How do I save myself from the darkness?</h2>
         <p>
           I don’t I embrace it. <code class="inline">shadowRoot</code>s are
           great! Unfortunately, I’m not really using encapsulation to my

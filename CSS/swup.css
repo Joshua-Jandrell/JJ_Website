@@ -1,8 +1,84 @@
-.transition-fade {
+/* whole block */
+.transition-main,
+.trstion-fade {
   opacity: 1;
-  transition: 2s;
+  transition: 0.5s;
 }
 
-html.is-animating .transition-fade {
+html.is-animating.is-leaving .transition-main,
+html.is-animating.is-leaving .transition-main {
   opacity: 0;
+}
+
+/* Slide nav */
+.transition-leftnav {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 2s;
+  transition: 0.5s;
+  transition-timing-function: cubic-bezier(0.66, -0.03, 0.58, 1.26);
+}
+html.is-animating .transition-leftnav {
+  transform: translateX(-100%);
+}
+
+html.is-animating.is-leaving .transition-left-nav {
+  transition-delay: 0s;
+  transform: translateX(100%);
+}
+
+/* Side nave lable*/
+.trastion-navh {
+  white-space: nowrap;
+  overflow-x: hidden;
+  transition: 0.75s;
+  transition-timing-function: cubic-bezier(0.66, -0.03, 0.58, 1.26);
+
+  width: 100%;
+  opacity: 1;
+}
+html.is-animating .trastion-navh {
+  width: 0%;
+}
+html.is-animating.is-leaving .trastion-navh {
+  opacity: 0;
+}
+
+/*page headding*/
+.transition-pageh {
+  transition-delay: 0.5s;
+  transition: 0.5s;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html.is-animating .transition-pageh {
+  transform: translateY(-20pt);
+  opacity: 0;
+}
+
+/* Main index list animations */
+.transition-mainindex {
+  transition: 1s;
+  transform: translateY(0);
+}
+
+html.is-animating .transition-mainindex {
+  transform: translateY(100vh);
+}
+
+/* Single article content */
+.transition-content {
+  transition: 1s;
+  color: green;
+
+  transform: translateX(0);
+}
+
+html.is-animating .transition-content {
+  transform: translateX(1vw);
+}
+
+html.is-animating.is-leaving .transition-content {
+  transform: translateX(2vw);
 }

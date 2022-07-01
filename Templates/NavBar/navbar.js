@@ -22,7 +22,6 @@ class NavBar {
         if (navElem == null) {
           navElem = this.navLinks["index.html.html"];
         }
-        console.log(this.navLinks + " vs " + this.page);
         navElem.classList.remove(selectedClass);
       }
       this.navLinks[pageName].classList.add(selectedClass);

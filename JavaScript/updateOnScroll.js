@@ -3,15 +3,22 @@
 
 // costants
 const offsetMultDefault = 0.5; // how far down the window must a dive be for the scroll offset to trigger
-const scrollMarkerGroups = [];
+let scrollMarkerGroups = [];
 const markerIdNavSuffex = "-nav-elem";
 // glabal scope varables
 let currentMarker = "none"; // the id of the marker the user has currently scrolled to.
 
+window.addEventListener("scroll", UpdateAllMarkers);
+
+function UpdateAllMarkers() {
+  scrollMarkerGroups.forEach((markerGroup) => {
+    markerGroup.UpdateMarker();
+  });
+}
 // Setup ===========================
 function SetIndependantMarkers(
-  markerClass,
-  addedClass,
+  markerClass, // class of marker folowed
+  addedClass, // class added to marker
   sameAsTarget,
   offsetMult = offsetMultDefault
 ) {
@@ -23,7 +30,6 @@ function SetIndependantMarkers(
     offsetMult
   );
   scrollMarkerGroups.push(newMarker);
-  window.addEventListener("scroll", () => newMarker.UpdateMarker());
 }
 function SetScrollPointMarkers(
   markerClass,
@@ -31,7 +37,10 @@ function SetScrollPointMarkers(
   sameAsTarget = false,
   offsetMult = offsetMultDefault
 ) {
-  let markerArray = Array.from(document.getElementsByClassName(markerClass));
+  let markerArray = Array.from(
+    document.getElementsByClassName(markerClass),
+    true
+  );
   let markergroup = new MarkerGroup(
     markerArray,
     addedClass,
@@ -39,7 +48,6 @@ function SetScrollPointMarkers(
     offsetMult
   );
   scrollMarkerGroups.push(markergroup);
-  window.addEventListener("scroll", () => markergroup.UpdateMarker());
 }
 
 // requires a nav bar
@@ -50,7 +58,6 @@ function SetNavMarkers(navIds, offsetMult) {
   });
   let navMarkers = new NavMarkerGroup(markers, offsetMult);
   scrollMarkerGroups.push(navMarkers);
-  window.addEventListener("scroll", () => navMarkers.UpdateMarker());
 }
 // Useful Calsses =================
 class MarkerGroup {
@@ -162,4 +169,9 @@ function GetOffset(offsetMult) {
 // id finding ==============================
 function GetMarkerNavId(targetId) {
   return targetId + markerIdNavSuffex;
+}
+
+// cleanup
+function ClearAllMarkers() {
+  scrollMarkerGroups = [];
 }

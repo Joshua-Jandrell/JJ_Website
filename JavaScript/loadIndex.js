@@ -330,7 +330,6 @@ async function DoExternalNavSetup(
   indexAnchor.href = href;
   SetIndexName(indexElem, mainElem);
   mainElem.shadowRoot.querySelector("a").onclick = () => {
-    console.log("cablamo");
     indexAnchor.click();
     return false;
   };

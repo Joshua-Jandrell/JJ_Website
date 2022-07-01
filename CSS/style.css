@@ -1,6 +1,11 @@
 body {
   margin: 0;
   padding: 50pt 0 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+  width: 100%;
 }
 
 h1.unstyled,
@@ -13,6 +18,14 @@ h2.unstyled {
 /* Genral styling */
 .center {
   text-align: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.no-display {
+  display: none;
 }
 
 a.inline-link {
@@ -29,6 +42,14 @@ code.inline {
 }
 a.inline-link code {
   font-weight: 550;
+}
+
+.retoric {
+  display: inline-block;
+  font-weight: 450px;
+  color: rgb(47, 177, 203);
+  text-align: right;
+  width: 100%;
 }
 
 /* Stuling for content select sections */
@@ -149,3 +170,212 @@ ul.content-list {
   background: #555;
 }
 */
+
+/* ================================================================= */
+/* ------------------------- Syliing for intrduction section ------- */
+/* ================================================================= */
+.intro-grad {
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+
+  height: 200vh;
+  width: 100%;
+
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 1) 100%
+  );
+
+  display: block;
+  position: absolute;
+  top: 0;
+  z-index: 11;
+  opacity: 1;
+}
+.intro-grad.push-back {
+  z-index: 1;
+}
+
+.spacer {
+  display: block;
+  height: 200vh;
+}
+
+#hwt.intro-txt {
+  color: white;
+  z-index: 12;
+}
+#welcome-txt {
+  margin-bottom: 60pt;
+}
+.intro-txt {
+  text-align: center;
+  vertical-align: middle;
+
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 60px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.intro-txt.vanish {
+  opacity: 0;
+}
+.sticky-block {
+  position: sticky;
+  position: -webkit-sticky;
+
+  top: 40vh;
+}
+
+/* ================================================================= */
+/* --------------- Animated headdings ------------------------------ */
+/* ================================================================= */
+.button-h {
+  position: relative;
+  font-size: 60px;
+  text-align: center;
+  max-width: fit-content;
+  margin: auto;
+  font-family: monospace;
+}
+a.button-ha {
+  display: block;
+  max-width: max-content;
+  margin: 5px auto 20px;
+  text-decoration: none;
+  color: black;
+  pointer-events: none;
+  max-width: 90vh;
+}
+a.button-ha.open {
+  pointer-events: initial;
+}
+a.button-ha .button-h::before {
+  content: "[";
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 80px;
+  color: orange;
+  background-color: white;
+  padding: 0;
+  position: absolute;
+  top: -20px;
+  left: 0;
+  text-align: right;
+  width: 51%;
+  transition: left 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+a.button-ha .button-h::after {
+  content: "]";
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 80px;
+  color: orange;
+  background-color: white;
+  padding: 0;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  text-align: left;
+  width: 51%;
+  transition: right 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+a.button-ha.open .button-h::after {
+  right: -30%;
+  width: 20%;
+
+  background-color: rgba(0, 0, 0, 0);
+  transition: width 0.2s, color 0.2s, right 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+a.button-ha.open .button-h::before {
+  left: -30%;
+  width: 20%;
+  background-color: rgba(0, 0, 0, 0);
+  transition: width 0.2s, color 0.2s, left 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.button-h a {
+  color: inherit;
+  text-decoration: inherit;
+  transition: color 0.25s;
+  display: inline-block;
+  padding: auto;
+}
+/* hover styling */
+a.button-ha:hover {
+  color: orange;
+}
+a.button-ha.open:hover .button-h::before {
+  color: black;
+  left: -40%;
+  transition: left 0.5s, color 0.25s;
+}
+a.button-ha.open:hover .button-h::after {
+  color: black;
+  right: -40%;
+  transition: right 0.5s, color 0.25s;
+}
+/* index nav structure */
+ul.index-nav {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 10vh;
+}
+ul.index-nav li {
+  height: 40vh;
+}
+ul.index-nav .index-panel {
+  position: sticky;
+  position: -webkit-sticky;
+
+  top: 40vh;
+}
+@media (max-width: 375px) {
+  .button-h {
+    font-size: 40px;
+  }
+  a.button-ha.open:hover .button-h::before {
+    left: -30%;
+  }
+  a.button-ha.open:hover .button-h::after {
+    right: -30%;
+  }
+}
+
+/* Slide out */
+
+.slide-out {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+}
+.slide-out .cover {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+.slide-out.open .cover {
+  width: 0%;
+  transition: all 1s;
+}
+.slide-out::before {
+  content: "//";
+  display: inline-block;
+  color: rgba(0, 0, 0, 0);
+  padding: 0 10px 0 0;
+  transition: all 0.25s;
+  transition-delay: 0.1s;
+}
+.slide-out.open::before {
+  color: rgb(47, 177, 203);
+  transition: all 0.2s;
+}

@@ -85,12 +85,8 @@
         load-href="/Templates/ContentMenuWrapper/menuItem.css"
       />
       <div class="main-h p-name"><slot name="title">Title</slot></div>
-      <span class="sub"
-        >By
-        <slot name="author"
-          ><a class="inline-link">Joshua Jandrell</a></slot
-        ></span
-      ><br />
+
+      <slot name="author"><a class="inline-link"></a></slot><br />
       <slot name="date" class="date">date</slot>
       <section class="e-content">
         <slot name="summary"></slot>

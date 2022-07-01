@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="./CSS/style.css" />
     <link rel="stylesheet" href="./Templates/NavBar/navBar.css" />
     <link rel="stylesheet" href="./CSS/swup.css" />
+    <link rel="stylesheet" href="./CSS/portfolio.css" />
 
+    <script src="./JavaScript/updateOnScroll.js"></script>
     <script>
       const pathToRoot = ".";
       const templateHrefs = [];
@@ -25,16 +27,27 @@
     <header>
       <nav-bar></nav-bar>
     </header>
-    <main id="swup" class="transition-fade">
+    <main id="swup" class="transition-main">
       <content-menu-wrapper>
-        <h1 slot="index-label" class="comment-h center">Devlog</h1>
-        <ul slot="index-list" id="index-list">
-          <li>test</li>
-          <li>Another one</li>
-        </ul>
-        <h1 slot="content-lable">Devlog</h1>
-        <ul slot="content-list" id="content-list" class="content-list"></ul>
+        <h1 slot="index-label" class="comment-h center trastion-navh">
+          Devlog
+        </h1>
+        <!--Just for web cralwers-->
+        <span class="p-autor" aria-hidden="true">Joshua Jandrell</span>
+        <ul
+          slot="index-list"
+          id="index-list"
+          class="transition-leftnav h-nav"
+        ></ul>
+        <h1 slot="content-lable" class="transition-pageh h-feed">Devlog</h1>
+        <ul
+          slot="content-list"
+          id="content-list"
+          class="content-list transition-mainindex"
+        ></ul>
       </content-menu-wrapper>
+      <a href="#dev_1-02">wotking?</a>
+      <a href="./devlog.html#dev_1-02">Huh</a>
 
       <template id="log-item-template" class="not-automated">
         <li class="devlog-entry h-entry">

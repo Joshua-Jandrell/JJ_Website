@@ -73,6 +73,7 @@ function SetSwup() {
   const swup = new Swup(options);
   swup.on("contentReplaced", Init);
   swup.on("scrollDone", HashNav);
+  swup.on("scrollStart", CloseHashNav);
   // window.addEventListener('locationchange', function () );
 }
 
@@ -89,6 +90,7 @@ function Init() {
   }
   navBar.SetPage(page);
   OnInit(page, hash);
+  SetScrollMarkers();
   window.scrollTo(0, 0);
 }
 
@@ -96,6 +98,19 @@ function HashNav() {
   autoTager.Open(window.location.hash.slice(1));
 }
 
-function Huh() {
-  swup.scrollTo(000);
+function CloseHashNav() {
+  console.log("good?");
+  autoTager.CloseCurrent();
+}
+
+function SetScrollMarkers() {
+  ClearAllMarkers(); // remove any previous markers
+  SetIndependantMarkers("button-ha", "open", true, 0.75);
+  SetIndependantMarkers("slide-out", "open", true, 0.75);
+  SetIndependantMarkers("hwt", "push-back", true, 0.1);
+  SetIndependantMarkers("hwt", "push-back", false, 0.1);
+}
+
+function clearScrollMarkers() {
+  document.removeEventListener("scroll");
 }

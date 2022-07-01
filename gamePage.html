@@ -4,21 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JJ/BlogX</title>
+    <title>JJ/Games</title>
     <link rel="stylesheet" href="./CSS/style.css" />
     <link rel="stylesheet" href="./Templates/NavBar/navBar.css" />
     <link rel="stylesheet" href="./CSS/swup.css" />
     <link rel="stylesheet" href="./CSS/portfolio.css" />
 
+    <script src="./JavaScript/updateOnScroll.js"></script>
     <script>
       const pathToRoot = ".";
       const templateHrefs = [];
     </script>
     <script src="./JavaScript/External/scroll-plugin/dist/SwupScrollPlugin.js"></script>
     <script src="./JavaScript/External/swup/dist/swup.js" defer></script>
-    <script src="./JavaScript/importer.js" id="importer" defer></script>
+    <script src="./JavaScript/importer.js" id="importer"></script>
     <script src="./JavaScript/loadIndex.js" defer></script>
-    <script src="./Templates/NavBar/navbar.js" defer></script>
+    <script src="./Templates/NavBar/navbar.js"></script>
 
     <script src="JavaScript/setup.js" defer></script>
   </head>
@@ -26,12 +27,16 @@
     <header>
       <nav-bar></nav-bar>
     </header>
-    <main id="swup" class="transition-fade">
+    <main id="swup" class="transition-main">
       <content-menu-wrapper>
-        <h1 slot="index-label" class="comment-h">Index</h1>
-        <ul slot="index-list" id="index-list"></ul>
-        <h1 slot="content-lable"></h1>
-        <ul slot="content-list" id="content-list" class="content-list"></ul>
+        <h1 slot="index-label" class="comment-h center">Games</h1>
+        <ul slot="index-list" id="index-list" class="transtion-navlist"></ul>
+        <h1 slot="content-lable" class="e-content"></h1>
+        <artilce
+          slot="content-list"
+          id="content-list"
+          class="content-list"
+        ></artilce>
       </content-menu-wrapper>
 
       <template
@@ -39,7 +44,7 @@
         class="not-automated"
         href="./gamePage.html"
       >
-        <article class="devlog-entry h-entry">
+        <article class="main-article">
           <main-article>
             <load-socket></load-socket>
           </main-article>

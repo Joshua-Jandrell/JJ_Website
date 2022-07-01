@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="./CSS/style.css" />
     <link rel="stylesheet" href="./Templates/NavBar/navBar.css" />
     <link rel="stylesheet" href="./CSS/swup.css" />
+    <link rel="stylesheet" href="./CSS/portfolio.css" />
 
+    <script src="./JavaScript/updateOnScroll.js"></script>
     <script>
       const pathToRoot = ".";
       const templateHrefs = [];
@@ -18,30 +20,79 @@
     <script src="./JavaScript/importer.js" id="importer"></script>
     <script src="./JavaScript/loadIndex.js" defer></script>
     <script src="./Templates/NavBar/navbar.js"></script>
-
     <script src="JavaScript/setup.js" defer></script>
   </head>
   <body>
-    <header>
+    <header aria-hidden="true">
       <nav-bar></nav-bar>
     </header>
-    <main id="swup" class="transition-fade">
-      <content-menu-wrapper>
-        <h1 slot="index-label" class="comment-h">Index</h1>
-        <ul slot="index-list" id="index-list">
-          <img src="./Assets/Icons/squareBracketRight.png" alt="" />
-        </ul>
-        <h1 slot="content-lable">Devlog</h1>
-        <ul slot="content-list" id="content-list" class="content-list"></ul>
-      </content-menu-wrapper>
+    <main id="swup" class="transition-main">
+      <!-- Itro section is shown before nav so that screan reader useres are appropratley greeted before we show them around (just like montior users)-->
+      <article class="intro-grad" id="hwt-nav-elem" rol="introduction">
+        <section class="sticky-block" id="fib">
+          <div class="intro-txt hwt" id="hwt">Hello World.</div>
+          <div class="intro-txt" id="imJJTxt z-2">I'm Joshua Jandrell</div>
+        </section>
+      </article>
+      <div aria-hidden="true" class="spacer"></div>
+      <article>
+        <div class="intro-txt basic slide-out center" id="welcome-txt">
+          Welcome to my website.
+          <div class="cover"></div>
+        </div>
+      </article>
+      <artilcle class="e-content main-body basic">
+        <nav>
+          <ul class="index-nav">
+            <li>
+              <article class="index-panel">
+                <h2 class="slide-h center">
+                  <span class="slide-out"
+                    >Have Some Fun
+                    <div class="cover"></div
+                  ></span>
+                </h2>
+                <a href="./games.html" class="button-ha">
+                  <h1 class="button-h">Games</h1>
+                </a>
+              </article>
+            </li>
+            <li>
+              <article class="index-panel">
+                <h2 class="slide-h center">
+                  <span class="slide-out"
+                    >Read my Rants
+                    <div class="cover"></div
+                  ></span>
+                </h2>
+                <a href="./blog.html" class="button-ha">
+                  <h1 class="button-h">Blog</h1>
+                </a>
+              </article>
+            </li>
+            <li id="home-h">
+              <article class="index-panel">
+                <h2 class="com-h center">
+                  <span class="slide-out"
+                    >Peek Behind the Scenes
+                    <div class="cover"></div
+                  ></span>
+                </h2>
+                <a href="./devlog.html" class="button-ha">
+                  <h1 class="button-h center">Dev-log</h1>
+                </a>
+              </article>
+            </li>
+          </ul>
+        </nav>
 
-      <template id="log-item-template" class="not-automated">
-        <li class="devlog-entry h-entry">
-          <local-article>
-            <load-socket></load-socket>
-          </local-article>
-        </li>
-      </template>
+        <div class="section-divider" id="main" aria-hidden="true"></div>
+      </artilcle>
+      <a href="#home-h">test</a>
+      <a href="./devlog.html#dev_1-02">Huh</a>
+      <footer class="foot">
+        <bottom-foot></bottom-foot>
+      </footer>
     </main>
   </body>
 </html>

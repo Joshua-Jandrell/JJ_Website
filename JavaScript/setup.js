@@ -1,5 +1,7 @@
 // This script should be defered
 const devLinks = [
+  "/HTML/Articles/Dev/dev_s4-0_ch.html",
+  // -- fill this gap
   "/HTML/Articles/Dev/dev_s3-2_rs.html",
   "/HTML/Articles/Dev/dev_s3-1_ap.html",
   "/HTML/Articles/Dev/dev_s3-0_nb.html",

@@ -8,12 +8,12 @@ function FormatCode(codeClass) {
 function FormatCode(codeClass, elem) {
   let codeSnips = elem.getElementsByClassName(codeClass);
   Array.from(codeSnips).forEach((snip) => {
-    FormatInnerCode(snip);
+    EscapeTags(snip);
   });
 }
 
 // COnvert the inner html of an element into a plain string
-function FormatInnerCode(elem) {
+function EscapeTags(elem) {
   let html = elem.innerHTML;
   elem.innerHTML = FormatAsCode(html);
 }
@@ -33,11 +33,11 @@ function FormatAsCode(html) {
 }
 
 customElements.define(
-  autoFormatTag,
+  displayTag,
   class extends HTMLElement {
     constructor() {
       super();
-      FormatInnerCode(this);
+      EscapeTags(this);
     }
   }
 );

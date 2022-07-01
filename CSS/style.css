@@ -15,6 +15,10 @@ h2.unstyled {
   padding: inherit;
 }
 
+pre.unstyled {
+  font-family: inherit;
+}
+
 /* Genral styling */
 .center {
   text-align: center;
@@ -37,7 +41,8 @@ code.inline {
   display: inline-block;
   background-color: aliceblue;
   outline: 1pt solid rgb(47, 177, 203);
-  padding: 0pt 2pt;
+  padding: 0 0.25em;
+  margin: 2pt 0;
   border-radius: 2pt;
 }
 a.inline-link code {
@@ -378,4 +383,18 @@ ul.index-nav .index-panel {
 .slide-out.open::before {
   color: rgb(47, 177, 203);
   transition: all 0.2s;
+}
+
+/* ================================================= */
+/* ---------- CSS used for devlog demos ------------ */
+/* ================================================= */
+.orange-txt {
+  display: block;
+  color: orange;
+  background-color: rgb(247, 226, 208);
+  border: 1pt orange;
+  border-left: 5pt solid orange;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 10pt;
 }

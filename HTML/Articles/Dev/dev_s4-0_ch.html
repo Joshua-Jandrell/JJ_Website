@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">dev_4-00</span>
+    <h1 slot="title" class="p-name unstyled">A custom code widget</h1>
+    <time slot="date" datetime="2022-07-01" class="dt-published"
+      >01 July 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      <p>
+        Quite a few dev-log articles benefit from code displays and
+        demonstrations. Simply displaying blocks of unformatted code is sloppy.
+        It's hard to look at and hard to read. This is a portfolio site &dash;
+        each block of code display in the dev-log is a portfolio item showcasing
+        my programming and problem-solving abilities. Good presentation will
+        make a good impression.
+      </p>
+    </article>
+    <article slot="content" class="e-contenet">
+      <section>
+        <h2>What’s wrong with your current code?</h2>
+        <p>Look at it:</p>
+        <pre><code>
+&lt;div class="some-div"&gt;
+  &lt;h1>This code is hard to read!&lt;/h1&gt;
+  &lt;p&gt;
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse molestiae
+    aliquid delectus numquam ipsam, nulla, quae officiis ratione, quasi
+    corporis incidunt qui libero reprehenderit. Sapiente, deserunt? Dolore rem
+    nobis incidunt?
+  &lt;/p&gt;
+   &lt;button onclick="Complain()"&gt;
+    Click Me!
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+function Complain(){
+    alert("This code hurts my eyes!");
+}
+&lt;/script&gt;
+        </code></pre>
+      </section>
+      <section>
+        <h2>Code highlighting</h2>
+        <p>
+          The simple solution is code highting. Most IDE’s (and even text
+          editors) do this to make code more presentable and easier to read.
+        </p>
+        <p>
+          I tied my hand at constructing a code highlighter. With limited
+          knowledge of regex progress was slow and the results were&hellip;
+          interesting.
+        </p>
+        <p class="retoric">
+          Why re-invent the wheel? There are tonnes on great
+          <a
+            class="inline-link"
+            href="https://ourcodeworld.com/articles/read/140/top-5-best-code-syntax-highlighter-javascript-plugins"
+            target="_blank"
+            >code-highlighting libraries</a
+          >
+          out there.
+        </p>
+        <p>
+          That they are! In fact, I’m spoilt for choice. Some are compact, some
+          are robust most are much of a muchness with a slightly different
+          flavour.
+        </p>
+        <p>
+          I'm going to use
+          <a
+            class="inline-link"
+            target="_blank"
+            href="https://prismjs.com/index.html"
+            >Prism</a
+          >
+          because it is light-wight, modular, open source, easy to use, and
+          &dash; most importantly &dash; it works according to current
+          web-standards for sematic markup. Most of the other libraires required
+          unusual custom markup (my own code concurs) but with prism integrating
+          the library simply means adopting best semantic practice which is
+          always a great idea.
+        </p>
+        <p>
+          My code will look good to humans, but also to machines: it’s a win,
+          win.
+        </p>
+      </section>
+      <section>
+        <h2>How it works</h2>
+        <p>
+          Prism is deviously simple to work with. It’s as easy as downloading
+          the JavaScript and CSS files and then including them in the head.
+        </p>
+        <pre>
+        <code-block code-lang="language-HTML">
+&lt;script src="./JavaScript/External/Prism/prism.js" defer&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="./CSS/prism.css" /&gt;
+        </code-block>
+      </pre>
+        <p>
+          The rest works automatically according to sematic html. As per the
+
+          <a
+            class="inline-link"
+            target="_blank"
+            href=" https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-code-element"
+            >HTML standards</a
+          >
+          , code is placed in a <code class="inline">&lt;code&gt;</code> element
+          with the language define by adddin the class
+          <code class="inline">class="language-[langage name]"</code>. Multiple
+          lines of code are wrapped in
+          <code class="inline">&lt;pre&gt;</code> block.
+        </p>
+        <code-block code-lang="language-HTML">
+          &lt;div class="some-div"&gt;
+          <div class="some-div">
+            <h1>This code looks much better!</h1>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse
+              molestiae aliquid delectus numquam ipsam, nulla, quae officiis
+              ratione, quasi corporis incidunt qui libero reprehenderit.
+              Sapiente, deserunt? Dolore rem nobis incidunt?
+            </p>
+            <button onclick="SayYay()">Click Me!</button>
+          </div>
+          <script>
+            function SayYay() {
+              alert("Yay!");
+            }
+          </script>
+        </code-block>
+      </section>
+      <section>
+        <h2>But there’s one more thing.</h2>
+        <p>
+          Formatting code like this is all well and good for static HTML with a
+          normal script Lifecyle. That would be about 2% of my site &dash; not
+          great.
+        </p>
+        <p>
+          Almost all my content is dynamically reloaded. Besides, the
+          <code class="inline">prism.js</code>
+          script won’t even run on each new page because of
+          <a class="inline-link" traget="_blank" href="https://swup.js.org/"
+            >Swup</a
+          >.
+        </p>
+        <p>
+          Fortunately, there is a solution: good old friend
+          <a
+            class="inline-link"
+            target="_blank"
+            href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements"
+            >custom HTML elements</a
+          >
+          . I’ve defined a code-block element that can call the
+          <a
+            class="inline-link"
+            target="_blank"
+            href="https://prismjs.com/docs/Prism.html#.highlightElement"
+            ><code>Prism.highlightElement</code></a
+          >
+          method from its constructor.
+        </p>
+        <p>
+          But why stop there? This is a golden opportunity to be lazy and
+          automat the semantic formatting.
+        </p>
+
+        <pre><code-block code-lang="language-javascript" code-label="JavaScript:">
+customElements.define(
+  "code-block",
+  class extends HTMLElement {
+    constructor() {
+      super();
+
+      // get the code inside the custom element
+      let html = this.innerHTML;
+
+      // Clear the innerHTML so we can add &lt;pre&lt; and &lt;code&lt; elemments
+      this.innerHTML = "";
+
+      // Make the required elements and append them to this one.
+      this.appendChild(MakeCodeSegment(escaped, "language-HTML"));
+    }
+
+    function MakeCodeSegment(escapedCode, language) {
+
+      // Make the required DOM elements
+      let pre = document.createElement("pre");
+      let code = document.createElement("code");
+      // Add the required class to indicate code langauage
+      pre.classList.add(language);
+      code.classList.add(language);
+    
+      // Set the code content to be the content of our original container
+      code.innerHTML = escapedCode;
+
+      // Highlight the code with Prism
+      Prism.highlightElement(code);
+
+      // Put the code into the preformatted block
+      pre.appendChild(code);
+
+      return pre;
+    }
+  }
+);
+        </code-block></pre>
+
+        <p>We can even add a label for good measure!</p>
+
+        <pre><code-block code-label="JavaScript:" code-lang="language-js">
+// Take in some message "msg" and return it inside a &lt;label&gt; element
+function MakeLabel(msg) {
+  let label = document.createElement("label");
+  label.innerHTML = msg;
+  return label;
+}
+        </code-block> </pre>
+
+        <p>
+          This is also an opportunity to do some HTML character escaping. Who
+          doesn't want to avoid the pain of typing
+          <code class="inline">&amp;lt</code> and
+          <code class="inline">&amp;gt</code> everywhere? (And I may have
+          something else panned&hellip;)
+        </p>
+        <pre><code-block code-label="JavaScript:" code-lang="language-js">
+function EscapeTags(html) {
+  // replace angular bracets so that code is not redered as HTML
+  html = html.replaceAll("&lt;", "&amp;lt;");
+  html = html.replaceAll("&gt;", "&amp;sgt;");
+  return html;
+}
+      </code-block></pre>
+        <p>
+          Putting it all together and adding some constants and variables for a
+          bit more flexibility. The
+          <code class="inline">code-lang</code> attribute defines the porgraming
+          langaige used in the
+          <code class="inline">&lt;code-block&gt;</code> while the
+          <code class="inline">code-lable</code> attribute defines the content
+          of the label element added to the widget.
+        </p>
+        <pre><code-block code-label="JavaScript:" code-lang="language-js">
+
+// Define constants to be used in HTML
+const formatTag = "code-block";
+const languageAttribute = "code-lang";
+const labelAttrubute = "code-label";
+// Deinfe constant to be inserted into HTML code
+const ariaRoleDiscrition = "Code preview";
+
+
+customElements.define(
+  formatTag,
+  class extends HTMLElement {
+    constructor() {
+      super();
+      
+      // proved an aria-roledescription for this element
+      this.ariaRoleDescription = ariaRoleDiscrition;
+
+
+      let html = this.innerHTML;
+
+      // escape the element content HTML
+      let escaped = EscapeTags(html);
+        
+      // Find a 'code-lang' atrbute defineding the langaige class
+      let language = this.getAttribute(languageAttribute);
+      // Assumed HTML if not deifned
+      let label = this.getAttribute(labelAttrubute);
+      if (language == null || typeof langage == "undefined") {
+        language = "language-HTML";
+      }
+
+      // Follow a similar approach for the label attribute
+      let label = this.getAttribute(labelAttrubute);
+      if (label == null || typeof label == "undefined") {
+        label = "Code:";
+      }
+
+      // Update DOM content 
+      this.innerHTML = "";
+      this.appendChild(MakeCodeSegment(escaped, language, label));
+    }
+  }
+);
+
+// Make segment like before, but now append a lable element too
+function MakeCodeSegment(escapedCode, language, label) {
+  let pre = document.createElement("pre");
+  let code = document.createElement("code");
+  pre.classList.add(language);
+  code.classList.add(language);
+
+  code.innerHTML = escapedCode;
+  Prism.highlightElement(code);
+
+  pre.appendChild(MakeLabel(label));
+  pre.appendChild(code);
+
+  return pre;
+}
+      </code-block></pre>
+      </section>
+      <section>
+        <h2>Now it's time for a preview</h2>
+        <p>
+          I have a bunch of unescaped code lying around inside the code-block
+          before it's loaded. Why not use it for something cool? For example, I
+          could render this code in a separate container. This is particularly
+          helpful if I want to showcase the effects of CSS.
+        </p>
+        <p>
+          With a few new functions the
+          <code class="inline">&lt;code-display&gt;</code> custom element does
+          precisely that!
+        </p>
+        <pre
+          class="unstyled"
+        ><code-block code-lang = "language-js" code-label="JavaScript:">
+const displayTag = "code-display";
+const resultsClass = "results-display"; // useful to add for styling
+
+customElements.define(
+  displayTag,
+  class extends HTMLElement {
+    constructor() {
+      super();
+      this.ariaRoleDescription = ariaRoleDiscrition;
+
+      let html = this.innerHTML;
+      let escaped = EscapeTags(html);
+
+      let label = this.getAttribute(labelAttrubute);
+      if (language == null || typeof langage == "undefined") {
+        language = "language-HTML";
+      }
+      let language = this.getAttribute(languageAttribute);
+      if (label == null || typeof label == "undefined") {
+        label = codeLabel;
+      }
+   
+      this.innerHTML = "";
+      this.appendChild(MakeCodeSegment(escaped, language, label));
+      // Add new results display
+      this.appendChild(MakeResultsDisplay(html));
+    }
+  }
+);
+
+// Take in some Unescaped HTML and wrap it in an article
+function MakeResultsDisplay(html) {
+  let article = document.createElement("article");
+  article.classList.add(resultsClass);
+  article.appendChild(MakeLabel(displayLabel));
+  article.innerHTML += html;
+  return article;
+}
+        </code-block></pre>
+        <p>Now here's a (rather meta) look at this new element in action.</p>
+
+        <pre class="unstyled"><code-display code-label="HTML:">
+<code-block code-lang="language-CSS" code-label="CSS:">
+    .orange-txt{
+      display: block;
+      color: orange;
+      background-color: rgb(247, 226, 208);
+      border: 1pt orange;
+      border-left: 5pt solid orange;
+      width: fit-content;
+      margin: 0 auto;
+      padding: 10pt;
+    }
+</code-block>
+<code-display code-lang="language-HTML">
+<div class="orange-txt">Some cool orange text!</div>
+</code-display>
+      </code-display></pre>
+        <p>Now all that’s left to do is write more code and abuse my power!</p>
+      </section>
+    </article>
+  </body>
+</html>

@@ -5,6 +5,12 @@
   transition: 0.5s;
 }
 
+.transition-main,
+.trstion-fade {
+  opacity: 1;
+  transition: 0.5s;
+}
+
 html.is-animating.is-leaving .transition-main,
 html.is-animating.is-leaving .transition-main {
   opacity: 0;

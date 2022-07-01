@@ -1,0 +1,56 @@
+code-display {
+  display: grid;
+  gap: 5%;
+}
+
+code-display pre[class*="language-"],
+code-block pre[class*="language-"] {
+  border-left: 5pt solid orange;
+  position: relative;
+}
+code-display pre[class*="language-"] label,
+code-block pre[class*="language-"] label {
+  z-index: 9;
+  line-height: 1.5;
+  content: "Code:";
+  display: block;
+  position: sticky;
+  position: -webkit-sticky;
+  margin-left: -1.5em;
+  margin-top: -1em;
+  width: fit-content;
+  top: 0;
+  left: -1.5em;
+  color: black;
+  padding: 2pt 5pt 2pt 10pt;
+  font-family: monospace;
+  background-color: rgb(247, 226, 208);
+  border: 1pt solid orange;
+}
+.results-display {
+  padding: 1.5em 1em 1em 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+  position: relative;
+
+  border: 1pt solid rgb(47, 177, 203);
+  border-left: 5pt solid rgb(47, 177, 203);
+}
+.results-display label {
+  z-index: 10;
+  line-height: 1.5;
+  content: "Result:";
+  display: block;
+  position: sticky;
+  position: -webkit-sticky;
+  margin-left: -2.5em;
+  margin-top: -1.5em;
+  width: fit-content;
+  top: 0;
+  left: -1.5em;
+  color: black;
+  padding: 2pt 5pt 2pt 10pt;
+  font-family: monospace;
+  background-color: aliceblue;
+  border: 1pt solid rgb(47, 177, 203);
+}

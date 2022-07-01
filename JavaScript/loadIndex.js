@@ -184,7 +184,7 @@ class LocalNavElem {
     this.element = element;
     this.shadow = element.shadowRoot;
     this.details = this.shadow.querySelector("details");
-    this.details.addEventListener("click", this.Click);
+    this.details.querySelector("summary").addEventListener("click", this.Click);
     this.details.setAttribute("nav-id", element.id);
   }
 

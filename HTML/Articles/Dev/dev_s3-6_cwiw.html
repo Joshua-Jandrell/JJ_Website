@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">dev_3-06</span>
+    <h1 slot="title" class="p-name unstyled">The Hypertext widgets I want.</h1>
+    <time slot="date" datetime="2022-06-16" class="dt-published"
+      >16 June 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      <section>
+        <p>
+          Hypertext Markup Language (HTML) is the internet standard when it
+          comes to formatting and rendering information. And yet, while it
+          allows for hyperlinking and other features Like the ‘details summary’
+          tags, HTML’s text is hardly hyper. At least not by my standards.
+        </p>
+      </section>
+      <section>
+        <h2>Why is it not 'hyper' enough?</h2>
+        <p>
+          The definitions of hypertext and hypermedia are points of contention.
+          They mean different things to different people. For the sake of this
+          entry ‘hypertext’ is any non-linear or changeable piece of literature
+          where traversal is altered based on user input.
+        </p>
+        <p>
+          Look, this definition is loose, and I haven’t even dared to open the
+          can of worms that comes with asking for my site to be ‘interactive’.
+          But this article isn’t about all that.
+        </p>
+        <p>
+          Essentially my gripe with the current HTML structure of my site is
+          that the content is static. Sure, I’m doing a whole to of dynamic
+          loading a JS nonsense behind the scenes. The navigation is driven by
+          things call HYPERlinks. Yet, to the user, the content of each page is
+          a fixed, unchanging body of text. It is no different to a newspaper or
+          book.
+        </p>
+      </section>
+      <section>
+        <h2>But most websites are like that.</h2>
+        <p>So?</p>
+        <p>Am <em>I</em> most websites?</p>
+        <p class="retoric">
+          Of course not. Most websites aren’t nearly as pretentious.
+        </p>
+        <p>No no no!</p>
+        <p>
+          I’m not saying that it’s a bad thing. I’m not saying that it’s not
+          hypertext. I just feel I can do more. I want the site to offer the
+          user more than just simple navigation. The goal of this site is to
+          impress so I need all the fireworks I can muster.
+        </p>
+      </section>
+      <section>
+        <h2>But why this?</h2>
+        <p>
+          Because it’s interesting. I have a malleable medium at my fingertips,
+          and I want to use more than a sliver of its potential.
+        </p>
+        <p>
+          Changeable text has the potential to construct fascinating narratives
+          and logic flows that would not be possible with traditional linear
+          text. Leveraging this to my advantage should allow me to take the
+          constitution and organisation of informastion on this site to a new
+          level.
+        </p>
+        <p>
+          Each of the custom elements I want to create will manipulate the text
+          in a specific manner to create a particular effect.
+        </p>
+      </section>
+      <section>
+        <h2>Just us JavaScript?</h2>
+        <p>
+          Yes, yes. I’m going to use JavaScript. But I don’t want to have to set
+          that JavaScript up every single time I want certain functionalities.
+        </p>
+        <p>
+          Custom HTML allows me to code once then include a new feature as if it
+          were regular markup as many times as I want. This should streamline
+          content creation.
+        </p>
+        <p>
+          Yeah, that’s a potential problem. In fact my fear of creating content
+          that is confuting to screen reader users (and web-crawlers) is one of
+          the reasons I haven’t made these widgets earlier.
+        </p>
+        <p>
+          It’s all well and good to watch the content of random ‘div’ change
+          when the site is rendered on your monitor. But how will this be
+          experienced via a screen reader? How can I let the user know something
+          has changed? How can I take them there? How do I do all that without
+          writing paragraphs in Aria?
+        </p>
+        <p>I don’t.</p>
+        <p>
+          Good design is lazy design. A screen reader reads a page from top to
+          bottom. If I need a user to interact with one container to change
+          another the interaction container will come first. It’s that simple.
+          If I code with this paradigm in mind (and remember that I can always
+          alter visual layout with good old CSS) there should be not accessibly
+          issues when it comes to screen readers and my widgets.
+        </p>
+      </section>
+      <section>
+        <h2>And what are these "widgets" anyway?</h2>
+        <p>Without further ado, here they are:</p>
+        <h3>Pop-out text</h3>
+        <p>
+          This one is analogous to the
+          <code class="inline">&lt;details&gt;</code>/<code class="inline"
+            >&lt;summary&gt;</code
+          >
+          element, but without the
+          <a class="inline-link" load-href="/devlog.html#dev_1-03"
+            >odd inline behaviour</a
+          >. <code class="inline">&lt;details&gt;</code>/<code class="inline"
+            >&lt;summary&gt;</code
+          >
+          is designed to hide additional information below a high-level summary
+          and display it when the user clicks on the summary.
+        </p>
+        <p>
+          <code class="inline">Pop-out</code> text is designed to expand on a
+          though within a body of text. The text that pops out is an equal level
+          to the original text.
+        </p>
+        <p>
+          The difference between the two is subtle and I have been using the
+          detail widget for this exact functionality until now.
+        </p>
+        <p>
+          My main reason for changing is that details are by default block-level
+          element and not intended to expand in-line text. Evan with the
+          necessary CSS they don’t quite behave as I would expect in some
+          contexts. Furthermore they seem to be impossible to animate.
+        </p>
+        <h3>Replace-text</h3>
+        <p>
+          The idea here is simple. Click on some text and it changes into
+          different text. Unlike <code class="inline">Pop-out</code> which
+          elaborates on ideas or gives additional information &dash; this widget
+          alters the text that is already present.
+        </p>
+        <p class="retoric">Why would this be useful?</p>
+        <p>
+          Why wouldn’t it? It allows me to tease the user with changing bits of
+          text. My main intention is to be able to go off on tangents. If the
+          user wants to follow that target, they can get each new line by
+          clinking on the <code class="inline">&lt;replace-text&lt;</code>. If I
+          were to do this with pop-outs it would slowly engulf the entire
+          document.
+        </p>
+        <h3>Branch-text</h3>
+        <p>
+          The HTML structure for this one is slightly different where the
+          content block will be defined outside of the main widget and accessed
+          by ID. This could let me have several branches leading to the same
+          conclusion without too many nested elements or the need to replace
+          code.
+        </p>
+      </section>
+      <section>
+        <h2>An when do we get to see all of this in action?</h2>
+        <p>
+          When I get round to it. I’m required to implement and external API
+          dependency so I’m going to be focusing on that for now.
+        </p>
+      </section>
+    </article>
+  </body>
+</html>

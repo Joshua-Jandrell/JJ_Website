@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">dev_3-03</span>
+    <h1 slot="title" class="p-name unstyled">
+      Thinking about a custom code widget&hellip;
+    </h1>
+    <time slot="date" datetime="2022-06-13" class="dt-published"
+      >13 June 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      <p>
+        As my development gets more technical, I need to show more and more code
+        snippets. That’s all well and good. But currently my code snippets
+        really don’t look good. I plan to make a new widget that will fix that.
+      </p>
+    </article>
+    <article slot="content" class="e-contenet">
+      <section>
+        <h2>What’s wrong with the current snippets?</h2>
+        <p>
+          Well for starters they have no styling to speak of (because I haven’t
+          added any CSS yet). On the old site code is written like this:
+        </p>
+        <code-display code-lang="language-html" code-label="HTML:">
+          <style>
+            code.code-snip {
+              display: block;
+              padding: 5pt 10pt;
+              margin: 10pt;
+              background-color: antiquewhite;
+              border-left: 5pt solid orange;
+            }
+          </style>
+          <pre><code class="code-snip">
+<div>
+  <h1>This is some code</h1>
+  <div>It useds '&lt;'' and '&gt;' instead of '&amp;lt;' and '&amp;gt' but wiill still render correctly</div>
+  <p>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id,
+    repudiandae fugit harum repellat earum, delectus labore nihil itaque
+    veritatis, quasi iure. Nesciunt culpa fugit placeat, beatae tempore
+    ullam unde accusamus.
+  </p>
+</div>
+          </code></pre>
+        </code-display>
+        <p>
+          I have a script what replaces the ‘,’ and ‘>’ with &lt; and &gt: to
+          make my life a but easier. No need to worry about replacing all my
+          angular brackets. (Of course one muse be care when using
+          <code class="inline">&lt;script&gt;</code> Tags because their contents
+          may be executed if they arn't escaped.
+        </p>
+        <pre><code-display code-lang="language-html" code-label="HTML:">
+<pre><code class="code-snip">
+  <!-- Make sure to eecape JS so that it isn't executed -->
+  &amp;lt;script>
+    // Chars to be repaced
+    const charDict = { "&gt;": "&amp;lt;", ">": "&gt;" };
+
+    function FormatAsCode(html) {
+    let htmlString = String(html);
+    let pre = ""; // this variable holds the escaped code
+
+    // loop thorough html string and repaced predefined char's
+    for (let char of htmlString) {
+      if (char in charDict) {
+        pre += String(charDict[char]);
+      } else {
+        pre += String(char);
+      }
+    }
+    return pre;
+  }
+  &amp;lt;/script>
+  
+</code></pre>
+        </code-display></pre>
+        <p>As helpful as this is, there’s a catch: it doesn’t look great.</p>
+      </section>
+      <section>
+        <h2>Autmaitc CSS</h2>
+        <p>
+          Unstyled code is not easy to read or follow. There is a reason that
+          most IDE’s and even text editors like vim and mousepad apply styling
+          to code so that it is easier to read and follow. If I’m already
+          looping though each character in the code, I might as well apply some
+          styling to make it look a bit better.
+        </p>
+        <p>
+          I had hoped to use regex to find all values between
+          <code class="inline">\&amp;lt;</code> and
+          <code class="inline">\&amp;gt;</code>
+          and place them in a <code class="inline">&lt;span&gt;</code> container
+          with the necessary formatting applied. Unfortunately reject
+          expressions like:
+        </p>
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
+let someElem.innerHTML = replaceAll(/&amp;lt;(.*?)&amp;gt;/g, "&amp;span class='orange'>$&&lt;/span>")
+        </code-block></pre>
+        <p>Will result in:</p>
+        <pre
+          class="unstyled"
+        ><code-block code-lang="language-html" code-label="HTML:">
+<style>
+  span.orange{
+    color: orange;
+    font-weight: 500;
+    font-family: monospace;
+  }
+</style>
+
+<!-- Code after script has been run on it -->
+<pre><code class="code-snip">
+  <span class="orange">&amp;lt;div id="someElem"&amp;gt;</span>[some stuff in a div]<span class="orange">&amp;gt;/div&amp;gt;</span>
+</code></pre>
+
+        </code-block></pre>
+        <article class="results-display">
+          <label>Result:</label>
+          <pre><code class="code-snip">
+          <span class="orange">&lt;div id="someElem"&gt;</span>[some stuff in a div]<span
+            class="orange"
+            >&lt;/div&gt;</span
+          >
+        </code></pre>
+        </article>
+        <p>
+          This is fine except it will apply formatting to the brackets around
+          the tag as well as the tag itself. This isn’t the look I’m going for.
+          I want the tag name to be chromatically distinct from the angular
+          brackets.
+        </p>
+        <p>I could run another replace on the brackets alone:</p>
+        <pre><code-block code-lang="language-js" code-label="JavaScript:">
+let someElem.innerHTML = replaceAll(/&amp;lt;/g, "&lt;span class='orange'>&lt;span>$&&lt;span class='orange'>&lt;span>")
+        </code-block></pre>
+        <p>
+          But this is quite a messy solution. It also doesn’t account for the
+          '/'' which occurs when closing tags. I could run a replace on the
+          '/'', but at that point I feel like I have an unnecessary amount of
+          nested &lt;span> containers.
+        </p>
+        <code-block code-lang="language-html">
+          <pre><code class="code-snip">
+            <span class="orange">&amp;lt;</span>div id="someElem"<span class="orange">&amp;gt;</span>[some stuff in a div]<span class="orange">&amp;gt;</span>/div<span class="orange">&amp;gt;</span>
+          </code></pre>
+        </code-block>
+        <article class="results-display">
+          <label>Result:</label>
+          <pre><code class="code-snip">
+          <span class="orange">&lt;</span>div id="someElem"<span class="orange">&gt;</span>[some stuff in a div]<span
+            class="orange"
+            >&lt;</span>/div<span class="orange">&gt;</span
+          >
+        </code></pre>
+        </article>
+        <p>
+          The current approach is by no means idea. It feels inefficient
+          (because all the finding, checking, and replacing means looping over
+          the string multiple times) and inelegant (a long list or random values
+          to check is hardly a neat and tidy way to format things.
+        </p>
+        <p>
+          Furthermore, I see no way to easily modify this process to work on
+          other code: such as CSS or JavaScript.
+        </p>
+        <p>
+          All that said it’s a working solution and I’ve spend enough time
+          faffing for one day. I think that a better solution to the styling
+          would be looping through the string once &dash; pushing certain paired
+          characters to a stack. But I’ll cross that bright if and when I get
+          there.
+        </p>
+        <p>
+          Right now, for the sake of progress, I’ll be diving right into the
+          next issue.
+        </p>
+        <p>
+          As I’m sure you can see I DID find a way to format my code a bit
+          later.
+          <a class="inline-link" load-href="/devlog.html#dev_4-00"
+            >Check it out how!</a
+          >
+        </p>
+      </section>
+    </article>
+  </body>
+</html>

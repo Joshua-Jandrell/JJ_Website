@@ -468,3 +468,9 @@ ol.ref-list li::before {
   padding: 10pt;
   display: block;
 }
+
+span.orange {
+  color: orange;
+  font-weight: 500;
+  font-family: monospace;
+}

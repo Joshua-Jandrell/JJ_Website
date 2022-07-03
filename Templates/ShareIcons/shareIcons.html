@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Share icons template</title>
+    <link rel="stylesheet" href="/Pages/HTML-templates/shareIcons.css" />
+    <script src="/Pages/HTML-templates/shareIcons.js"></script>
+  </head>
+  <body>
+    <template id="share-icons">
+      <link rel="stylesheet" load-href="/Templates/ShareIcons/shareIcons.css" />
+      <nav class="icon-block">
+        <label for="share-icons" class="icon-label"
+          ><slot name="label">Share:</slot></label
+        >
+        <ul id="share-icons">
+          <li>
+            <a onclick="DoMailShare()" rel="external" target="_blank"
+              ><img
+                src="./Assets/Images/Company-logos/mail.png"
+                load-src="/Assets/Images/Company-logos/mail.png"
+                alt="Email"
+            /></a>
+          </li>
+          <li>
+            <a onclick=" DoFackbookShare()" rel="external" target="_blank"
+              ><img
+                src="./Assets/Images/Company-logos/fb.png"
+                load-src="/Assets/Images/Company-logos/fb.png"
+                alt="FaceBook"
+            /></a>
+          </li>
+          <li>
+            <a onclick="DoLinkedinShare()" rel="external" target="_blnak"
+              ><img
+                src="./Assets/Images/Company-logos/linkedIn.png"
+                load-src="/Assets/Images/Company-logos/linkedIn.png"
+                alt="LinkedIn"
+            /></a>
+          </li>
+          <li>
+            <a onclick="DoTwitterShare()" rel="external" target="_blank"
+              ><img
+                load-src="/Assets/Images/Company-logos/twitter.png"
+                alt="Twitter"
+            /></a>
+          </li>
+        </ul>
+      </nav>
+    </template>
+    <template id="contact-icons">
+      <link rel="stylesheet" load-href="Pages/HTML-templates/shareIcons.css" />
+      <nav class="icon-block">
+        <label for="share-icons" class="icon-label"
+          ><slot name="label">Contanct:</slot></label
+        >
+        <ul id="share-icons">
+          <li>
+            <a
+              href="mailto:2333213@students.wits.ac.za"
+              class="u-email"
+              target="_blank"
+              ><img
+                src="/Assets/Images/Company-logos/mail.png"
+                load-src="/Assets/Images/Company-logos/mail.png"
+                alt="Send me and e-mail"
+            /></a>
+          </li>
+          <li>
+            <a
+              href="https://api.whatsapp.com/send?phone=+270738348251"
+              rel="nofollow"
+              target="_blank"
+              ><img
+                src="./Assets/Images/Company-logos/whatsapp.png"
+                load-src="/Assets/Images/Company-logos/whatsapp.png"
+                alt="Message me on WhatsApp"
+            /></a>
+          </li>
+          <li>
+            <a href="https://t.me/+380509144504" rel="nofollow" target="_blank"
+              ><img
+                src="./Assets/Images/Company-logos/telegram.png"
+                load-src="/Assets/Images/Company-logos/telegram.png"
+                alt="Message me on Telegram"
+            /></a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/Joshua-Jandrell"
+              rel="nofollow"
+              target="_blank"
+              ><img
+                src="./Assets/Images/Company-logos/gitHub.png"
+                load-src="/Assets/Images/Company-logos/gitHub.png"
+                alt="Check my Git-hub"
+            /></a>
+          </li>
+        </ul>
+      </nav>
+    </template>
+    <template id="bottom-foot">
+      <link rel="stylesheet" load-href="/Templates/ShareIcons/shareIcons.css" />
+      <section class="foot">
+        <share-icons></share-icons>
+        <article class="credits">
+          This website was designed and programmed by
+          <span class="p-author">Joshua Jandrell</span>.
+        </article>
+        <!--<article class="acknoledge">
+          All company logos used are the property of the companies they
+          represent.
+        </article>-->
+      </section>
+    </template>
+  </body>
+</html>

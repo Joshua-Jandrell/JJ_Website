@@ -12,6 +12,10 @@ img.log-img {
   outline: 1px solid black;
   box-shadow: 0 0 2px black;
 }
+img.log-img.small {
+  width: 30%;
+  margin: 0 auto;
+}
 
 h1.unstyled,
 h2.unstyled {
@@ -40,12 +44,28 @@ pre.unstyled {
 a.inline-link {
   text-decoration: solid orange underline;
   color: inherit;
+  transition: all 1s;
+  font-weight: 450;
+}
+a.inline-link:hover {
+  color: orange;
+  cursor: pointer;
 }
 a.inline-link code,
 code.inline {
   display: inline-block;
   background-color: aliceblue;
   outline: 1pt solid rgb(47, 177, 203);
+  padding: 0 0.25em;
+  margin: 2pt 0;
+  border-radius: 2pt;
+}
+
+a.inline-link:hover code,
+code.inline {
+  display: inline-block;
+  background-color: antiquewhite;
+  outline: 1pt solid orange;
   padding: 0 0.25em;
   margin: 2pt 0;
   border-radius: 2pt;
@@ -66,7 +86,19 @@ label.log-label {
   color: orange;
 }
 label.log-label::before {
-  content: " //";
+  content: "// ";
+  color: black;
+}
+
+.h-entry h2 {
+  font-family: monospace;
+  color: rgb(47, 177, 203);
+  font-size: 16pt;
+  font-weight: 425;
+}
+.h-entry h2::before {
+  font-weight: bold;
+  content: "// ";
   color: black;
 }
 
@@ -97,9 +129,6 @@ ul.content-list {
 
   max-height: 75vh;
   overflow-y: scroll;
-
-  border-right: 2pt solid rgb(47, 177, 203);
-  background: aliceblue;
 }
 /* Scroll styling */
 /*#index-list::-webkit-scrollbar {
@@ -121,9 +150,15 @@ ul.content-list {
 }*/
 /* List item styling */
 #index-list li {
-  background-color: aliceblue;
+  border-right: 5pt solid rgb(47, 177, 203);
+  background-color: white;
   margin: 0;
   padding: 20pt 17pt 20pt 20pt;
+  border-bottom: 1pt solid black;
+  text-align: center;
+}
+#index-list li:first {
+  border-top: 1pt solid black;
 }
 #index-list li a {
   font-weight: 500;
@@ -135,6 +170,8 @@ ul.content-list {
   display: table;
 
   padding: 0 0.5em;
+  margin-left: auto;
+  margin-right: auto;
   transition: all 0.5s;
 }
 
@@ -414,7 +451,44 @@ ol.ref-list li::before {
   position: absolute;
   left: -30px;
 }
+/* ================================================= */
+/* ---------- Styling for hyper widgets ------------ */
+/* ================================================= */
+/* pop-out */
+pop-out,
+toggle-pop-out {
+  /*display: none;*/
 
+  transition: opacity 0.5s;
+  visibility: hidden;
+  max-width: 0;
+  opacity: 0;
+  display: none;
+}
+pop-out-text[open] pop-out,
+toggle-pop-out[open] {
+  visibility: visible;
+  opacity: 1;
+  max-width: 100%;
+  display: inline;
+}
+.jeff:focus {
+  color: red;
+}
+pop-out-text {
+  position: relative;
+  text-decoration: underline solid rgb(47, 177, 203);
+  font-weight: 500;
+}
+pop-out-text[open] {
+  position: relative;
+  text-decoration: underline solid rgb(47, 177, 203);
+  font-weight: 500;
+}
+
+toggle-button.open {
+  color: brown;
+}
 /* ================================================= */
 /* ---------- CSS used for devlog demos ------------ */
 /* ================================================= */

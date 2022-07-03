@@ -2,6 +2,13 @@
 const devLinks = [
   "/HTML/Articles/Dev/dev_s4-0_ch.html",
   // -- fill this gap
+  "/HTML/Articles/Dev/dev_s3-10_is.html",
+  "/HTML/Articles/Dev/dev_s3-9_tl.html",
+  "/HTML/Articles/Dev/dev_s3-8_pl.html",
+  "/HTML/Articles/Dev/dev_s3-7_ff.html",
+  "/HTML/Articles/Dev/dev_s3-6_cwiw.html",
+  "/HTML/Articles/Dev/dev_s3-5_atar.html",
+  "/HTML/Articles/Dev/dev_s3-4_cwia.html",
   "/HTML/Articles/Dev/dev_s3-3_ch.html",
   "/HTML/Articles/Dev/dev_s3-2_rs.html",
   "/HTML/Articles/Dev/dev_s3-1_ap.html",
@@ -31,10 +38,14 @@ const devLinks = [
 ];
 
 const blogLinks = [
+  "/HTML/Articles/Dev/dev_s3-9_tl.html",
+  "/HTML/Articles/Dev/dev_s2-fin_aMess.html",
   "/HTML/Articles/Blog/blog_s1-7_mm.html",
   "/HTML/Articles/Blog/blog_s1-6_uxi.html",
+  "/HTML/Articles/Dev/dev_s2-2_tt.html",
   "/HTML/Articles/Blog/blog_s1-5_infgeo.html",
   "/HTML/Articles/Blog/blog_s1-4_re0.html",
+  "/HTML/Articles/Dev/dev_s1-10_psb.html",
   "/HTML/Articles/Blog/blog_s1-3_met.html",
   "/HTML/Articles/Blog/blog_s1-2_sm.html",
   "/HTML/Articles/Blog/blog_s1-1_atmt.html",

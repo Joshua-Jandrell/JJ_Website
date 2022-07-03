@@ -41,16 +41,12 @@
             Loading content...
           </slot>
         </main>
-
-        <footer class="foot">
-          <bottom-foot></bottom-foot>
-        </footer>
       </article>
     </template>
     <template id="content-li" class="not-automated">
       <li>
         <a>
-          <slot name="title" class="link-h">WUt</slot>
+          <slot name="title" class="link-h"></slot>
           <article class="time-marker"></article>
           <label for="time-marker"><slot name="date">date</slot></label>
           <slot name="summary" class="p-summary"></slot>
@@ -66,7 +62,7 @@
         load-href="/Templates/ContentMenuWrapper/menuItem.css"
       />
 
-      <a class="content-item click-item" onclick="return false">
+      <a class="content-item click-item">
         <article class="date-marker">
           <div class="marker"></div>
           <slot name="date" class="date">date</slot>
@@ -84,10 +80,12 @@
         href="/Templates/ContentMenuWrapper/menuItem.css"
         load-href="/Templates/ContentMenuWrapper/menuItem.css"
       />
-      <div class="main-h p-name"><slot name="title">Title</slot></div>
+      <div class="sub-t">
+        <slot name="author" class="author sub-tilte"></slot>
+      </div>
+      <div class="sub-t"><slot name="date" class="date">date</slot></div>
+      <h1 class="main-h p-name"><slot name="title">Title</slot></h1>
 
-      <slot name="author"><a class="inline-link"></a></slot><br />
-      <slot name="date" class="date">date</slot>
       <section class="e-content">
         <slot name="summary"></slot>
         <slot name="content"></slot>
@@ -138,7 +136,7 @@
       <slot name="date" class="entry-date"></slot>
       <details class="devlog-feed-deets" id="log-details">
         <summary>
-          <h2 class="main-h dev-h"><slot name="title"></slot></h2>
+          <h1 class="main-h dev-h"><slot name="title"></slot></h1>
           <section>
             <slot name="summary"></slot>
           </section>

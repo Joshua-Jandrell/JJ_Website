@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">dev_3-08</span>
+    <h1 slot="title" class="p-name unstyled">Picking a library</h1>
+    <time slot="date" datetime="2022-06-21" class="dt-published"
+      >21 June 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      It’s been a while since I looked a what JS libraries could do and
+      explained why I wanted one. Now it’s time to choose. I’ve spent a lot of
+      time reaching and pontificating with libraries. Its hight time I figured
+      out exactly what I want. Vanilla JS is nice and all, but it would be
+      better with chocolate sprinkles.
+    </article>
+    <article slot="content" class="e-contenet">
+      <section>
+        <h2>What do I need?</h2>
+        <p>
+          There is not shortage of JS libraires. With a plethora of options out
+          here the shear variety and functionality are rather overwhelming.
+          JavaScript libraires can control anything from DOM to data (while
+          managing all the little gremlins in between)
+          <a class="inline-link" href="#dev_3-08_ref"><cite>[1]</cite></a
+          >. I’ve spent longer than I should have jumped down dozens of rabbit
+          holes and the truth is I still have no clue which flavour of library
+          to choose.
+        </p>
+        <p>
+          But surely, I must have some idea of what to write next. If I could
+          wish for one section of this site to be written for me, what would it
+          be?
+        </p>
+      </section>
+      <section>
+        <h2>World DOMination?</h2>
+        <p>
+          One of my first thoughts was a DOM manipulation library. The obvious
+          answer to this is
+          <a href="https://jquery.com/" class="inline-link" target="_blank"
+            ><cite>jQuery</cite></a
+          >.
+        </p>
+        <blockquote>
+          jQuery is a fast, small, and feature-rich JavaScript library. It makes
+          things like HTML document traversal and manipulation, event handling,
+          animation, and Ajax much simpler with an easy-to-use API that works
+          across a multitude of browsers. With a combination of versatility and
+          extensibility, jQuery has changed the way that millions of people
+          write JavaScript.
+        </blockquote>
+        <cite>jquery.com</cite>
+        <p>
+          Before I started researching, using jQuery seemed like an open and
+          such case. It does all I need and more. Awesome animations [2][3][4].
+          Simple syntax [3][4][5]. Enhanced DOM manipulation [2][3] abilities
+          and Cross-browser support [2][3]. From the outside jQuery seemed to be
+          an industry standard whose use was taken as given. Surly there must be
+          a reason for this great popularity? (And surly this makes it something
+          I should focus on learning as a new developer).
+        </p>
+        <p class="retoric">
+          But you haven’t chosen it yet so you know there must be an
+          issue&hellip;?
+        </p>
+        <p>
+          Turns out jQuery might not be all it’s made out to be. The power of
+          cross browser finicality has been diminished after the advent of IE-8:
+          these days modern browsers tend to play nice [4][6].
+        </p>
+        <p>
+          That oh so simple syntax staring that sexy magic ‘$’ once sliced away
+          huge sections of vanilla JS – stripping complex functions down to a
+          single line [3]. But these days vanilla functions often have similar
+          lengths [4][6]. That super ‘$’ does reduce the number of lines one
+          writes but its utility is both a blessing and a curse. It obfuscates
+          long complex and inefficient functions – tricking fooling developers
+          like me into thinking their code is more efficient because it is
+          shorted and easier to type [5]. The insane number of functions. This
+          syntax can become tricky to work with at times because it’s harder to
+          control what exactly is being done [5][6] and leads to bad modern
+          practice in some cases [4][5].
+        </p>
+        <p class="retoric">
+          But it’s all work it for an efficiency boost right?
+        </p>
+        <p>Wrong! Vanilla JS Dom function perform better that jQuery[4].</p>
+        <p>
+          It might not even be work my while learning for the sake of its
+          popularity because that too is on the decline [4].
+        </p>
+        <p>
+          All that said, I doubt jQuery is going anywhere. It’s loaded with
+          features and does seem very intuitive to work with. But from what I’ve
+          seen I really comes into its own when performing http requests
+          (something I don’t do a lot of). I have no problem with verbose or
+          slightly long-winded code (or writing for that matter) for the sake of
+          performance and robustness. As useful as jQuery is I think I’ll be
+          giving it a miss.
+        </p>
+        <p>
+          In fact, my research on jQuery put me of DOM libraries in general.
+          They do some cool stuff, but nothing mind-blowing. I have had no
+          problem access the DOM and if it ain’t broke don’t fix it. My main
+          reason for perusing this avenue of library was the mirage of
+          efficiency which has now been debunked.
+        </p>
+      </section>
+      <section>
+        <h2>How did I react?</h2>
+        <p>
+          My next though was a UI library. Something like
+          <a class="inline-line" href="https://reactjs.org/" target="_blank"
+            >React</a
+          >
+          sounds great for this.
+        </p>
+        <blockquote>
+          React makes it painless to create interactive UIs. Design simple views
+          for each state in your application, and React will efficiently update
+          and render just the right components when your data changes.
+        </blockquote>
+        <cite>react.org</cite>
+        <p>
+          React is component based and encourages modular and reusable code
+          [7][8][9]. Its component logic is written in JS rather than html
+          templates which makes it easier to handle states [7][8]. React makes
+          UI easier to handle ad more efficient [7][8][9]. It’s growing
+          super-fast with and constant flow of exciting updates [9] and has even
+          surpassed jQuery in popularity [4][8].
+        </p>
+        <p class="retoric">You using it then?</p>
+        <p>I'd Love to&hellip;</p>
+        <p class="retoric">I sense a 'but' coming.</p>
+        <p>Yip. Here it is:</p>
+        <p>
+          I do find it painful to work with scripts and html templates and
+          reacts proposition is enticing. But I have my own system now. As much
+          as I feel my site would gentility benefit from react, I would be
+          fixing systems that already work.
+        </p>
+        <p>
+          Given my timeframe, I’m sure if this is the best way to ensure my site
+          is packed with exciting features. Besides React is form UI only [8][9]
+          so I would still need to find something else for loading content.
+        </p>
+      </section>
+      <section>
+        <h2>Time to aminate?</h2>
+        <p>
+          My next though was animation libraries. Those are great! My site has
+          some animations, but it could do with a bit of spicing up.
+        </p>
+        <p>
+          In this regard I am spoil for choice. Anime.JS looks awesome, it’s
+          light weight and has tonnes of cool effects [10], although it can’t
+          target pseudo elements which is a bit annoying [10].
+        </p>
+        <p>
+          But not to fear, Green Sock can! It also boasts impressive performance
+          and customisation with plugins [11]. It does everything from scroll
+          events to tweening[11].
+        </p>
+        <p>
+          Mo.js [12] is another exciting option promising simplicity,
+          performance, and robustness.
+        </p>
+        <p>
+          There are countless other examples. All of which boast similar (yest
+          distinct) features. Adding animations to the site will make it feel
+          more exiting. This will improve the user acceptance and enhance the
+          impact of the site.
+        </p>
+        <p>
+          The again I’ve already done relatively well with CSS. My site is quite
+          simple. What exact do I need to animate that requires a library?
+        </p>
+        <p class="retoric">Everything?</p>
+        <p>
+          If I animate everything then the animations lose their impact. But
+          just looking at the sites for some of these animation libraries has me
+          in awe. They boast jaw-dropping effects which could have a positive
+          impact on the user.
+        </p>
+        <p>
+          Sure, I can make an animation with CSS, but can I find it painful and
+          finicky. These libraries will allow me to add more slick animations
+          and trigger them from JavaScript with ease.
+        </p>
+        <p class="retoric">Good point.</p>
+        <p>
+          Yeah. CSS is fine. I could animate anything, but why should I? What’s
+          wrong with toggling a CSS class? I do see how these libraries might
+          make the process more convenient, but what would I be animating?
+        </p>
+        <p class="retoric">Hmm&hellip; no clue.</p>
+        <p>I felt the same. Then it hit me.</p>
+      </section>
+      <section>
+        <h2>Page Transitions!</h2>
+        <p>
+          It’s one thing I don’t have, have no clue how to get and defiantly
+          need ASAP.
+        </p>
+        <p class="retoric">Why?</p>
+        <p>
+          Because they are awesome and will make my site feel more connected,
+          more coherent, and more refined. They will enhance the user experience
+          and allow to display my work in new and exciting ways.
+        </p>
+        <p class="retoric">Errr&hellip; I don't get it.</p>
+        <p>Don't worry, it will all be explaued next time.</p>
+      </section>
+      <section id="dev_3-08_ref">
+        <h2>Refferances</h2>
+        <ol class="ref-list">
+          <li>
+            Acharya. D.P,
+            <cite>The 40 Best JavaScript Libraries and Frameworks for 2022</cite
+            >, kinsta. [Online] Available:<a
+              href="https://kinsta.com/blog/javascript-libraries/"
+              target="_blank"
+              class="inline-link"
+              >https://kinsta.com/blog/javascript-libraries/</a
+            >
+            [Accessed<time datetime="2022-06-20">20/06/2022</time>]
+          </li>
+          <li>
+            jQuery,
+            <cite>jQuery.com</cite>, kinsta. [Online] Available:<a
+              href="https://jquery.com/"
+              target="_blank"
+              class="inline-link"
+              >https://jquery.com/</a
+            >
+            [Accessed<time datetime="2022-06-20">20/06/2022</time>]
+          </li>
+          <li>
+            Tekslate
+            <cite
+              >11 Benefits of jQuery That Every Web Designers Should Know</cite
+            >, kinsta.<time datetime="2021-04-14">14/04/2021</time> [Online]
+            Available:<a
+              href="https://tekslate.com/11-benefits-jquery-every-web-designers-know"
+              target="_blank"
+              class="inline-link"
+              >https://tekslate.com/11-benefits-jquery-every-web-designers-know</a
+            >
+            [Accessed<time datetime="2022-06-20">20/06/2022</time>]
+          </li>
+          <li>
+            Candyscript
+            <cite>Is jQuery dead in 2022?</cite>
+            <time datetime="2019-09-24">24/09/2019</time> [Online] Available:
+            <a
+              href="https://realtoughcandy.com/is-jquery-dead/"
+              target="_blank"
+              class="inline-link"
+            >
+              https://realtoughcandy.com/is-jquery-dead/</a
+            >
+            [Accessed<time datetime="2014-01-13">01/13/2014</time>]
+          </li>
+          <li>
+            Chemerisuk. M,
+            <cite>Writing A Better JavaScript Library For The DOM</cite>,
+            Smashing Magazine.
+            <time datetime="2019-09-24">24/09/2019</time> [Online] Available:
+            <a
+              href="https://www.smashingmagazine.com/2014/01/writing-a-better-javascript-library-for-the-dom/"
+              target="_blank"
+              class="inline-link"
+            >
+              https://www.smashingmagazine.com/2014/01/writing-a-better-javascript-library-for-the-dom/</a
+            >
+            [Accessed<time datetime="2022-06-20">20/06/2022</time>]
+          </li>
+          <li>
+            Abbondanzo et al
+            <cite>You might not need jQuery</cite> [Online] Avai:
+            <a
+              href="https://youmightnotneedjquery.com/"
+              target="_blank"
+              class="inline-link"
+            >
+              https://youmightnotneedjquery.com/</a
+            >
+            [Accessed<time datetime="2022-06-20">20/06/2022</time>]
+          </li>
+          <li>
+            React.org
+            <cite>React. A JavaScript library for building user interfaces</cite
+            >[Online] Available:
+            <a href="https://reactjs.org/" target="_blank" class="inline-link">
+              https://reactjs.org/</a
+            >
+            [Accessed<time datetime="2022-06-20">20/06/2022</time>]
+          </li>
+          <li>
+            Pisuwala. U,
+            <cite
+              >The benefits of ReactJS and reasons to choose it for your
+              project</cite
+            >, peerbits. <time datetime="2022-03-20">20/03/2022</time> [Online]
+            Available:
+            <a
+              href="https://www.peerbits.com/blog/reasons-to-choose-reactjs-for-your-web-development-project.html"
+              target="_blank"
+              class="inline-link"
+            >
+              https://www.peerbits.com/blog/reasons-to-choose-reactjs-for-your-web-development-project.html</a
+            >
+            [Accessed<time datetime="2022-06-20">20/06/2022</time>]
+          </li>
+          <li>
+            JavaPoint,
+            <cite>Pros and Cons of ReactJS</cite> [Online] Available:
+            <a
+              href="https://www.javatpoint.com/pros-and-cons-of-react"
+              target="_blank"
+              class="inline-link"
+            >
+              https://www.javatpoint.com/pros-and-cons-of-react</a
+            >
+            [Accessed<time datetime="2022-06-20">20/06/2022</time>]
+          </li>
+          <li>
+            anime.js,
+            <cite>Properties</cite> [Online] Available:
+            <a
+              href="https://animejs.com/documentation/#cssProperties"
+              target="_blank"
+              class="inline-link"
+            >
+              https://animejs.com/documentation/#cssProperties</a
+            >
+            [Accessed<time datetime="2022-06-20">20/06/2022</time>]
+          </li>
+          <li>
+            GreenSock,
+            <cite>GreenSock</cite> [Online] Available:
+            <a
+              href="https://greensock.com/"
+              target="_blank"
+              class="inline-link"
+            >
+              https://greensock.com/</a
+            >
+            [Accessed<time datetime="2022-06-20">20/06/2022</time>]
+          </li>
+          <li>
+            Mo.js,
+            <cite>Mo.js</cite> [Online] Available:
+            <a
+              href="https://mojs.github.io/"
+              target="_blank"
+              class="inline-link"
+            >
+              https://mojs.github.io/</a
+            >
+            [Accessed<time datetime="2022-06-20">20/06/2022</time>]
+          </li>
+        </ol>
+      </section>
+    </article>
+  </body>
+</html>

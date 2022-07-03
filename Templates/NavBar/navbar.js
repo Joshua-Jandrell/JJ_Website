@@ -1,5 +1,8 @@
 // Useful class
 const selectedClass = "select";
+const hambergerOpenClass = "nav-open";
+const hamburgerId = "nav-menu";
+const backButtonId = "nav-back";
 class NavBar {
   constructor() {
     this.page = null;
@@ -25,6 +28,7 @@ class NavBar {
         navElem.classList.remove(selectedClass);
       }
       this.navLinks[pageName].classList.add(selectedClass);
+      this.CloseMenu();
     }
     this.page = pageName;
   }
@@ -35,6 +39,9 @@ class NavBar {
     if (this.page != null) {
       this.SetPage(this.page);
     }
+
+    this.SetMenuToggle(elem);
+    this.SetBackButton();
   }
 
   FindLinkElems(elem) {
@@ -44,7 +51,49 @@ class NavBar {
       }
     });
   }
+  /* Menue toggles */
+  SetMenuToggle(elem) {
+    this.menuButton = elem.querySelector("#" + hamburgerId);
+    this.menuButton.onclick = () => {
+      this.ToggleOpen();
+
+      return false;
+    };
+  }
+
+  ToggleOpen() {
+    this.GetNavBarElem().classList.toggle(hambergerOpenClass);
+  }
+
+  CloseMenu() {
+    this.GetNavBarElem().classList.remove(hambergerOpenClass);
+  }
+  GetNavBarElem() {
+    if (typeof this.navBarElem === "undefined") {
+      // only serch doc once, then store a referance to element
+      this.navBarElem = document.getElementById("nav-bar");
+    }
+    return this.navBarElem;
+  }
+
+  // Back button
+  SetBackButton() {
+    this.GetNavBarElem().querySelector("#" + backButtonId).onclick = () => {
+      this.GoBack();
+    };
+  }
+
+  GoBack() {
+    console.log(document.referrer);
+    // What a normal sane person would do
+    window.history.back();
+    // Now with swup lol:
+    // => Back is not animated by design (https://github.com/swup/swup/issues/47)
+    // => hacky sollution is to make a dummy link and click it but this has odd behaviour from time to time
+    // => this is ba
+  }
 }
+
 const navBar = new NavBar();
 
 // Definition for cusstom element

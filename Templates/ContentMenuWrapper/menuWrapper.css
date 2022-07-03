@@ -21,7 +21,7 @@
 .content {
   position: relative;
   padding-left: 5vw;
-  max-width: 750px;
+  max-width: 700px;
 }
 
 /* ----> Timelinde */
@@ -30,10 +30,19 @@
   position: absolute;
   top: -50pt;
   left: -2.5pt;
-  height: 110%;
+  height: 100%;
   width: 5px;
-  background-color: blues;
   border-left: 5px dashed black;
+}
+.time-line::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: -9.5px;
+  background-color: black;
+  width: 15px;
+  height: 15px;
 }
 
 /* Left-nav */

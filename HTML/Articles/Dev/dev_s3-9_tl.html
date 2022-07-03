@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">dev_3-09</span>
+    <h1 slot="title" class="p-name unstyled">Transitioning to a new system</h1>
+    <time slot="date" datetime="2022-06-23" class="dt-published"
+      >23 June 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      When one is engrosses in a beautiful website, there is nothing more
+      jarring and off-putting than a slow, ugly, obnoxious page transition. And
+      if you’ve seen my
+      <a
+        href="https://joshua-jandrell.github.io/portfolio-website/"
+        class="inline-link"
+        target="_blank"
+        >(old) site</a
+      >
+      you know how bad it can get. But, with a bit of luck, I'm going to make
+      this site smoother than ever.
+    </article>
+    <article slot="content" class="e-contenet">
+      <section>
+        <h2>What’s wrong with the transitions now?</h2>
+        <p>
+          Not much. A brief flick, the navbar jumps a bit and, on occasion the
+          imported CSS get’s all janky while the wrapper templates are loading.
+          Then of course everything jumps around and gets rendered while all the
+          content is aggressively inserted. But after a couple seconds it all
+          settles down and&hellip;
+        </p>
+        <p>Oh gosh! It’s awful! But not anymore. I’m going to fix it.</p>
+      </section>
+      <section>
+        <h2>The perks of seamless transition</h2>
+        <p>
+          The medium is the message and this whole site is the portfolio. It’s
+          not just about the work I showcase, it’s about how I present it. Every
+          choice I make on this site reflects on my skills and ability as a
+          designer. It needs to draw the viewer in and keep then engaged. I want
+          them to be able to seamlessly swoop between portfolio items. I want
+          their experience to be uninterrupted and awe-inspiring. I believe that
+          page transitions are the key to this.
+        </p>
+        <h3>No more Jank</h3>
+        <p>
+          Page transition libraries do aways with the jarring forced reload
+          between pages [1,2,3]. This is replaced by an smoother, more natural
+          experience. The library ensures that content is loaded before the
+          transition animation commences and thus avoids the mess of half-loaded
+          DOM.
+        </p>
+        <p>
+          Some libraries like
+          <a href="https://barba.js.org/" target="_blank" class="inline-link"
+            >Barba</a
+          >
+          and
+          <a href="https://swup.js.org/" target="_blank" class="inline-link"
+            >Swup</a
+          >
+          can even preload content before the link is clicked, thus reducing
+          page load time.
+        </p>
+        <h3>Immortal scripts</h3>
+        <p>
+          Transition libraries alter the lifecycle of assets linked in the
+          <code class="inline">&lt;head&gt;</code> of a document, keeping them
+          loaded between pages [1,3]. Shared JavaScript and CSS files no-longer
+          need to be reloaded with a new page &dash; reducing the amount of data
+          that must be retrieved and thus improving the performance.
+        </p>
+        <p>
+          This feature is particularly enticing for a site like mine. Many of my
+          pages used the same templates for multiple page (that’s kinda the
+          whole idea behind templates in the first place). It’s convenient from
+          the development perspective but quite expensive performance wise.
+        </p>
+        <p>
+          To define a template I need to
+          <code
+            ><a
+              target="_blank"
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"
+              class="inline-link"
+              >fetch</a
+            ></code
+          >
+          another document and Parse its content to HTML &dash; this also
+          involves the retrieval of any stylesheets that have been linked inside
+          shadow templates. Once loaded I loop though the content checking for
+          levels with <code class="inline">load-href</code> and
+          <code class="inline">load-src</code> attributes. This process is
+          allows me to update relatively referenced hyperlinks (which are
+          required by GitHub pages) based on the location of the window they are
+          displayed in. The final step involves appending templates to the
+          document and defining custom HTML element with JavaScript. Oh, and
+          this whole process is also asynchronous, so it increases the number of
+          workers and thus limits the overall performance of the site.
+        </p>
+        <p>
+          I wouldn’t worry about all the above if it were seamless, however
+          sometimes there is a visible delay between the page loading and the
+          template being applied.
+        </p>
+        <p>
+          With the new lifecycle grated by a page transition library that whole
+          process only needs to happen once. All the html data would be stored,
+          and all the templates would remain attached to the document.
+        </p>
+        <p>
+          There would be less to do between pages and the site would perform
+          better as a result.
+        </p>
+        <h3>A smooth experience</h3>
+        <p>
+          The core of benefit of a transition library boils down to this. Pages
+          load quicker and more gracefully. According to Shum [5] the ese of
+          navigation and hypertext traversal can fundamentally change the
+          association and connotation a digital space has with it visitors. If
+          my site seems slick and energetic it will feel closer, easier and
+          ‘better’ than one that is slow and clanky.
+        </p>
+        <p>
+          This will help me a better user experience and keep visitors engaged
+          with my portfolio content for longer. They will be impressed by my
+          work and my site, and that’s exactly what I want.
+        </p>
+      </section>
+      <section>
+        <h2>But which library will you use?</h2>
+        <p>
+          Very good question. There are plenty to choose from [4]. But I’ve
+          narrowed it down to a shortlist of three options.
+        </p>
+        <h3>Barba js</h3>
+        <blockquote>
+          Barba.js is a small (7kb minified and compressed) and easy-to-use
+          library that helps you create fluid and smooth transitions between
+          your website’s pages. It makes your website run like a SPA (Single
+          Page Application) and help reduce the delay between your pages,
+          minimize browser HTTP requests and enhance your user’s web experience.
+          <br /><a
+            href="https://barba.js.org/"
+            target="_blank"
+            class="inline-link"
+            ><cite href="https://barba.js.org/">barba.js.org</cite></a
+          >
+        </blockquote>
+        <p>
+          <a href="https://barba.js.org/" target="_blank" class="inline-link"
+            >Barba</a
+          >
+          has all the bells and whistles when it comes to transitions: form page
+          preloading to custom namespaces for each page that helps manage when
+          code is executed. A quick visit to the
+          <a href="https://barba.js.org/" target="_blank" class="inline-link"
+            >Barba website</a
+          >
+          will explain exactly why I am so excited: the transitions really are
+          impressive.
+        </p>
+        <p>
+          Besides all that, the libraries name is a play on words and that
+          deserves respect.
+        </p>
+        <p>
+          All that’s needed to get barab working is a
+          <code class="inline">data-barba</code> container for the content that
+          you’d like to change from page to page. Barba will see to the rest.
+          [1]
+        </p>
+        <p>
+          Of course, nobody is perfect: Barba is no exception. It cannot work
+          alone. Barba has nothing to do with then animation. It merely proves
+          the triggers events which must be used to call animation functions
+          provided by other libraries. [1]
+        </p>
+        <p>
+          This isn’t really a weakness, the deign choice makes sense. Barba is
+          about transitions, not animations. However, regardless of the logic,
+          it meanns I’ll need to find an additional dependency for animation and
+          I'm not sure how I feel about that.
+        </p>
+        <h3>Highway</h3>
+        <blockquote>
+          Highway is a lightweight (2.5ko gzipped), easy-to-use, flexible and
+          modern library to create AJAX navigations with animations on websites.
+          Don't bother about all the process behind-the-scene and focus on
+          creative animations
+          <br /><a
+            href="https://highway.js.org/"
+            target="_blank"
+            class="inline-link"
+            ><cite>Highway.js.org</cite></a
+          >
+        </blockquote>
+        <p>
+          @Dogstudio’s <br /><a
+            href="https://highway.js.org/"
+            target="_blank"
+            class="inline-link"
+            >Highway</a
+          >
+          sits on the opposite end of the spectrum. It’s simple and
+          minimalistic. It gives the users tool to make transitions rather than
+          a rigid API. I like this approach because it leads to more
+          adaptability, customisation, and control.
+        </p>
+        <p>
+          Despite its claims of being simple Highways seems to have a far
+          fiddlier setup than it’s contemporises. More control means more for me
+          to break and more that can go wrong. I’m young, inexperienced, and
+          prone to typos: something funny is bound to happen.
+        </p>
+        <p>
+          Highway doesn’t offer anything vastly different to Barba, except, its
+          translations are defined with CSS rather than by a JavaScript
+          animation library [2]. I prefer this approach because it keeps visual
+          effects in CSS where they belong. It also removes the need for
+          additional downloads, libraries API’s and dependencies.
+        </p>
+        <h3>Swup</h3>
+        <blockquote>
+          Think of swup as being pjax on steroids. The concepts are similar to
+          those used in barba.js or other transition libraries, but swup gives
+          more attention to ease of use and flexibility. Apart from loading the
+          contents of the new page and replacing required parts in DOM, swup is
+          built around CSS transition. The main thing that needs to be done is
+          defining hidden state in CSS. Swup detects the end of transition of
+          animated elements and proceeds to replacing the content of containers
+          and animating your page back. For the animations based on CSS to be
+          possible, swup uses several classes that are assigned to the html tag
+          through the process of page transition.
+
+          <br /><a
+            href="https://highway.js.org/"
+            target="_blank"
+            class="inline-link"
+            ><cite>Swup.js.org</cite></a
+          >
+        </blockquote>
+        <p>
+          <a href="https://highway.js.org/" target="_blank" class="inline-link"
+            >Swup</a
+          >
+          is another promising option. With only a single line of setup require
+          swup seems to be quick and easy to set up. Like Highway, swup makes
+          use of CSS translations &dash; but smarter. Once transitions have
+          defined using the <code class="inline">transtion-*</code> keywork swup
+          calculates the total animation time and calls events accordingly.
+        </p>
+        <p>
+          On its own swup lacks some of the features which come standard to
+          Barba. However, functionalities like preloading and page scrolling can
+          be added via plugins. There is even a plugin that allows Swup to call
+          JS animations instead of CSS (just like barba). This more modular
+          approach ensures that I don’t wase space on content I don’t need.
+          (Although given how lightweight these libraries are I hardly think
+          it’s a problem.
+        </p>
+        <h3>That's all?</h3>
+        <p>
+          Yes. There are plenty others [4] but they are all variations on the
+          same theme. Quite a few of them are built to integrate with another
+          library or framework like jQuiery or React. I’m happy with just
+          vanilla JS and from that pack these three jumped out.
+        </p>
+      </section>
+      <section>
+        <h2>The verdict</h2>
+        <p>I’m going to use&hellip;</p>
+        <p>Swup!</p>
+        <p>
+          This big reveal was kinad telegraphed. I mentioned swup last and
+          generally had a lot of praise for it. Make no mistake, it was far
+          harder to come to this conclusion behind the scenes.
+        </p>
+        <p>
+          There’s not much between the three libraries and it’s all down for
+          personal preference. I went for Swup because it uses CSS transitions
+          rather than JS animations &dash; this is lower commitment and simple
+          to change. I enjoy the balance of simplicity and versatility; it looks
+          easier to set up than highway but more customisable than Barbara.
+        </p>
+        <p>
+          Then there is the straw which broke the camel’s back. Unlike the other
+          two libraries swup is still getting actively updated and debugged by
+          its creators. (In contrast the last barba commit was 6 years ago). fs
+          this continues swup should remain up to date with modern standards
+          while other libraries could become obsolete irrelevant or even
+          unsupported.
+        </p>
+      </section>
+      <section>
+        <h2>An what now?</h2>
+        <p>I impliment it.</p>
+        <p>
+          I’m looking forward to the technical challenge of it all. My current
+          system relies heavily on the paradigm of scripts dying with the page
+          they are on. The potential for better content loading, template
+          creation and updating of elements like the nave bar is ripe for the
+          taking.
+        </p>
+        <p>
+          The creative CSS aspect of it will also be fun. CSS I magic and can do
+          a whole lot of really cool things with the right amount of fiddling.
+          Swup will allow me to take my messy CSS to a new hight. I’ll get to
+          mess about with interesting effects and not need to concern with the
+          JS that triggers them.
+        </p>
+        <p>
+          Now that all that’s out of the way it’s time for me to install swup
+          and get cracking.
+        </p>
+      </section>
+      <section>
+        <p>
+          <a class="inline-link" load-href="/devlog.html#dev_3-10">Next time</a>
+          I'll tell you how it all went
+        </p>
+      </section>
+      <section id="dev_3-09_ref">
+        <h2>Referances</h2>
+        <ol class="ref-list">
+          <li>
+            Barba.js.org,
+            <cite
+              >Barba. Create badass fluid and smooth transitions between your
+              website’s pages.</cite
+            >
+            [Online] Available:<a
+              href="https://barba.js.org/"
+              target="_blank"
+              class="inline-link"
+              >https://barba.js.org/</a
+            >
+            [Accessed <time datetime="2022-06-23">23/06/2022</time>]
+          </li>
+          <li>
+            highway.js.org,
+            <cite>Highway</cite> [Online] Available:<a
+              href="https://highway.js.org/"
+              target="_blank"
+              class="inline-link"
+              >https://highway.js.org/</a
+            >
+            [Accessed <time datetime="2022-06-20">23/06/2022</time>]
+          </li>
+          <li>
+            swup.js.org,
+            <cite
+              >Swup. Complete, flexible, extensible and easy to use page
+              transition library for your web.</cite
+            >
+            [Online] Available:<a
+              href="https://swup.js.org/"
+              target="_blank"
+              class="inline-link"
+              >https://swup.js.org/</a
+            >
+            [Accessed <time datetime="2022-06-20">23/06/2022</time>]
+          </li>
+          <li>
+            Henri,
+            <cite>10 Javascript & CSS Page Transition Libraries</cite>,
+            Bashhooka. <time datetime="2022-10-12">12/10/2022</time> [Online]
+            Available:<a
+              href="https://bashooka.com/coding/10-javascript-css-page-transition-libraries/"
+              target="_blank"
+              class="inline-link"
+              >https://bashooka.com/coding/10-javascript-css-page-transition-libraries/</a
+            >
+            [Accessed <time datetime="2022-06-23">23/06/2022</time>]
+          </li>
+          <li>
+            Shum. S,
+            <cite
+              >Real and Virtual Spaces: Mapping from Spatial Cognition to
+              Hypertext,</cite
+            >
+            <i>Hypermedia,</i>, vol. 2 No. 2, pp. 135-158. Jan 1990. DOI:
+            <a
+              href="https://www.tandfonline.com/doi/abs/10.1080/09558543.1990.12031179"
+              class="inline-link"
+              target="_blank"
+              >10.1080/09558543.1990.12031179</a
+            >
+          </li>
+        </ol>
+      </section>
+    </article>
+  </body>
+</html>

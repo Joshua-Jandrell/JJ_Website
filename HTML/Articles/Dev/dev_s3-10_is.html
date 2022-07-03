@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">dev_3-10</span>
+    <h1 slot="title" class="p-name unstyled">So I implemented swup&hellip;</h1>
+    <time slot="date" datetime="2022-06-30" class="dt-published"
+      >30 June 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      Took me long enough. But after a couple weeks of painful deliberation,
+      coupled with a hefty dose of ‘other projects’ (procrastination) I’ve done
+      it. I’ve integrated the SWUP library with my site. I’d like to reflect on
+      this experience.
+    </article>
+    <article slot="content" class="e-contenet">
+      <section>
+        <h2>What I’ve gained</h2>
+        <h3>Slick transitions</h3>
+        <p>
+          The User experience has been improved. Page transitions are smother as
+          advertised. It’s no secret that with a heavy template/content overhead
+          my old site produced some rather jarring forced reloads.
+        </p>
+        <p>
+          Of course, hurling a bunch of transitions at the problem is no quick
+          fix. If they are too plain or too busy the transition can be just as
+          disruptive as the most disgusting reload. I still need to play around
+          to make sure the transitions are subtle yet exacting. This is a rabbit
+          hole, but a fun one and I’ll get there soon enough. This will give my
+          site a bit more fluidity and allow me to improve the user experience
+          in interesting new ways.
+        </p>
+        <p>
+          I'm considering the use of that hello world text gradient as some sort
+          of a motief...
+        </p>
+        <h3>Improved perforce</h3>
+        <p>
+          Swup loads scripts once. This forced me to think about where, when,
+          and how I fetched HTML data. With my old system I would need to load
+          all my articles every single time I navigated to a new page. This
+          process is slow and expensive &dash; and would get even worse as I
+          write more.
+        </p>
+        <p>
+          Scripts (and HTML outside of the designated container) are not
+          discarded between pages, I only need to fetch resources once. For
+          example: I can load and create all my shadow templates while the
+          screen is neatly hidden behind the ‘hello world’ introduction. When I
+          navigate to a new page that used the template my custom elements are
+          already defined, and the shadow roots are appended as the DOM loads.
+          Less repetitive operations and no unstyled content rearing its ugly
+          head before the template element is defined.
+        </p>
+        <p>
+          Dev-log, index and game articles are saved after the first time they
+          are fetched. No more load waits to reload old content. Note: this
+          works for now but as the site grows, I want to look into something
+          like the swup
+          <a
+            href="https://swup.js.org/plugins/preload-plugin"
+            target="_blank"
+            class="inline-link"
+            >preload Pugin</a
+          >
+          or an alternative library that can help me control when each article
+          is loaded and assist in managing cache storage.
+        </p>
+        <p>
+          The nav-bar? I load that once an keep a reference to its important
+          elements (which I needed to do anyway). No need for DOM traversal or
+          insertion of additional HTML, just toggle a class or too every now and
+          then.
+        </p>
+        <h3>Experience</h3>
+        <p class="retoric">Yeah yea, great user experience. We get it.</p>
+        <p>No. My experience.</p>
+        <p>
+          This is my first time working with an external dependency. It wasn’t
+          nearly as easy as it should have been but that’s how learning goes.
+          I’ve done it now. There’s not big unknow regarding integration,
+          packages, and API’s. I’m far more open to including libraires now that
+          I’ve broken ground and got a taste.
+        </p>
+        <p>
+          Besides, learning from this experience I’ll do a better job next time.
+        </p>
+      </section>
+      <section>
+        <h2>What Have I learnt?</h2>
+        <h3>Nothing worth doing is easy</h3>
+        <p>
+          In all honesty one of the reason, I chose swup was its “simplicity” (I
+          was also feeling a bit lazy). The docs are short and sweet. The API is
+          clear and concise. It’s set up with one line of code and… took 3 days
+          to implement&hellip;
+        </p>
+        <p>Yup, 3 whole days.</p>
+        <p class="retoric">WHY?</p>
+        <p>
+          I had not clue what I was doing. I had assumptions about how swup
+          worked; many of which were incorrect. The simplicity of SWUP came at
+          the cost of control &dash; for all my talk about not wanting to use a
+          framework because I would need to re-work things, I found myself doing
+          an awful lot of reworking.
+        </p>
+        <p>
+          That’s not a bad thing. I SWUP forced my site to be better
+          constructed, less convoluted and more SEO friendly. The library fears
+          the dark (ignores the shadow DOM) and keeps scripts between pages.
+          Lots of my scripts were doing weird things in weird ways, making junk
+          and obfuscating content. A link that swup can’t be seen by a
+          web-crawler either.
+        </p>
+        <p>
+          Perhaps if my site had been structured differently this would have
+          been painless? Perhaps another transition library would have put up
+          with my nonsense? We shall never know.
+        </p>
+        <p>
+          I’ve come to realise that nothing is ever as simple as it seems and
+          that’s okay. You don’t grow without struggling and overcoming that
+          struggle.
+        </p>
+        <h3>Test, test, test</h3>
+        <p>And thank goodness I did!</p>
+        <p>
+          Swup did some stuff I didn’t expect. Granted most of it was clearly
+          explained in the documentation. I read it all but I didn’t really
+          understand the implications until my site broke. I feel a bit silly –
+          but thank goodness I before it all became too broken to trace.
+        </p>
+        <p>
+          After the traumatic experience of discovering that
+          <a
+            href="https://pages.github.com/"
+            target="_blank"
+            class="inline-link"
+            >GitHub pages</a
+          >
+          is allergic to Root references at the eleventh hour, I was careful to
+          test my deployed (site rather than one hosted by my machine).
+        </p>
+        <p>
+          An damn &dash; things were crazy. Swup keeps the header between pages
+          which makes relatively referenced resources go mad when the page
+          directory is changed. npm and Github pages weren’t getting along (and
+          it didn’t help that I was using modules incorrectly). My shiny new
+          swup based navigation system made liberal use of
+          <code class="inline">windom.location.pathname</code> to identify which
+          page it was on an act accordingly. Great right?
+        </p>
+        <p>Wrong!</p>
+        <p>
+          Github pages changes the pathname from
+          <code class="inline">index.html</code> to
+          <code class="inline">" "</code> (this is an empty string). Not
+          challenging to fix but not trivial to identify if you don’t know what
+          you looking for.
+        </p>
+        <p>
+          There were many more small issues like these (some didn’t even have
+          anything to do with using swup) that I simply did not foresee and
+          would not have picked up without testing.
+        </p>
+        <p>
+          Debugging can be frustrating and tedious but I’m so glad I did it
+          yesterday so that is don’t panic tomorrow.
+        </p>
+        <h3>Don’t be afraid to try and fail</h3>
+        <p>
+          I spent more time thinking about implementing swup than I did
+          implementing it. I was anxious about committing to an external
+          dependency. I was worried that I would chose the wrong one. I’m still
+          worried I chose the wrong one. Would
+          <a href="https://barba.js.org/" target="_blank" class="inline-link"
+            >Barba’s</a
+          >
+          namespaces have helped me with my deployment woes? Would the adaptable
+          control of
+          <a href="https://highway.js.org/" target="_blank" class="inline-link"
+            >highway</a
+          >
+          required less changes to my system and be quicker to integrate ? Or is
+          the grass always greener on the other side?
+        </p>
+        <p>
+          There are no right or wrong answers: only different trade-offs. I’m
+          99.99% sure that if I moved to another transition library, I’d find a
+          new array of challenges and teething issues. I bet there is a heap of
+          (clearly documented) spanners just witing to be thrown into my works.
+          Spanners that I will only find if I get my hands dirty and try. I
+          would have made a far more informed design if my research process hand
+          been driven by testing and doing rather than reading and thinking.
+        </p>
+        <p>
+          There is a reason you test-drive a car before buying it. Specs,
+          recommendations, and reviews can be informative. But how you feel
+          behind the wheel is what really matters.
+        </p>
+        <p>
+          In future, if I’m met with a choice with not clear answer I’m going to
+          go for a ‘test-drive’ instead of deliberating in circles.
+        </p>
+      </section>
+      <section>
+        <h2>What I lost</h2>
+        <h3>Control?</h3>
+        <p>
+          When it comes to systems, I like to micromanage letting someone else’s
+          code into my system was a bit scary at times. I like to know what’s
+          ‘under the hood’ but this doesn’t mean I could make it all. I may miss
+          full control of my system but would my hacky, homemade beginner’s
+          equivalent of swup have been better.?
+        </p>
+        <p>Heck no!</p>
+        <p>Would it even have been easier for me to use? Probably not.</p>
+        <h3>Time?</h3>
+        <p>
+          Sure, I would’ve liked to put more effort into other parts of the site
+          instead of fighting swup. But I leant of a lot from it all. Time spent
+          deliberating on the other hand&hellip;
+        </p>
+        <h3>Nothing much?</h3>
+        <p>
+          Almost. The scroll plugin is not the greatest when it comes to the
+          opening and closing section of my dev-log. It gets a bit lost from
+          time to time. I’ll probably need to fix this.
+        </p>
+        <p>
+          There also some problems when navigating from the bottom of one page
+          to the top of the other. The scroll effect tends to mess with the
+          animation. I'm sure I'll find a way to fix this.
+        </p>
+        <p>
+          I’d be lying if there weren’t times when I regretted using swup and
+          swore that all JS libraries were comprised of pure evil. But I just
+          didn’t know how to use them properly yet.
+        </p>
+        <p>
+          At the end of the day, I’m pleased I implemented swup. It’s not
+          perfect. I’d like to have done thing differently. But hindsight is
+          2020 and that year is worth forgetting.
+        </p>
+        <p>
+          If anything, I regret not going all in and implementing a meatier
+          dependency like Angular or React. It’s a bit late now, but as I get
+          used to this whole ‘library’ thing it’s defiantly something for the
+          future.
+        </p>
+        <p>
+          Let's see which new depandancy I impliment
+          <a load-href="/devlog.html#dev_4-00" class="inline-link">next</a
+          >&hellip;
+        </p>
+      </section>
+    </article>
+  </body>
+</html>

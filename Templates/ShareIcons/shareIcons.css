@@ -1,0 +1,88 @@
+.icon-block {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr, 6fr;
+  position: relative;
+  margin: 0;
+  padding: 5px;
+}
+.icon-block ul {
+  display: grid;
+  height: 30px;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 10px;
+
+  list-style: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: fit-content;
+  width: max-content;
+}
+
+.icon-block ul li {
+  display: block;
+  height: 35px;
+  width: 45px;
+}
+
+.icon-block ul li img {
+  height: 80%;
+  padding: 10%;
+  margin: auto;
+  transition: all 0.25s;
+}
+.icon-block ul li img:hover {
+  height: 100%;
+  padding: 0%;
+  cursor: pointer;
+}
+
+.icon-label {
+  text-align: right;
+  vertical-align: middle;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-right: 20px;
+
+  font-size: 20px;
+  color: rgb(41, 88, 98);
+  font-family: monospace;
+}
+
+/* Footer styling */
+.foot {
+  display: block;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 30px;
+  margin-top: 100spx;
+  border-top: 2pt solid rgb(47, 177, 203);
+  background-color: aliceblue;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  color: rgb(91, 91, 91);
+}
+.foot .contact-grid {
+  width: 100%;
+  float: none;
+}
+
+.foot .credits.wide {
+  margin-top: 50px;
+  width: 100%;
+  text-align: left;
+}
+
+@media (max-width: 400px) {
+  .icon-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

@@ -93,6 +93,38 @@
   display: inline;
 }
 
+/* Main content headdig styling */
+h1.main-h {
+  font-family: monospace;
+  font-size: 28pt;
+  padding-left: 35pt;
+  color: black;
+  position: relative;
+}
+h1.main-h::before {
+  content: "// ";
+  color: orange;
+  margin-right: 5pt;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: fit-content;
+  padding: 0;
+  margin: 0;
+}
+/* Author and date styling */
+
+.sub-t {
+  display: inline-block;
+  color: rgb(47, 177, 203);
+  font-family: monospace;
+  padding-left: 20pt;
+  font-size: 1.15em;
+  margin: 0;
+}
+
 /*.content-item details .entry-content {
   max-height: 0vh;
   height: fit-content;

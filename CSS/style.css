@@ -2,6 +2,8 @@ body {
   margin: 0;
   padding: 50pt 0 0 0;
   font-family: Arial, Helvetica, sans-serif;
+
+  overflow-x: hidden;
 }
 
 img {
@@ -15,6 +17,10 @@ img.log-img {
 img.log-img.small {
   width: 30%;
   margin: 0 auto;
+}
+
+code {
+  max-width: 100%;
 }
 
 h1.unstyled,
@@ -127,7 +133,8 @@ ul.content-list {
   list-style: none;
   padding-left: 0;
 
-  max-height: 75vh;
+  margin-bottom: 0;
+  height: 60vh;
   overflow-y: scroll;
 }
 /* Scroll styling */
@@ -208,6 +215,12 @@ ul.content-list {
   right: -0.5vw;
 }
 
+@media (max-width: 400pt) {
+  #index-list li {
+    border-right: none;
+  }
+}
+
 /* === Scroll bar styling === */ /*
 ::-webkit-scrollbar {
   width: 10px;
@@ -251,9 +264,15 @@ ul.content-list {
   top: 0;
   z-index: 11;
   opacity: 1;
+
+  transition: 2s;
 }
 .intro-grad.push-back {
   z-index: 1;
+}
+
+html.is-animating .intro-grad {
+  opacity: 0;
 }
 
 .spacer {
@@ -472,9 +491,7 @@ toggle-pop-out[open] {
   max-width: 100%;
   display: inline;
 }
-.jeff:focus {
-  color: red;
-}
+
 pop-out-text {
   position: relative;
   text-decoration: underline solid rgb(47, 177, 203);

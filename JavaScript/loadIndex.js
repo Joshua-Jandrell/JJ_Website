@@ -144,6 +144,8 @@ class NavAutoTager {
     let tag = hrefParts.pop();
     // Note 'this' is the link here so autotager must be refferaced
     autoTager.Open(tag);
+
+    CloseIndex();
   }
   GotoNext(id) {
     this.Goto(this.GetNextElem(id));
@@ -413,4 +415,15 @@ function SetNextButton(button, element) {
   button.addEventListener("click", (e) => {
     autoTager.GotoNext(element.id);
   });
+}
+
+// =========== sidenav cotol -- this section is the only one that reies on specfic template formatting
+function ToggleIndex() {
+  let shaddow = currentPageDetails.GetMainListElem().parentElement.shadowRoot;
+  shaddow.querySelector("#wrapper").classList.toggle(openClass);
+}
+
+function CloseIndex() {
+  let shaddow = currentPageDetails.GetMainListElem().parentElement.shadowRoot;
+  shaddow.querySelector("#wrapper").classList.remove(openClass);
 }

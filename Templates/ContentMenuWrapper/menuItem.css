@@ -93,6 +93,10 @@
   display: inline;
 }
 
+.content-item details {
+  max-width: 100%;
+}
+
 /* Main content headdig styling */
 h1.main-h {
   font-family: monospace;
@@ -135,3 +139,31 @@ h1.main-h::before {
   max-height: 1000vh;
   transition: all 3s;
 }*/
+
+@media (max-width: 650px) {
+  h1.main-h {
+    font-size: 14pt;
+  }
+
+  .click-item .link-h {
+    font-size: 13pt;
+  }
+  .click-item .link-h::after,
+  .click-item .link-h::before {
+    display: none;
+  }
+  .content-item .date-marker .marker {
+    width: 15pt;
+    height: 15pt;
+  }
+
+  .content-item .date-marker {
+    position: absolute;
+    left: -27.5pt;
+  }
+
+  .content-item {
+    margin-left: 10pt;
+    padding-left: 0;
+  }
+}

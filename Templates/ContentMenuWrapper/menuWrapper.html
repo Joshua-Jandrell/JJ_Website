@@ -19,13 +19,10 @@
       <article id="wrapper">
         <header class="content-head">
           <nav class="left-nav" aria-hidden="ture">
-            <input
-              type="checkbox"
-              name="index-toggle"
-              id="index-toggle"
-              class="noDisplay"
-            />
-            <label for="index-toggle" class="toggle-lable">
+            <button id="index-button" onclick="ToggleIndex()">
+              <div class="icon">&#9658;</div>
+            </button>
+            <label for="index-button" class="toggle-lable">
               <slot name="index-label" class="index-label"></slot
             ></label>
             <slot name="index-list"></slot>
@@ -34,7 +31,6 @@
         <main class="content">
           <div class="time-line" aria-hidden="true"></div>
           <slot name="content-lable">Index</slot>
-          <span class="p-author noDisplay">Joshau Jandrell</span>
           <!--Give authot for microformat but no need to display this on the site-->
           <!-- Devlog articles start ---------------------------------->
           <slot name="content-list" class="content-list">

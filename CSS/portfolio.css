@@ -133,27 +133,25 @@ ul.downloads li a {
 
   padding: 0;
   margin: 0;
+
+  white-space: nowrap;
+  position: relative;
 }
 
-ul.downloads li a::after {
-  content: "]";
-  font-size: 150%;
-  margin-left: 10px;
-  transition: all 0.5s;
-  text-decoration: none;
-}
 ul.downloads li a::before {
   content: "[";
-  font-size: 150%;
   margin-right: 10px;
   transition: all 0.5s;
   text-decoration: none;
+
+  position: absolute;
 }
 ul.downloads li a::after {
   content: "]";
-  font-size: 150%;
   margin-left: 10px;
   transition: all 0.5s;
+
+  position: absolute;
 }
 ul.downloads li a:hover {
   color: orange;
@@ -163,15 +161,11 @@ ul.downloads li a:hover {
 }
 ul.downloads li a:hover:before {
   margin-right: 20px;
-  font-weight: 200%;
-  font-size: 170%;
   color: orange;
   text-shadow: 0 0 1px;
 }
 ul.downloads li a:hover::after {
   margin-left: 20px;
-  font-weight: 200%;
-  font-size: 170%;
   color: orange;
   text-shadow: 0 0 1px;
 }

@@ -113,6 +113,37 @@
   cursor: pointer;
 }
 
+#nav-back {
+  margin-top: 1.275em;
+  margin-left: 10pt;
+  float: left;
+
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+
+  color: rgb(47, 177, 203);
+  font-weight: 550;
+
+  position: relative;
+  transition: all 0.5s;
+}
+#nav-back:hover {
+  color: orange;
+  cursor: pointer;
+}
+#nav-back::before {
+  color: rgba(0, 0, 0, 0);
+  content: "◀";
+  transition: all 0.5s;
+
+  position: absolute;
+  right: 80%;
+}
+#nav-back:hover::before {
+  color: black;
+  right: 100%;
+}
+
 @media (max-width: 700px) {
   #nav-menu {
     display: inline-block;
@@ -124,7 +155,6 @@
 
     position: absolute;
     z-index: 500;
-
     right: 0;
     top: 100%;
     margin-top: 0;

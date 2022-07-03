@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span slot="tag" class="nav-tag">dev_4-02</span>
+    <h1 slot="title" class="p-name unstyled">
+      Making a highligted code widget
+    </h1>
+    <time slot="date" datetime="2022-07-03" class="dt-published"
+      >03 July 2022</time
+    >
+    <article slot="summary" class="p-summary">
+      <p>
+        If you didn’t already know, I’ve been making this site as an assignment
+        for interactive media.
+        <pop-out-text>
+          Tomorrow
+          <pop-out
+            >(or perhaps this afternoon depending on when I finish
+            writing)</pop-out
+          >
+        </pop-out-text>
+        is my final submission. Before I say my goodbyes here’s how I feel about
+        this site and everything else.
+      </p>
+    </article>
+    <article slot="content" class="e-contenet">
+      <p>Honestly, I’m quite disappointed.</p>
+      <branch-to target="why_dis">Why?</branch-to
+      ><branch-to target="4-02_bad">Yip. Me too.</branch-to>
+      <!-- #region WHY_dis-->
+      <toggle-pop-out id="why_dis"
+        ><section>
+          <p>
+            Because I could have done so much more. There were so many cool
+            things I had planned. Fun new ideas I wanted to implement.
+          </p>
+          <p>
+            I want to start a code section, separate from the dev-log. It would
+            be less about the code on this site ad more about stuff it programs
+            in general. Articles would also be more like tutorials and less like
+            reflections. This would be a way to show my skills as a programmer
+            and enhance my portfolio. That’s partly why set up he code
+            highlighter which is now criminally underused.
+          </p>
+          <p>
+            Sadly, I haven’t even finished all the write-ups for the dev-log
+            (and I really want to talk about the hypertext widgets I have
+            finally implemented). I also want to add a couple more portfolio
+            games.
+          </p>
+          <p>There is so much to do and so little time.</p>
+          <branch-to target="4-02_bummer">That's a bummer.</branch-to><br />
+          <branch-to target="4-02_before">I've hear this all before.</branch-to
+          ><br />
+          <brach-to target="4-02_else">What esle did you want to do?</brach-to>
+          <toggle-pop-out id="4-02_else">
+            Lots. I wanted to got back and edit some of my long-winded and
+            rumbly blogs with some hypertext formatting (like this article
+            here). They are quick long and rumbly, defiantly in need of a
+            rework. The hypertext setting allows me to go down rabbit holes and
+            take the reader on tangents more naturally. It will be like a
+            conversation. We are quite side-tracked here &dash; but you chose to
+            get side-tracked with me.
+            <branch-to target="4-02_reflect"
+              >oops, let’s get back to talking about your site</branch-to
+            ><br />
+            <branch-to target="4-02_else_1"
+              >Yeah, pretty cool. What else would you like to add?</branch-to
+            >
+            <toggle-pop-out id="4-02_else_1">
+              Well obviously, I want to do this hypertext thing for my about
+              section too! I wanted it to be conversational: now I can make it a
+              literal conversation. Unfortunately doing it properly would take
+              some planning and I’m kind of sleep deprived&hellip;
+
+              <branch-to target="4-02_reflect"
+                >Well we'd better get on with it&hellip;</branch-to
+              ><br />
+              <branch-to target="4-02_else_2"
+                >Anything other than hypertext?</branch-to
+              >
+            </toggle-pop-out>
+            <toggle-pop-out id="4-02_else_2">
+              I was thinking of making the “hello world’ text display different
+              messages if the visitor has been to the site before&hellip;
+
+              <branch-to target="4-02_reflect"
+                >Focus on the task at hand!</branch-to
+              ><br />
+              <branch-to target="4-02_else_3">And&hellip;?</branch-to>
+            </toggle-pop-out>
+            <toggle-pop-out id="4-02_else_3">
+              I want to add a dark mode&hellip;
+
+              <branch-to target="4-02_reflect"
+                >Just refect on the site already!</branch-to
+              ><br />
+              <branch-to target="4-02_else_4">Tell me more!</branch-to>
+            </toggle-pop-out>
+            <toggle-pop-out id="4-02_else_3">
+              I want &hellip; No. I have to get on with things!
+
+              <branch-to target="4-02_reflect"
+                >Fine, let's have a look at the site.</branch-to
+              >
+            </toggle-pop-out>
+          </toggle-pop-out>
+        </section></toggle-pop-out
+      >
+      <toggle-pop-out id="4-02_bummer">
+        <p>
+          I know right! But that’s always the case with me. I bite off more than
+          I can chew. I try to do much. I end up spending more time imagining
+          everything than doing it.
+        </p>
+        <p>
+          I’m frustrated because I feel like I let myself down. I feel as if
+          silly things like dynamic CSS and adding basic mark-up and meta data
+          should be quick and easy. Yet precious hours slip through my fingers.
+        </p>
+        <p>
+          I look this whole site and I don’t see how it took me three weeks. I
+          could have done this in three days. I should have done this in three
+          days! How can I let myself down like this?
+        </p>
+        <branch-to target="4-02_before">You need better planning.</branch-to
+        ><br />
+        <brach-to target="4-02_bad">Yeah, this site is kinda ungly</brach-to
+        ><br />
+        <brach-to target="">Hey, this site isn't so bad</brach-to>
+      </toggle-pop-out>
+      <!-- #endregion -->
+      <!-- #region Me too -->
+      <!-- #endregion -->
+      <!-- #region Before -->
+      <toggle-pop-out id="4-02_before">
+        <p>
+          I know. I’ve made this mistake a thousand times! That’s the worst
+          part!
+        </p>
+        <p>
+          I imagine what I want to do. I strategize but never execute. I hardly
+          ever set out clear goals and a timeframe. (Or when I do, they are so
+          overambitious that I drive myself crazy trying to meet them and get
+          demotivated.)
+        </p>
+        <p>
+          This time I’m not going to fall for that trap. I have 19 hours and I’m
+          going to make sure that I come out the other side with a well-polished
+          site. That’s the impression I need to make.
+        </p>
+        <branch-to target="4-02_nsb"
+          >Don't worry, you are almost there.</branch-to
+        ><br />
+        <branch-t target="4-02_bad"
+          >Good luck idiot. This site is a mess.</branch-t
+        >
+      </toggle-pop-out>
+
+      <!-- #endregion -->
+
+      <!-- #region Not so bad-->
+      <!-- #endregion -->
+      <!-- #region  Bad-->
+      <section>
+        <toggle-pop-out id="4-02_nsb"
+          ><p>
+            Yeah, I guess it’s alright. But it could be better. Just look at the
+            typos (I'm sure there are plently I haven't spotted).
+          </p>
+          <brach-to target="4-02_reflect"
+            >Well let's look at the site then.</brach-to
+          ></toggle-pop-out
+        >
+        <toggle-pop-out id="4-02_bad">
+          <p>Hey, hang on a minute!</p>
+          <p>
+            I know I constantly insult myself and my site but that doesn’t mean
+            that you can too.
+          </p>
+          <branch-to target="4-02_bad_huh">Huh?</branch-to>
+          <branch-to target="4-02_bad_sorry">Oh, sorry</branch-to>
+        </toggle-pop-out>
+        <toggle-pop-out id="4-02_bad_huh">
+          <p>
+            Listen Punk! (and possiblt my future boss I’m terebly sorry, Do
+            still give me a rase). I know my wok and I know my work. I’ve worked
+            damn hard on this site. Perhaps I could have done better but I still
+            think I did a damn fine job!
+          </p>
+        </toggle-pop-out>
+        <toggle-pop-out id="4-02_bad_huh">
+          <p>
+            Listen
+            <pop-out-text
+              >Punk! <pop-out></pop-out>(and possiblt my future boss, so sorry,
+              don't doc my pay.)</pop-out-text
+            >
+            I know my work and I know my worth. I’ve worked damn hard on this
+            site. Perhaps I could have done better. Perhaps I could have done
+            more.
+          </p>
+          <p>
+            But I still did a heck of a lot and I think I did a damn fine job.
+          </p>
+          <brach-to target="4-02_bad_sorry">My applogies</brach-to>
+          <brach-to target="4-02_reflect"
+            >Oh really? Let's take a look then.</brach-to
+          >
+          <branch-to target="4-02_arr">oh, we arrogant now?</branch-to>
+        </toggle-pop-out>
+        <toggle-pop-out id="4-02_arr"
+          ><p>No.</p>
+          <p>
+            Trust me I’m well ware of my shortcomings. But I’m not going to just
+            sit here and beat myself up about it &dash; I've done some great
+            things too.
+          </p>
+          <branch-to target="4-02_reflect"
+            >Oh really? Let's take a look then.</branch-to
+          ></toggle-pop-out
+        >
+        <toggle-pop-out id="4-02_bad_sorry">
+          <p>No worries, I know it’s pretty weird and confusing.</p>
+          <p>
+            You see I hold myself to very hight standards. I don’t care about
+            marks or praise. I just want to please myself. Unfortunately he’s a
+            tough crowd. I always see ways to improve and push myself. I’ll
+            never settle for ‘good enough’ because I know it can be better.
+          </p>
+          <p>
+            I could probably have done the bare minimum well. Made a simple
+            static site with not dev-log, no templates, and no hypertext. It
+            would have looked the same. Swup would have been easier to
+            integrate.
+          </p>
+          <p>
+            I could have spent more time making my site looking extra pretty and
+            less time glaring at monstrous bugs of my own creation.
+          </p>
+          <p>
+            In some cases, this is a massive weakness. I’m doing my own thing
+            and failing to do what I should focus on. But in a way it’s also my
+            biggest strength.
+          </p>
+          <p>
+            I have learnt and grown so much through these struggles. Even if it
+            isn’t all reflected in my site, I know a lot of it is. If I took the
+            easy path, I may be able to live better and sleep more. Possible
+            even get a better mark thanks to fewer bugs and coherent editing.
+          </p>
+          <p>But I don’t care.</p>
+          <p>
+            All this stress that I put myself. It helps be better and learn
+            more.
+          </p>
+          <p>Why should I just be good enough?</p>
+          <branch-to target="4-02_reflect"
+            >Now let's look at your site</branch-to
+          >
+        </toggle-pop-out>
+      </section>
+      <!-- #endregion -->
+      <!-- #region -->
+      <section>
+        <toggle-pop-out id="4-02_reflect">
+          <h2>So how did things turn out?</h2>
+          <p>So you made it through hypertext hell? Well done!</p>
+          <p>
+            Please don’t bother trying to find all the branches and possible
+            narratives. These new widgets of mine are very much a work in
+            progress. They don’t do revers traversal and retracing of steps with
+            good grace. I know how to fix it, but now is not the time. (I’m also
+            not sure if they all work so now that you're here it’s best you
+            stay).
+          </p>
+          <p>
+            The labyrinth of links up there probably seems very uncalled for,
+            rather confusing, unrelated to the task at hand and a bit of a waste
+            of time. (Depending on how you got here, sometimes it’s a breeze.)
+          </p>
+          <p>
+            Those links summarise my site and my design experience perfectly.
+          </p>
+          <h3>Tedious and fiddly.</h3>
+          <p>
+            Even with my arsenal of custom HTML elements, setting up text like
+            that is tricky. I’ve never written a branching narrative in my life
+            before, let alone one in my own temperamental medium. It’s not easy
+            to plot out and I ended up needing to cut down on quite a lot of it.
+          </p>
+          <p>
+            Perhaps I should have spent more time writing and less time making
+            widgets like
+            <code class="inline">&lt;toggle-block&gt;</code> which I didn’t even
+            end up using because it's still a bit buggy. Actually,
+            <em>Everything</em> is still a bit buggy!
+          </p>
+          <p>
+            I’m trying to do something new and unusual. Perhaps I am innovating
+            and pushing the envelope. Branching hypertext narratives are
+            interesting.
+          </p>
+          <p>
+            I’m also doing something that nobody asked for and 99% of the
+            population make do without. What’s wrong with just using twine. I
+            did it all myself but is it worth it?
+          </p>
+          <p>
+            On a macro scale my site is in the same predicament. It’s got some
+            rather nifty features. You know: automating templet creation with
+            custom HTML elements, it’s own API for importing HTML form other
+            documents, which supports and automated index creation system. I
+            even have my own update-on-scroll function and a code-preview
+            element.
+          </p>
+          <p>
+            All of these tasks were intreating to tackle and thrilling to solve.
+            But none of them make it a better site.
+          </p>
+          <p>
+            Yes, hypertext is exciting. But there is a reason that linear
+            narratives still exist: they tell the best stories. I could probably
+            have my point above with fewer words, less buttons and in a shorter
+            amount of time. And it would be clear and concise!
+          </p>
+          <p>
+            Don’t get me wrong I’m proud of what I’ve done with this site. I
+            pushed myself to the limits of my skills and understanding and one
+            can only ever learn and grow from something like that.
+          </p>
+          <p>
+            The auto indexing system is less tedious than a static equivalent
+            and I can’t deny the utility of templets as design patterns. I know
+            they're helpful.
+          </p>
+          <p>
+            I just don’t see direct effects on my site. Infract I was so focused
+            on these system that I dropped the ball with the basics.
+          </p>
+          <p>
+            I have a poorly edited bracing narrative when a well written
+            paragraph would do?
+          </p>
+          <h3>But it’s looking quite nice</h3>
+          <p>
+            That it is. It’s a big clucky here and there but the aesthetic
+            works. It’s minimal and professional yet still interesting. The
+            monospace and pseudo elements add visual intrigue while evoking
+            ideas of programming and design. The contrast between orange an blue
+            gives the site a sense of energy and makes thing pop, although I
+            does feel and bit light at time. Sometimes I feel my articles could
+            do with more colour. The orange and blue sections on the game pages
+            really make thing pop and bring the site to life. It’s a bit harder
+            to incorporate colourful blocks into text like this.
+          </p>
+          <h3>And the navigation is getting there</h3>
+          <p>
+            I think my navigation is the best it’s been so far! There is greater
+            unity and consistency between sections and pages which provides a
+            sense of unity and makes it easier for visitors to learn to use my
+            site.
+          </p>
+          <p>
+            It’s easier than ever before to move between articles, especially
+            with the new side navigation in the games (portfolio) section.
+          </p>
+          <p>
+            Swup is a nice touch and privies some fluency however some
+            transitions can still be a bit awkward. I’m not unhappy with my
+            choice of library although I feel I should have taken a leap of
+            faith in something more substantial. Perhaps react could have got my
+            hypertext widgets up and running&hellip;
+          </p>
+          <h3>It could be more&hellip;</h3>
+          <p>I am still disappointed.</p>
+          <p>
+            This site could be so much more. There is an mountian to edit and
+            fix. And an irresistible array of new ideas to try.
+          </p>
+          <p>
+            Five months ago I could not write JS, CSS or even HTML. Now I’m
+            building a system to show off my code (I don't think it's fantastic,
+            but I’m still proud of it).
+          </p>
+          <p>
+            When I started I sore I would be glad to be rid of web pages. But
+            not the time has come I don’t want to let do. I’ve got a taste of
+            this exciting new world and now I’m hooked.
+          </p>
+          <p>
+            With so much more to explore and so many options for expanding my
+            website what I have right now (be it branching narrative or flowing
+            essay) feels incomplete.
+          </p>
+          <p>How can I submit with so many tangents unchased?</p>
+          <p>
+            How could I call it quits with mountains of stones left unturned?
+          </p>
+          <p>Why should I?</p>
+          <p>
+            I said that I was making this website as an assignment. Well, that’s
+            about to change (although I unfortunately I was kinda doing my own
+            thing already to some degree).
+          </p>
+          <p>
+            Now I’m free to do what I want with this site. Why not take it to
+            the next level?
+          </p>
+          <p>
+            Watch this
+            <pop-out-text
+              >Space!
+              <pop-out
+                >(Or a distant iteration of it that has endured countless more
+                reboots.)</pop-out
+              ></pop-out-text
+            >
+          </p>
+          <p>P.S Thank you! &hearts;</p>
+        </toggle-pop-out>
+      </section>
+      <!-- #endregion -->
+    </article>
+  </body>
+</html>

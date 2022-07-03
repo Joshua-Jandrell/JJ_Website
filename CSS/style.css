@@ -107,7 +107,17 @@ label.log-label::before {
   content: "// ";
   color: black;
 }
+/* About section */
+.about-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  column-gap: 20pt;
+}
 
+img.about-img {
+  border: 5pt solid orange;
+  width: 100%;
+}
 /* Stuling for content select sections */
 ul.content-list {
   list-style: none;

@@ -1,8 +1,5 @@
 // Some fun hypertext widgets
 
-// Helpful CSS classes
-const openClass = "open";
-
 // popout containers
 const popOutTextContainer = "pop-out-text";
 
@@ -42,8 +39,7 @@ customElements.define(
 
       this.toggle = (toggleName) => {
         Array.from(this.popOuts).forEach((popOut) => {
-          console.log(popOut.name + "?=" + toggleName);
-          if (popOut.name == toggleName) {
+          if (popOut.id == toggleName) {
             popOut.toggleAttribute("open");
             // Focus screen reader onto element that just popped out
             popOut.focus();
@@ -54,9 +50,9 @@ customElements.define(
 
         Array.from(this.buttons).forEach((button) => {
           if (button.for == toggleName) {
-            button.classList.toggle(openClass);
+            button.classList.toggle("open");
           } else {
-            button.classList.remove(openClass);
+            button.classList.remove("open");
           }
         });
         return false;
@@ -72,12 +68,9 @@ customElements.define(
       this.role = "button";
       this.tabIndex = 0;
 
-      this.for = this.getAttribute("for");
-
-      console.log("Start for" + this.for);
+      this.for = this.getAttribute("target");
       this.onclick = () => {
-        console.log(this.for);
-        this.parentElement.toggle(this.for);
+        this.parentElement.closest("toggle-block").toggle(this.for);
 
         // Return false to prevent this click event from bubbling
         return false;
@@ -104,7 +97,12 @@ customElements.define(
     constructor() {
       super();
       this.tabIndex = 0;
-      this.name = this.getAttribute("name");
+      this.target = this.getAttribute("target");
+      this.targetElem = document.getElementById(this.target);
+
+      this.onclick = () => {
+        this.targetElem.toggleAttribute("open");
+      };
     }
   }
 );

@@ -54,7 +54,7 @@
   text-align: center;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 1000px) {
   .gamepage-wrapper .game-download-wrapper ul {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -143,15 +143,11 @@ ul.downloads li a::before {
   margin-right: 10px;
   transition: all 0.5s;
   text-decoration: none;
-
-  position: absolute;
 }
 ul.downloads li a::after {
   content: "]";
   margin-left: 10px;
   transition: all 0.5s;
-
-  position: absolute;
 }
 ul.downloads li a:hover {
   color: orange;

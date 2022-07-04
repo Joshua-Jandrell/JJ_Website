@@ -27,6 +27,7 @@
   position: relative;
   padding-left: 5vw;
   max-width: 700px;
+  min-height: 75vh;
 }
 
 /* ----> Timelinde */

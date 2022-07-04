@@ -2,18 +2,35 @@
 .transition-main,
 .trstion-fade {
   opacity: 1;
-  transition: 0.5s;
-}
-
-.transition-main,
-.trstion-fade {
-  opacity: 1;
-  transition: 0.5s;
+  transition: 1.5s;
+  transform: translateX();
 }
 
 html.is-animating.is-leaving .transition-main,
 html.is-animating.is-leaving .transition-main {
   opacity: 0;
+  transition: 1s;
+}
+
+.t-wipe {
+  position: fixed;
+  top: 0;
+  z-index: 50;
+  height: 140vh;
+  width: 100vw;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(47, 177, 203) 40%,
+    orange 100%
+  );
+
+  transition: all 0.75s;
+  transform: translatey(-140vh);
+}
+
+html.is-animating .t-wipe {
+  transform: translatey(0);
 }
 
 /* Slide nav */
@@ -85,7 +102,6 @@ html.is-animating .t-mainindex {
 /* Single article content */
 .transition-content {
   transition: 1s;
-  color: green;
 
   transform: translateX(0);
 }
@@ -96,4 +112,13 @@ html.is-animating .transition-content {
 
 html.is-animating.is-leaving .transition-content {
   transform: translateX(2vw);
+}
+
+/* hide footer */
+.t-slide {
+  transform: translateY(0);
+  transition: 1s;
+}
+html.is-animating .t-slide {
+  transform: translateY(1vh);
 }

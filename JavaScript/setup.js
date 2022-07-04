@@ -127,6 +127,9 @@ function SetScrollMarkers() {
   SetIndependantMarkers("slide-out", "open", true, 0.75);
   SetIndependantMarkers("hwt", "push-back", true, 0.1);
   SetIndependantMarkers("hwt", "push-back", false, 0.1);
+
+  // udpatedon scroll
+  SetScrollPointMarkers("scroll-entry", "select", false, 0.1);
 }
 
 function clearScrollMarkers() {

@@ -324,9 +324,6 @@ function MakeIndex(pageDetails, hash) {
       }
     });
   });
-
-  // udpatedon scroll
-  SetScrollPointMarkers("scroll-entry", "select", false, 0.1);
 }
 async function DoInternalNavSetup(mainElem, indexElement, navIndex, hash) {
   SetInternalNav(mainElem, indexElement, navIndex);

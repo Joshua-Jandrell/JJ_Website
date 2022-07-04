@@ -44,7 +44,7 @@
         <a href="./blog.html" slot="index-label" class="h-link t-navh">
           <h1 class="t-navh link-h center">Blog</h1>
         </a>
-        <ul slot="index-list" id="index-list"></ul>
+        <ul slot="index-list" id="index-list" class="t-leftnav"></ul>
         <h1 slot="content-lable"></h1>
         <article
           slot="content-list"
@@ -65,9 +65,9 @@
         </article>
       </template>
     </main>
-    <footer class="foot">
+    <div aria-hidden="true" class="t-wipe"></div>
+    <footer class="foot t-slide">
       <bottom-foot></bottom-foot>
-      <span class="p-author no-display">Joshau Jandrell</span>
     </footer>
   </body>
 </html>

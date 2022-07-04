@@ -167,3 +167,54 @@ h1.main-h::before {
     padding-left: 0;
   }
 }
+
+/* ================================================= */
+/* ---------- Bottom buttons ------------ */
+/* ================================================= */
+
+.close-buttons.local {
+  margin-top: 20pt;
+  display: grid;
+  text-align: left;
+}
+.close-buttons.single {
+  margin-top: 20pt;
+  text-align: left;
+}
+.close-buttons .icon {
+  float: left;
+  margin-right: 3pt;
+  transition: 0.5s;
+}
+
+.close-buttons .icon.right {
+  float: right;
+  margin-left: 3pt;
+  margin-right: 0;
+}
+
+.close-buttons button .icon {
+  color: rgb(47, 177, 203);
+  transition: all 0.5s;
+}
+
+.close-buttons button:hover .icon {
+  color: black;
+}
+
+.close-buttons button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  width: max-content;
+}
+
+.close-buttons button:hover {
+  color: orange;
+  font-weight: 550;
+  cursor: pointer;
+}
+
+.nav-target {
+  position: absolute;
+  top: -20pt;
+}

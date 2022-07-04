@@ -18,9 +18,9 @@ img.log-img.small {
   width: 30%;
   margin: 0 auto;
 }
-
-code {
+pre.scroll {
   max-width: 100%;
+  overflow-x: scroll;
 }
 
 h1.unstyled,
@@ -67,8 +67,7 @@ code.inline {
   border-radius: 2pt;
 }
 
-a.inline-link:hover code,
-code.inline {
+a.inline-link:hover code {
   display: inline-block;
   background-color: antiquewhite;
   outline: 1pt solid orange;
@@ -80,6 +79,11 @@ a.inline-link code {
   font-weight: 550;
 }
 
+blockquote {
+  background-color: antiquewhite;
+  border-left: 5px solid orange;
+  padding: 10px;
+}
 .retoric {
   display: inline-block;
   font-weight: 450px;
@@ -106,6 +110,19 @@ label.log-label::before {
   font-weight: bold;
   content: "// ";
   color: black;
+
+  max-width: 200pt;
+}
+.h-entry h3 {
+  font-family: monospace;
+  color: black;
+  font-size: 12pt;
+  font-weight: 425;
+}
+.h-entry h3::before {
+  font-weight: bold;
+  content: "// ";
+  color: rgb(47, 177, 203);
 
   max-width: 200pt;
 }
@@ -298,6 +315,7 @@ ul.content-list {
 }
 #index-list li.select {
   background-color: antiquewhite;
+  border-right: 5pt solid orange;
 }
 #index-list li:first {
   border-top: 1pt solid black;
@@ -421,6 +439,7 @@ html.is-animating .intro-grad {
 }
 #welcome-txt {
   margin-bottom: 60pt;
+  width: 100%;
 }
 .intro-txt {
   text-align: center;
@@ -627,10 +646,20 @@ toggle-pop-out[open] {
   display: inline;
 }
 
-pop-out-text {
+pop-out-text,
+toggle-button,
+branch-to {
   position: relative;
   text-decoration: underline solid rgb(47, 177, 203);
   font-weight: 500;
+  transition: all 0.5s;
+}
+
+pop-out-text:hover,
+toggle-button:hover,
+branch-to:hover {
+  color: rgb(47, 177, 203);
+  cursor: pointer;
 }
 pop-out-text[open] {
   position: relative;

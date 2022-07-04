@@ -114,6 +114,7 @@ function Init() {
 
 function HashNav() {
   autoTager.Open(window.location.hash.slice(1));
+  UpdateAllMarkers();
 }
 
 function CloseHashNav() {

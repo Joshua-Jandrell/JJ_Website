@@ -37,10 +37,7 @@ function SetScrollPointMarkers(
   sameAsTarget = false,
   offsetMult = offsetMultDefault
 ) {
-  let markerArray = Array.from(
-    document.getElementsByClassName(markerClass),
-    true
-  );
+  let markerArray = Array.from(document.getElementsByClassName(markerClass));
   let markergroup = new MarkerGroup(
     markerArray,
     addedClass,
@@ -127,6 +124,7 @@ function ToggleNavClasses(newElem, oldElem, togglClass) {
   let newNav = document.getElementById(newNavId);
   let oldNavId = GetMarkerNavId(oldElem.id);
   let oldNav = document.getElementById(oldNavId);
+
   ToggleClasses(newNav, oldNav, togglClass);
 }
 function ToggleClasses(newElem, oldElem, toggleClass) {

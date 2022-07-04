@@ -103,6 +103,7 @@ class NavAutoTager {
     anchor.href = "#" + tag;
     // Wierd I know but this is to appease swup
     anchor.addEventListener("click", this.OnAnchorClick);
+    indexElem.id = tag + "-nav-elem";
     this.navAnchors[tag] = anchor;
   }
 
@@ -202,7 +203,7 @@ class LocalNavElem {
     // NB: open atribute only added after click
     if (!this.hasAttribute("open")) {
       this.classList.add(openClass);
-      //autoTager.SetCurrent(this.getAttribute("nav-id"));
+      autoTager.SetCurrent(this.getAttribute("nav-id"));
     } else {
       this.classList.remove(openClass);
     }
@@ -254,7 +255,6 @@ function MakePageList(pageName, hash) {
 }
 
 function MakePage(pageDetails, hash) {
-  console.log(hash + "is ha");
   currentPageDetails = pageDetails;
   currentPageDetails.hash = hash;
   pageDetails.Claer();
@@ -324,6 +324,9 @@ function MakeIndex(pageDetails, hash) {
       }
     });
   });
+
+  // udpatedon scroll
+  SetScrollPointMarkers("scroll-entry", "select", false, 0.1);
 }
 async function DoInternalNavSetup(mainElem, indexElement, navIndex, hash) {
   SetInternalNav(mainElem, indexElement, navIndex);
@@ -384,6 +387,7 @@ function SetInternalNav(mainEntry, indexElem, index) {
   let navTag = autoTager.TryTag(mainEntry, entryTag, index);
   SetIndexName(indexElem, mainEntry);
   autoTager.SetIndexHref(indexElem, navTag);
+
   return navTag;
 }
 

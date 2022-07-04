@@ -57,6 +57,12 @@
 #nav-bar ul.nav-list a.select::after {
   color: rgb(47, 177, 203);
 }
+#nav-bar ul.nav-list a.select:before {
+  left: -3pt;
+}
+#nav-bar ul.nav-list a.select::after {
+  right: -3pt;
+}
 #nav-bar ul.nav-list a:hover {
   color: orange;
 }

@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="Description"
+      content="Joshua Jandrell refects and rants about the lates topic on his radar"
+    />
+    <meta name="Author" content="Joshua Jandrell" />
     <title>JJ/Blog</title>
     <link rel="stylesheet" href="./CSS/style.css" />
     <link rel="stylesheet" href="./Templates/NavBar/navBar.css" />
@@ -15,14 +20,15 @@
     <script src="./JavaScript/updateOnScroll.js"></script>
     <script>
       const pathToRoot = ".";
-      const templateHrefs = [];
+      const templateHrefs = ["./Templates/ShareIcons/shareIcons.html"];
     </script>
     <script src="./JavaScript/External/scroll-plugin/dist/SwupScrollPlugin.js"></script>
     <script src="./JavaScript/External/swup/dist/swup.js" defer></script>
     <script src="./JavaScript/importer.js" id="importer"></script>
     <script src="./JavaScript/loadIndex.js" defer></script>
     <script src="./Templates/NavBar/navbar.js"></script>
-
+    <script src="./Templates/ShareIcons/shareIcons.js" defer></script>
+    <script src="./JavaScript/hyper.js" defer></script>
     <script src="./JavaScript/External/Prism/prism.js"></script>
     <script src="./JavaScript/codeDisplay.js"></script>
     <script src="./JavaScript/demoCode.js" defer></script>
@@ -35,9 +41,9 @@
     </header>
     <main id="swup" class="transition-main">
       <content-menu-wrapper>
-        <h1 slot="index-label" class="t-navh">
-          <a href="./blog.html button-h small">Blog</a>
-        </h1>
+        <a href="./blog.html" slot="index-label" class="h-link t-navh">
+          <h1 class="t-navh link-h center">Blog</h1>
+        </a>
         <ul slot="index-list" id="index-list"></ul>
         <h1 slot="content-lable"></h1>
         <article

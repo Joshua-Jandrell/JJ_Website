@@ -143,6 +143,7 @@ h1.main-h::before {
 @media (max-width: 650px) {
   h1.main-h {
     font-size: 14pt;
+    color: rgb(169, 110, 1);
   }
 
   .click-item .link-h {
@@ -174,11 +175,13 @@ h1.main-h::before {
 
 .close-buttons.local {
   margin-top: 20pt;
+  margin-bottom: 20pt;
   display: grid;
   text-align: left;
 }
 .close-buttons.single {
   margin-top: 20pt;
+  margin-bottom: 20pt;
   text-align: left;
 }
 .close-buttons .icon {

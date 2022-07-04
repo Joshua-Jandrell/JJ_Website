@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JJ/Devlog</title>
+
+    <meta
+      name="Description"
+      content="Joshua Jandrell discusses the challenges he faces while constrcting his site and how he overcomes them. Web development, JavaScript, Css and HTML"
+    />
+    <meta name="Author" content="Joshua Jandrell" />
+    <title>JJ/Dev-log</title>
     <link rel="stylesheet" href="./CSS/style.css" />
     <link rel="stylesheet" href="./Templates/NavBar/navBar.css" />
     <link rel="stylesheet" href="./CSS/portfolio.css" />
@@ -15,19 +21,18 @@
     <script src="./JavaScript/updateOnScroll.js"></script>
     <script>
       const pathToRoot = ".";
-      const templateHrefs = [];
+      const templateHrefs = ["./Templates/ShareIcons/shareIcons.html"];
     </script>
     <script src="./JavaScript/External/scroll-plugin/dist/SwupScrollPlugin.js"></script>
     <script src="./JavaScript/External/swup/dist/swup.js" defer></script>
     <script src="./JavaScript/importer.js" id="importer"></script>
     <script src="./JavaScript/loadIndex.js" defer></script>
     <script src="./Templates/NavBar/navbar.js"></script>
-
+    <script src="./Templates/ShareIcons/shareIcons.js" defer></script>
+    <script src="./JavaScript/hyper.js" defer></script>
     <script src="./JavaScript/External/Prism/prism.js"></script>
     <script src="./JavaScript/codeDisplay.js"></script>
     <script src="./JavaScript/demoCode.js" defer></script>
-
-    <script src="./JavaScript/hyper.js"></script>
 
     <script src="JavaScript/setup.js" defer></script>
   </head>
@@ -37,11 +42,11 @@
     </header>
     <main id="swup" class="transition-main">
       <content-menu-wrapper>
-        <h1 slot="index-label" class="comment-h center t-navh">Devlog</h1>
+        <h1 slot="index-label" class="comment-h center t-navh">Dev-log</h1>
         <!--Just for web cralwers-->
         <span class="p-autor" aria-hidden="true">Joshua Jandrell</span>
         <ul slot="index-list" id="index-list" class="t-leftnav h-nav"></ul>
-        <h1 slot="content-lable" class="transition-pageh h-feed">Devlog</h1>
+        <h1 slot="content-lable" class="transition-pageh h-feed">Dev-log</h1>
         <ul
           slot="content-list"
           id="content-list"
@@ -58,6 +63,7 @@
       </template>
     </main>
     <footer class="foot">
+      <bottom-foot></bottom-foot>
       <span class="p-author no-display">Joshau Jandrell</span>
     </footer>
   </body>

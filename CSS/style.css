@@ -243,6 +243,7 @@ about-bottom toggle-button.open {
 ul.content-list {
   list-style: none;
   left: -5pt;
+  padding-left: 0;
 }
 
 /* Heding styling */
@@ -294,6 +295,9 @@ ul.content-list {
   padding: 20pt 17pt 20pt 20pt;
   border-bottom: 1pt solid black;
   text-align: center;
+}
+#index-list li.select {
+  background-color: antiquewhite;
 }
 #index-list li:first {
   border-top: 1pt solid black;

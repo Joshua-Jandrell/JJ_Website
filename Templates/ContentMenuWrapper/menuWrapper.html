@@ -85,6 +85,16 @@
       <section class="e-content">
         <slot name="summary"></slot>
         <slot name="content"></slot>
+        <article class="nav-buttons">
+          <button class="prev-button" onclick="LoadPrev()">
+            <div class="icon">&#x25BC;</div>
+            previous
+          </button>
+          <button class="next-button" onclick="LoadNext()">
+            <div class="icon">&#x25B2;</div>
+            next
+          </button>
+        </article>
       </section>
     </template>
 

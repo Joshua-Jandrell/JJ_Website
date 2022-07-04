@@ -254,7 +254,9 @@ function MakePageList(pageName, hash) {
 }
 
 function MakePage(pageDetails, hash) {
+  console.log(hash + "is ha");
   currentPageDetails = pageDetails;
+  currentPageDetails.hash = hash;
   pageDetails.Claer();
   if (pageDetails.isSingle) {
     MakeArticle(pageDetails);
@@ -290,6 +292,9 @@ async function LoadExternalNav(pageDetails, href) {
   GetDocument(href).then((doc) => {
     //let name = doc.getElementsByClassName("p-name").innerHTML;
     SetIndexName(indexElem, doc);
+    if (href == FindLinkParam()) {
+      indexElem.classList.add("select");
+    }
   });
 }
 
@@ -415,6 +420,40 @@ function SetNextButton(button, element) {
   button.addEventListener("click", (e) => {
     autoTager.GotoNext(element.id);
   });
+}
+
+// Extenral Next/previous buttons
+function LoadNext() {
+  let hash = FindLinkParam();
+  let index = currentPageDetails.hrefList.indexOf(hash);
+  let link = currentPageDetails.hrefList[index - 1];
+  if (link != null && link != -1) {
+    // I know this is a messy traversal but it's still the best way i can see
+    currentPageDetails
+      .GetIndexListElem()
+      .children[index - 1].querySelector("a")
+      .click();
+  }
+}
+
+function LoadPrev() {
+  let hash = FindLinkParam();
+  let index = currentPageDetails.hrefList.indexOf(hash);
+  let link = currentPageDetails.hrefList[index + 1];
+  if (link != null && link != -1) {
+    // I know this is a messy traversal but it's still the best way i can see
+    currentPageDetails
+      .GetIndexListElem()
+      .children[index + 1].querySelector("a")
+      .click();
+  }
+}
+
+function FindLinkParam() {
+  let paramsString = window.location.search;
+  let urlParams = new URLSearchParams(paramsString);
+  let hash = urlParams.get("href");
+  return hash;
 }
 
 // =========== sidenav cotol -- this section is the only one that reies on specfic template formatting

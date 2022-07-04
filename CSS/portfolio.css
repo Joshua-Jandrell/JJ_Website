@@ -18,7 +18,7 @@
     margin: 0 50px;
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .gamepage-wrapper {
     display: block;
     width: 80%;

@@ -103,7 +103,10 @@
     </template>
     <template id="contact-block">
       <link rel="stylesheet" load-href="/Templates/ShareIcons/shareIcons.css" />
-      <nav class="contact-icons">
+      <nav class="icon-block contact-icons">
+        <label for="share-icons" class="icon-label"
+          ><slot name="label">Contanct:</slot></label
+        >
         <ul id="share-icons">
           <li>
             <a

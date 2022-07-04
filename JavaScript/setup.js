@@ -54,12 +54,14 @@ const blogLinks = [
 ];
 
 const gameLinks = [
-  "/HTML/Articles/Game/game_s1-1_cat.html",
-  "/HTML/Articles/Game/game_s1-2_idol.html",
-  "/HTML/Articles/Game/game_s1-3_proj.html",
-  "/HTML/Articles/Game/game_s1-4_pin.html",
-  "/HTML/Articles/Game/game_s1-6_life.html",
+  "/HTML/Articles/Game/game_s1-10_shuf.html",
   "/HTML/Articles/Game/game_s1-8_help.html",
+  "/HTML/Articles/Game/game_s1-6_life.html",
+  "/HTML/Articles/Game/game_s1-5_star.html",
+  "/HTML/Articles/Game/game_s1-4_pin.html",
+  "/HTML/Articles/Game/game_s1-3_proj.html",
+  "/HTML/Articles/Game/game_s1-2_idol.html",
+  "/HTML/Articles/Game/game_s1-1_cat.html",
 ];
 
 const pageLists = {

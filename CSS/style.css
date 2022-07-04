@@ -106,22 +106,143 @@ label.log-label::before {
   font-weight: bold;
   content: "// ";
   color: black;
+
+  max-width: 200pt;
 }
 /* About section */
 .about-wrapper {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 4fr;
+
   column-gap: 20pt;
+
+  margin: 30pt auto 20pt;
+  max-width: 800px;
 }
 
 img.about-img {
   border: 5pt solid orange;
-  width: 100%;
+  width: 80%;
+}
+.about-txt {
+  padding: 3t 10pt;
+}
+.about-bottom {
+  grid-column: span 2;
+  min-height: 200pt;
+
+  padding: auto;
+  text-align: center;
+}
+.about-bottom .toggle-buttons {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 3em;
+
+  margin-bottom: 2em;
+}
+.about-bottom .toggle-buttons toggle-button {
+  font-size: 150%;
+}
+.about-bottom toggle-button {
+  color: rgb(47, 177, 203);
+  font-family: monospace;
+  font-weight: 550;
+  text-decoration: none;
+  transition: all 0.75s;
+
+  position: relative;
+  text-align: center;
+
+  width: max-content;
+  padding: 0 10pt;
+
+  margin: 0 auto;
+}
+.about-bottom toggle-button::before {
+  color: rgba(0, 0, 0, 0);
+  content: "[";
+  left: 0;
+  transition: all 0.75s;
+  margin: 0;
+
+  position: absolute;
+}
+.about-bottom toggle-button::after {
+  color: rgba(0, 0, 0, 0);
+  content: "]";
+  right: 0;
+  transition: all 0.75s;
+  margin: 0;
+
+  position: absolute;
+}
+
+.about-bottom toggle-button:hover {
+  color: black;
+  cursor: pointer;
+}
+.about-bottom toggle-button:hover::before {
+  color: rgb(47, 177, 203);
+  left: -5pt;
+}
+.about-bottom toggle-button:hover::after {
+  color: rgb(47, 177, 203);
+  right: -5pt;
+}
+about-bottom toggle-button.open {
+  color: rgb(8, 110, 130);
+}
+.about-bottom toggle-button.open::before {
+  color: black;
+  left: 1pt;
+}
+.about-bottom toggle-button.open::after {
+  color: black;
+  right: 1pt;
+}
+.left-align {
+  text-align: left;
+}
+
+.else-b {
+  margin: 20pt auto 0;
+  display: block;
+  width: fit-content;
+}
+
+@media (max-width: 940px) {
+  .about-wrapper {
+    margin: 30pt 20pt 20pt;
+    display: block;
+  }
+  .about-bottom .toggle-buttons {
+    grid-auto-flow: row;
+    gap: 0.5em;
+  }
+
+  img.about-img {
+    width: 20vw;
+    float: left;
+    margin-right: 10pt;
+    margin-bottom: 10pt;
+  }
+
+  .contact-icons {
+    float: right;
+  }
+}
+
+@media (max-width: 575px) {
+  img.about-img {
+    width: 157pt;
+    float: left;
+  }
 }
 /* Stuling for content select sections */
 ul.content-list {
   list-style: none;
-  padding-left: 0;
+  left: -5pt;
 }
 
 /* Heding styling */
@@ -513,9 +634,6 @@ pop-out-text[open] {
   font-weight: 500;
 }
 
-toggle-button.open {
-  color: brown;
-}
 /* ================================================= */
 /* ---------- CSS used for devlog demos ------------ */
 /* ================================================= */

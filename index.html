@@ -23,7 +23,7 @@
     <script src="./JavaScript/loadIndex.js" defer></script>
     <script src="./Templates/NavBar/navbar.js"></script>
     <script src="./Templates/ShareIcons/shareIcons.js" defer></script>
-
+    <script src="./JavaScript/hyper.js" defer></script>
     <script src="./JavaScript/External/Prism/prism.js"></script>
     <script src="./JavaScript/codeDisplay.js"></script>
     <script src="./JavaScript/demoCode.js" defer></script>
@@ -114,13 +114,7 @@
               class="profil-picture u-photo"
               src="./Assets/Images/Profile-pic.png"
             />
-            <article class="contact">
-              <div class="contact-icons">
-                <contact-icons>
-                  <span slot="label" class="no-display"></span>
-                </contact-icons>
-              </div>
-            </article>
+
             <ul
               class="details-list no-display"
               aria-roledescription="Personal Details"
@@ -150,12 +144,387 @@
             </ul>
           </section>
           <section class="e-content about-txt">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Est qui
-            vitae reiciendis cum dicta velit error, laborum voluptatem nemo
-            aspernatur alias veritatis! Expedita a soluta explicabo possimus
-            fuga incidunt culpa.
+            <p>
+              <pop-out-text
+                >Joshua Jandrell
+                <pop-out
+                  >(currently referring to himself in third person)</pop-out
+                ></pop-out-text
+              >
+              is a human being, inhabiting planet earth
+              <pop-out-text
+                >earth
+                <pop-out
+                  >&dash; there weren’t any other options available</pop-out
+                ></pop-out-text
+              >.
+            </p>
+            <p>
+              He’s also
+              <a href="./games.html" class="inline-link">game desinger</a>,
+              <a href="./devlog.html" class="inline-link">web-developer</a>,
+              <a href="./blog.html" class="inline-link">critical thinker</a> and
+              the biggest oxymoron you’ll ever meet.
+            </p>
+            <p>He’s dreadfully dedicated; yet seldom serious</p>
+            <p>
+              He’s a
+              <pop-out-text
+                >'lazy desinger'
+                <pop-out>(automates whenever possible)</pop-out></pop-out-text
+              >that
+              <pop-out-text
+                >never sleeps
+                <pop-out
+                  >There's more automating to be done</pop-out
+                ></pop-out-text
+              >.
+            </p>
+            <p>
+              He can code in
+              <pop-out-text
+                >5 Languages
+                <pop-out
+                  >{C#; C++; JavaScript; Assembly; Pyhton}</pop-out
+                ></pop-out-text
+              >
+              but &dash; can't type in
+              <pop-out-text
+                >inglish
+                <pop-out>(This time it's intentional)</pop-out></pop-out-text
+              >.
+            </p>
+            <p>
+              He’s an
+
+              <pop-out-text
+                >Engineer
+                <pop-out
+                  >(planning to attain a profession BSc(Eng)(Information
+                  Engineering) in 2024)</pop-out
+                ></pop-out-text
+              >
+              with artistic flair.
+            </p>
+            <p>And an artist with technical prowess.</p>
+
+            <p>
+              This site is a testimony to his blundering insights and foolish
+              genius as he stumbles assuredly along the path to become an
+              experienced novice in this little old thing called the world wide
+              web.
+            </p>
           </section>
-          <section class="about-bottom"></section>
+          <section class="about-bottom">
+            <toggle-block>
+              <article class="toggle-buttons">
+                <toggle-button target="quali">Is he qualified?</toggle-button>
+                <toggle-button target="d0">What does he do?</toggle-button>
+                <toggle-button target="find"
+                  >Where can I find him?</toggle-button
+                >
+              </article>
+              <toggle-pop-out id="find">
+                <p>
+                  He’s not going to give his location to a random stranger on
+                  the internet!
+                </p>
+                <p>But you're welcome to message him.</p>
+                <contact-icons></contact-icons>
+              </toggle-pop-out>
+              <toggle-pop-out id="quali" class="left-align"
+                ><p>
+                  Josh is currently in his third year of
+                  <a
+                    href="https://www.wits.ac.za/course-finder/undergraduate/ebe/digital-arts/"
+                    target="_blank"
+                    class="inline-link"
+                    rel="external"
+                    >BEngSc (Digital Arts)</a
+                  >
+                  and will graduate in 2022
+                </p>
+                <p>
+                  Following graduation Josh intends to study further and attain
+                  a professional
+                  <a
+                    href="https://www.wits.ac.za/course-finder/undergraduate/ebe/information-engineering/"
+                    target="_blank"
+                    class="inline-link"
+                    >Information Engineering</a
+                  >
+                  degree by 2024.
+                </p>
+                <p>
+                  His highest current qualification is an
+                  <a
+                    href="https://www.ieb.co.za/pages/nscrequirements"
+                    target="_blank"
+                    rel="nofollow"
+                    class="inline-link"
+                    rel="external"
+                    >IEB NSC</a
+                  >
+                  attained in 2019.
+                </p>
+                <p>
+                  In 2022 Josh worked as a vacation student at
+                  <a
+                    href="https://sam.co.za/"
+                    target="_blank"
+                    rel="external"
+                    class="inline-link"
+                    >Systems Automation & Managment</a
+                  >
+                  where he learnt about system integration.
+                </p>
+              </toggle-pop-out>
+
+              <toggle-block>
+                <toggle-pop-out id="d0">
+                  <pop-out-text
+                    >Design Games
+                    <pop-out
+                      >(Analogue and digital but mostly abstract puzzle games in
+                      <a
+                        class="inline-link"
+                        target="_blank"
+                        href="https://unity.com/"
+                        >Unity)</a
+                      ></pop-out
+                    > </pop-out-text
+                  ><br />
+                  <toggle-button target="d1" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d1">
+                  <pop-out-text
+                    >Play Games
+                    <pop-out
+                      >(Analogue or digital, mostly turn based strategy and
+                      puzzle games)
+                      <a
+                        class="inline-link"
+                        target="_blank"
+                        href="https://unity.com/"
+                        >Unity</a
+                      ></pop-out
+                    > </pop-out-text
+                  ><br />
+                  <toggle-button target="d2" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d2">
+                  <pop-out-text
+                    >Write Songs
+                    <pop-out
+                      >(or let’s call them poems because he can’t sing)
+                      <a
+                        class="inline-link"
+                        target="_blank"
+                        href="https://unity.com/"
+                        >Unity</a
+                      ></pop-out
+                    > </pop-out-text
+                  ><br />
+                  <toggle-button target="d3" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d3">
+                  <pop-out-text
+                    >Write code
+                    <pop-out
+                      >(Mostly C# and JS at the moment)
+                      <a
+                        class="inline-link"
+                        target="_blank"
+                        href="https://unity.com/"
+                        >Unity</a
+                      ></pop-out
+                    > </pop-out-text
+                  ><br />
+                  <toggle-button target="d4" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d4">
+                  Play with his three fluffy dogs<br />
+                  <toggle-button target="d5" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d5">
+                  <pop-out-text
+                    >Chase tangents
+                    <pop-out
+                      >(have you ever spent a day clicking through the links of
+                      Wikipedia?)
+                      <a
+                        class="inline-link"
+                        target="_blank"
+                        href="https://unity.com/"
+                        >Unity</a
+                      ></pop-out
+                    > </pop-out-text
+                  ><br />
+                  <toggle-button target="d6" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d6">
+                  <pop-out-text
+                    >Draw pictures
+                    <pop-out
+                      >(but not particularly well)
+                      <a
+                        class="inline-link"
+                        target="_blank"
+                        href="https://unity.com/"
+                        >Unity</a
+                      ></pop-out
+                    > </pop-out-text
+                  ><br />
+                  <toggle-button target="d7" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d7">
+                  Tutor high school maths and physics<br />
+                  <toggle-button target="d8" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d8">
+                  <pop-out-text
+                    >Sleep
+                    <pop-out
+                      >(lol no, he stays up working on his lates project.)
+                      <a
+                        class="inline-link"
+                        target="_blank"
+                        href="https://unity.com/"
+                        >Unity</a
+                      ></pop-out
+                    > </pop-out-text
+                  ><br />
+                  <toggle-button target="d9" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d9">
+                  <pop-out-text
+                    >Play with Lego
+                    <pop-out
+                      >(He’s mostly building interesting contraptions, but
+                      sometimes he just wants to play with is mini-figures. like
+                      he’s a child)
+                      <a
+                        class="inline-link"
+                        target="_blank"
+                        href="https://unity.com/"
+                        >Unity</a
+                      ></pop-out
+                    > </pop-out-text
+                  ><br />
+                  <toggle-button target="d10" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d10">
+                  <pop-out-text
+                    >Make jokes
+                    <pop-out
+                      >(and ocationally make people laugh)
+                      <a
+                        class="inline-link"
+                        target="_blank"
+                        href="https://unity.com/"
+                        >Unity</a
+                      ></pop-out
+                    > </pop-out-text
+                  ><br />
+                  <toggle-button target="d11" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d11"
+                  >Butchor the engish languega<br />
+                  <toggle-button target="d12" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d12"
+                  >Procrastinate &dash; we all do it<br />
+                  <toggle-button target="d13" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d13"
+                  >Go for long strolls in the park<br /><toggle-button
+                    target="d14"
+                    class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d14"
+                  >Lecture you on the benefits of OOP<br /><toggle-button
+                    target="d15"
+                    class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d15">
+                  <pop-out-text
+                    >Watch sport
+                    <pop-out
+                      >(Rugby and F1)
+                      <a
+                        class="inline-link"
+                        target="_blank"
+                        href="https://unity.com/"
+                        >Unity</a
+                      ></pop-out
+                    > </pop-out-text
+                  ><br />
+                  <toggle-button target="d16" class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d16"
+                  >Rant about sport<br /><toggle-button
+                    target="d17"
+                    class="else-b"
+                    >What else?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d17"
+                  >Rant about politics<br /><toggle-button
+                    target="d18"
+                    class="else-b"
+                    >What else!?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d18"
+                  >Acquire useless information<br /><toggle-button
+                    target="d19"
+                    class="else-b"
+                    >What else!!?</toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d19"
+                  >Umm&hellip; try to think of something else&hellip;<br /><toggle-button
+                    target="d20"
+                    class="else-b"
+                    ><em>What else!!??</em></toggle-button
+                  ></toggle-pop-out
+                >
+                <toggle-pop-out id="d20">Remove your button.</toggle-pop-out>
+              </toggle-block>
+            </toggle-block>
+          </section>
         </article>
       </article>
     </main>

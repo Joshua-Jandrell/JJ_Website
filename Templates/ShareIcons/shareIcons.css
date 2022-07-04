@@ -86,3 +86,10 @@
     margin-right: auto;
   }
 }
+
+.contact-icons ul {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+
+  width: 20px;
+}
